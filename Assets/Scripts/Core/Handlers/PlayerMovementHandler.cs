@@ -7,6 +7,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
 {
     private CharacterController characterController;
     private Vector3 move;
+    private Transform cameraTransform; // Reference to main camera
     [SerializeField] private float yVelocity;
 
     // Speed
@@ -23,6 +24,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        cameraTransform = Camera.main.transform;
     }
 
     public void HandleMovement(IInputHandler inputHandler)
@@ -40,13 +42,32 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
 
     private void Move(IInputHandler inputHandler)
     {
-        move = inputHandler.Vertical * transform.forward + inputHandler.Horizontal * transform.right;
+        // Calculate inputs relative to camera
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+
+        // Get move direction
+        move = inputHandler.Vertical * forward + inputHandler.Horizontal * right;
         if (move.magnitude > 1) move.Normalize();
+
+        // Handle player models rotation
+        bool moving = inputHandler.Vertical != 0 || inputHandler.Horizontal != 0;
+
+        if (moving)
+        {
+           Vector3 newDirection = Vector3.RotateTowards(transform.forward, move, 10 * Time.deltaTime, 0.0f);
+           transform.rotation = Quaternion.LookRotation(newDirection);
+        }
 
         float currentSpeed = inputHandler.IsSprinting ? sprintSpeed : speed;
         characterController.Move(move * currentSpeed * Time.deltaTime);
 
-        IsMoving = inputHandler.Vertical != 0 || inputHandler.Horizontal != 0;
+        IsMoving = moving;
         IsSprinting = inputHandler.IsSprinting;
     }
 
