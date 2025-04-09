@@ -5,23 +5,23 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
 {
-    private CharacterController characterController;
-    private Vector3 move;
-    private Transform cameraTransform; // Reference to main camera
-    [SerializeField] private float yVelocity;
+    protected CharacterController characterController;
+    protected Vector3 move;
+    protected Transform cameraTransform; // Reference to main camera
+    [SerializeField] protected float yVelocity;
 
     // Speed
-    [SerializeField] private float speed;
-    [SerializeField] private float sprintSpeed;
-    [SerializeField] private float gravityValue;
-    [SerializeField] private float jumpHeight;
+    [SerializeField] protected float speed;
+    [SerializeField] protected float sprintSpeed;
+    [SerializeField] protected float gravityValue;
+    [SerializeField] protected float jumpHeight;
 
     // States
     public bool IsGrounded { get; private set; }
     public bool IsMoving { get; private set; }
     public bool IsSprinting { get; private set; }
 
-    void Start()
+    protected virtual void Start()
     {
         characterController = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
@@ -35,12 +35,12 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
         Jump(inputHandler);
     }
 
-    private void GroundCheck()
+    protected void GroundCheck()
     {
         IsGrounded = characterController.isGrounded;
     }
 
-    private void Move(IInputHandler inputHandler)
+    protected void Move(IInputHandler inputHandler)
     {
         // Calculate inputs relative to camera
         Vector3 forward = cameraTransform.forward;
@@ -71,7 +71,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
         IsSprinting = inputHandler.IsSprinting;
     }
 
-    private void ApplyGravity()
+    protected void ApplyGravity()
     {
         if (!IsGrounded) yVelocity += gravityValue * Time.deltaTime;
         else yVelocity = -0.25f;
@@ -79,7 +79,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
         characterController.Move(new Vector3(0, yVelocity, 0));
     }
 
-    private void Jump(IInputHandler inputHandler)
+    protected void Jump(IInputHandler inputHandler)
     {
         if (inputHandler.IsJumping && IsGrounded)
         {

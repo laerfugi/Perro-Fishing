@@ -17,7 +17,7 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -27,17 +27,51 @@ public class CameraManager : MonoBehaviour
 
     public void SwapTarget()
     {
-        targets[activeTargetIndex].GetComponent<Player>().enabled = false;
-
+        DeactivateTarget(targets[activeTargetIndex]);
         activeTargetIndex = (activeTargetIndex + 1) % targets.Length;
-
         SetActiveTarget(activeTargetIndex);
     }
 
     private void SetActiveTarget(int index)
     {
-        targets[index].GetComponent<Player>().enabled = true;
+        Transform newTarget = targets[index];
+        ActivateTarget(newTarget);
+        cameraController.SetTarget(newTarget);
+    }
 
-        cameraController.SetTarget(targets[index]);
+    private void DeactivateTarget(Transform target)
+    {
+        // Check if the target is a Player
+        Player player = target.GetComponent<Player>();
+        if (player != null)
+        {
+            player.enabled = false;
+            return;
+        }
+
+        // Check if the target is a LittleGuy
+        LittleGuy littleGuy = target.GetComponent<LittleGuy>();
+        if (littleGuy != null)
+        {
+            littleGuy.SetAIControlled();
+        }
+    }
+
+    private void ActivateTarget(Transform target)
+    {
+        // Check if the target is a Player
+        Player player = target.GetComponent<Player>();
+        if (player != null)
+        {
+            player.enabled = true;
+            return;
+        }
+
+        // Check if the target is a LittleGuy
+        LittleGuy littleGuy = target.GetComponent<LittleGuy>();
+        if (littleGuy != null)
+        {
+            littleGuy.SetPlayerControlled();
+        }
     }
 }

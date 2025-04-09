@@ -9,9 +9,9 @@ public interface IInputHandler
     bool IsJumping { get; }
     bool IsSprinting { get; }
     bool IsClicking { get; }
-    bool IsPressingE { get; }
-    bool IsPressingR { get; }
-    bool IsPressingTab { get; }
+    bool IsPressingInteract { get; }
+    bool IsPressingDrop { get; }
+    bool IsPressingMenu { get; }
 
     void HandleInput();
 }
