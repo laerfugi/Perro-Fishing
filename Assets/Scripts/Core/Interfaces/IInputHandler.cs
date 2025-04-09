@@ -8,6 +8,10 @@ public interface IInputHandler
     float Horizontal { get; }
     bool IsJumping { get; }
     bool IsSprinting { get; }
+    bool IsClicking { get; }
+    bool IsPressingE { get; }
+    bool IsPressingR { get; }
+    bool IsPressingTab { get; }
 
     void HandleInput();
 }
