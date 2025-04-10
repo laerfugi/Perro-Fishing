@@ -8,9 +8,12 @@ public class FishInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log($"Picked up {fishData.name} of {fishData.combinationType}");
-        // add to inventory event
-        Destroy(gameObject);
+        Debug.Log($"Attempting to pick up {fishData.name} of {fishData.combinationType}");
+        if (!PlayerInventory.Instance.IsFull())
+        {
+            PlayerInventory.Instance.AddItem(fishData);
+            Destroy(gameObject);
+        }
     }
 
     public string GetInteractionPrompt()

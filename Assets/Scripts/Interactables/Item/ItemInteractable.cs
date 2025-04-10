@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class ItemInteractable : MonoBehaviour, IInteractable
 {
-    [SerializeField] private string itemName;
+    [SerializeField] private ItemData itemData;
 
     public void Interact()
     {
-        Debug.Log($"Picked up {itemName}");
-        // add to inventory thingy
-        Destroy(gameObject);
+        Debug.Log($"Attempting to pick up {itemData.name}");
+        if (!PlayerInventory.Instance.IsFull())
+        {
+            PlayerInventory.Instance.AddItem(itemData);
+            Destroy(gameObject);
+        }
     }
 
     public string GetInteractionPrompt()
     {
-        return $"Press E to pick up {itemName}";
+        return $"Press E to pick up {itemData.name}";
     }
 }

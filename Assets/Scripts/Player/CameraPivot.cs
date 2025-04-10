@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Face : MonoBehaviour
+public class CameraPivot : MonoBehaviour
 {
     [SerializeField] private float sensitivity;
     private float xRotation = 0f;
