@@ -16,7 +16,7 @@ public class PlayerInteractHitbox : MonoBehaviour
 
             if (interactablesInHitbox.Count == 1)
             {
-                EventManager.OnPlayerCanInteractEvent();
+                EventManager.OnPlayerCanInteractEvent(interactable.GetInteractionPrompt());
             }
         }
     }
@@ -30,7 +30,7 @@ public class PlayerInteractHitbox : MonoBehaviour
 
             if (interactablesInHitbox.Count == 0)
             {
-                EventManager.OnPlayerCanInteractEvent();
+                EventManager.OnPlayerCannotInteractEvent();
             }
         }
     }
@@ -48,6 +48,7 @@ public class PlayerInteractHitbox : MonoBehaviour
             {
                 EventManager.OnPlayerCannotInteractEvent();
             }
+            
         }
     }
 }

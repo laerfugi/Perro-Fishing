@@ -5,14 +5,28 @@ using UnityEngine.Events;
 
 public static class EventManager
 {
+    #region Events
     // Player inventory is updated
     public static event UnityAction InventoryEvent;
 
     // Player can use/interact with an item
-    public static event UnityAction PlayerCanInteractEvent;
+    public static event UnityAction<string> PlayerCanInteractEvent;
     public static event UnityAction PlayerCannotInteractEvent;
 
+    /*---UI Events---*/
+    #region UI Events
+    //Notification UI
+    public static event UnityAction<string> DisplayNotificationEvent;
+    public static event UnityAction HideNotificationEvent;
+    #endregion
+
+    #endregion
+
+    #region Invoke Methods
     public static void OnInventoryEvent() => InventoryEvent?.Invoke();
-    public static void OnPlayerCanInteractEvent() => PlayerCanInteractEvent?.Invoke();
+    public static void OnPlayerCanInteractEvent(string message) => PlayerCanInteractEvent?.Invoke(message);
     public static void OnPlayerCannotInteractEvent() => PlayerCannotInteractEvent?.Invoke();
+    public static void OnDisplayNotificationEvent(string message) => DisplayNotificationEvent?.Invoke(message);
+    public static void OnHideNotificationEvent() => HideNotificationEvent?.Invoke();
+    #endregion
 }

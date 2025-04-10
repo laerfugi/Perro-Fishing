@@ -60,7 +60,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
 
         if (moving)
         {
-           Vector3 newDirection = Vector3.RotateTowards(transform.forward, move, 10 * Time.deltaTime, 0.0f);
+           Vector3 newDirection = Vector3.RotateTowards(transform.forward, move, 15 * Time.deltaTime, 0.0f);
            transform.rotation = Quaternion.LookRotation(newDirection);
         }
 
