@@ -37,10 +37,10 @@ public class LittleGuyNav : MonoBehaviour
         {
             FollowTarget();
         }
-        else if (distanceToTarget < fleeDistance)
-        {
-            FleeFromTarget();
-        }
+        //else if (distanceToTarget < fleeDistance)
+        //{
+        //    FleeFromTarget();
+        //}
         else
         {
             navMeshAgent.isStopped = true;

@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class Face : MonoBehaviour
 {
-    [SerializeField] private Transform cameraPivot;
     [SerializeField] private float sensitivity;
     private float xRotation = 0f;
     private float yRotation = 0f;
     [SerializeField] private float minVerticalAngle;
     [SerializeField] private float maxVerticalAngle;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void LateUpdate()
     {
         HandleRotation();
@@ -34,6 +25,6 @@ public class Face : MonoBehaviour
 
         xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
 
-        cameraPivot.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
 }
