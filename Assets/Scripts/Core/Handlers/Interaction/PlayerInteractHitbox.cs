@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PlayerInteractHitbox : MonoBehaviour
 {
-    public List<IInteractable> interactablesInHitbox = new List<IInteractable>();
+    [SerializeReference]
+    public List<GameObject> interactablesInHitbox = new List<GameObject>();
 
     void OnTriggerEnter(Collider collider)
     {
         IInteractable interactable = collider.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            interactablesInHitbox.Add(interactable);
+            interactablesInHitbox.Add(collider.gameObject);
 
             if (interactablesInHitbox.Count == 1)
             {
@@ -25,7 +26,7 @@ public class PlayerInteractHitbox : MonoBehaviour
         IInteractable interactable = collider.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            interactablesInHitbox.Remove(interactable);
+            interactablesInHitbox.Remove(collider.gameObject);
 
             if (interactablesInHitbox.Count == 0)
             {
@@ -38,10 +39,10 @@ public class PlayerInteractHitbox : MonoBehaviour
     {
         if (interactablesInHitbox.Count > 0)
         {
-            IInteractable closestInteractable = interactablesInHitbox[0];
+            IInteractable closestInteractable = interactablesInHitbox[0].GetComponent<IInteractable>();
             closestInteractable.Interact();
 
-            interactablesInHitbox.Remove(closestInteractable);
+            interactablesInHitbox.Remove(interactablesInHitbox[0]);
 
             if (interactablesInHitbox.Count == 0)
             {
