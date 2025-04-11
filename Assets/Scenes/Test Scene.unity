@@ -2549,6 +2549,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: stupid idiot fish
       objectReference: {fileID: 0}
+    - target: {fileID: 5044713809980462076, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 740093bab6d37354788638e8ed0c0c23, type: 2}
+    - target: {fileID: 5044713809980462076, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 740093bab6d37354788638e8ed0c0c23, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

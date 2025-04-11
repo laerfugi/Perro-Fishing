@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : ItemInteractable
+public class ExampleItem : ItemInteractable
 {
     public override void Use()
     {

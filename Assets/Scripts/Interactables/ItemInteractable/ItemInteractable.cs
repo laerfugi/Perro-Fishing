@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//parent class for all items in the game that can go in the player inventory and be held (fish, flashlight)
 public abstract class ItemInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] protected ItemData itemData;
@@ -21,6 +22,6 @@ public abstract class ItemInteractable : MonoBehaviour, IInteractable
         return $"Press E to pick up {itemData.name}";
     }
 
-    public abstract void Use();
+    public virtual void Use() { }
 
 }

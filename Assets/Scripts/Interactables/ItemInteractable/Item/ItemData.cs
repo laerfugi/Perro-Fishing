@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ItemType
-{
-    Item, Fish
-}
-
 //holds data of an item. Can be edited as a ScriptableObject
 [CreateAssetMenu(fileName = "New Item", menuName = "Interactable/ItemData")]
 public class ItemData : ScriptableObject
@@ -16,5 +11,4 @@ public class ItemData : ScriptableObject
     public string description;
     public Sprite icon;
     public GameObject item;     //reference to prefab
-    public ItemType itemType;
 }
