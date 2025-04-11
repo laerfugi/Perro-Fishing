@@ -10,11 +10,11 @@ public abstract class ItemInteractable : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log($"Attempting to pick up {itemData.name}");
-        if (!PlayerInventory.Instance.IsFull())
-        {
+        //if (!PlayerInventory.Instance.IsFull())
+        //{
             PlayerInventory.Instance.AddItem(itemData);
             Destroy(gameObject);
-        }
+        //}
     }
 
     public string GetInteractionPrompt()
