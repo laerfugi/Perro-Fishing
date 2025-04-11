@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemInteractable : MonoBehaviour, IInteractable
+public abstract class ItemInteractable : MonoBehaviour, IInteractable
 {
-    [SerializeField] private ItemData itemData;
+    [SerializeField] protected ItemData itemData;
 
     public void Interact()
     {
@@ -20,4 +20,7 @@ public class ItemInteractable : MonoBehaviour, IInteractable
     {
         return $"Press E to pick up {itemData.name}";
     }
+
+    public abstract void Use();
+
 }
