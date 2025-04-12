@@ -6,11 +6,16 @@ using Cinemachine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private Transform[] targets;
+    [SerializeField] private char char_keybind;
+    private KeyCode keybind;
 
     private int activeTargetIndex = 0;
 
     void Start()
     {
+        char_keybind = char.ToUpper(char_keybind);
+        keybind = (KeyCode)System.Enum.Parse(typeof(KeyCode), char_keybind.ToString());
+
         if (targets.Length > 0)
         {
             SetActiveCam(0);
@@ -19,7 +24,7 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(keybind))
         {
             SwapTarget();
         }
