@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8075841345094049268}
   - component: {fileID: 6134929842394256125}
   - component: {fileID: 1195458697738363201}
-  - component: {fileID: 5044713809980462076}
   m_Layer: 0
   m_Name: stupid idiot fish
   m_TagString: Untagged
@@ -139,19 +138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5044713809980462076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419022890915657522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f35a0f4d476a64ea4b891960171ceb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishData: {fileID: 11400000, guid: 740093bab6d37354788638e8ed0c0c23, type: 2}
 --- !u!1 &4981329482049179529
 GameObject:
   m_ObjectHideFlags: 0

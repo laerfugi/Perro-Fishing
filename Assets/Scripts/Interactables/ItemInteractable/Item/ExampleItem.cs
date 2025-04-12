@@ -7,6 +7,6 @@ public class ExampleItem : ItemInteractable
 {
     public override void Use()
     {
-        Debug.Log("I am being used");
+        Debug.Log("I am an example item");
     }
 }

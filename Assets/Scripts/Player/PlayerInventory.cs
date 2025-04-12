@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 //Contains 2 inventory lists: 1 for Items and 1 for Fish.
-//Inventory Methods will automatically sort a given argument ItemData into either list.
+//Inventory Methods will automatically sort a given argument ItemData into either list. May possibly need to change this but it convenient lol
 public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory Instance { get; private set; }
@@ -14,7 +14,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] public List<Fish_ItemData> fishInventoryList;
 
     [Header("Inventory Settings")]
-    [SerializeField] private int INVENTORY_SIZE = 3;
+    //[SerializeField] private int INVENTORY_SIZE = 3;      //we can use this later to limit inventory space but it's making an error in unity since its unused lol
 
     [Header("Money")]
     public int money;

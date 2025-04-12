@@ -4,21 +4,8 @@ using UnityEngine;
 
 public class Fish : ItemInteractable
 {
-    
-    /*
-    public void Interact()
+    public override void Use()
     {
-        Debug.Log($"Attempting to pick up {fishData.name} of {fishData.combinationType}");
-        if (!PlayerInventory.Instance.IsFull())
-        {
-            //PlayerInventory.Instance.AddItem(fishData);
-            Destroy(gameObject);
-        }
+        Debug.Log("I am a fish");
     }
-
-    public string GetInteractionPrompt()
-    {
-        return $"Press E to pick up {fishData.name}";
-    }
-    */
 }
