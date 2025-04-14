@@ -22,6 +22,8 @@ public class SpriteFacingCam : MonoBehaviour
     {
         //transform.LookAt(transform.position + activeCameraTransform.forward);
         // Old cam facing implementation no difference
-        transform.forward = activeCameraTransform.forward; 
+        //transform.forward = activeCameraTransform.forward;
+
+        transform.forward = new Vector3(activeCameraTransform.forward.x, 0, activeCameraTransform.forward.z);       //no y axis tracking makes it look nicer
     }
 }
