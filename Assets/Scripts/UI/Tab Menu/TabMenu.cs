@@ -37,7 +37,9 @@ public class TabMenu : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            GameObject.FindWithTag("Player").GetComponent<PlayerInputHandler>().enabled = false;        //disable player input movement 
+            //NEED TO CHANGE THIS WHEN WE DEFINE PLAYER STATES FOR MENU
+            //disable player movement
+            GameObject.FindWithTag("Player").GetComponent<Player>().enabled = false;        //disable player input movement 
             GameObject.FindWithTag("Player").GetComponentInChildren<CameraPivot>().enabled = false;     //disable camera movement
         } 
         else
@@ -47,7 +49,7 @@ public class TabMenu : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
 
             //enable player movement
-            GameObject.FindWithTag("Player").GetComponent<PlayerInputHandler>().enabled = true;         //enable player input movement 
+            GameObject.FindWithTag("Player").GetComponent<Player>().enabled = true;         //enable player input movement 
             GameObject.FindWithTag("Player").GetComponentInChildren<CameraPivot>().enabled = true;     //enable camera movement
         }
     }

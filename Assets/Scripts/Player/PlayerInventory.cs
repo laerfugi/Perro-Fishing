@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//Contains 2 inventory lists: 1 for Items and 1 for Fish.
+//Contains lists for items and fish.
 //Inventory Methods will automatically sort a given argument ItemData into either list. May possibly need to change this but it convenient lol
 public class PlayerInventory : MonoBehaviour
 {
