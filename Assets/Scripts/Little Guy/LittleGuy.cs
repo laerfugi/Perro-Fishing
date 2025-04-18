@@ -43,6 +43,9 @@ public class LittleGuy : MonoBehaviour
     {
         if (state == LittleGuyState.AI)                     //Little Guy is AI controlled
         {
+            //camera stuff
+            cameraPivot.enabled = true;
+
             //state stuff
             controller.enabled = false;
             nav.enabled = true;
@@ -65,7 +68,7 @@ public class LittleGuy : MonoBehaviour
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
             //camera stuff
-            cameraPivot.enabled = false;
+            cameraPivot.enabled = true;
         }
     }
 

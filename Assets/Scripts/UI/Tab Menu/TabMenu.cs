@@ -40,7 +40,7 @@ public class TabMenu : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Inactive;
+            GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Menu;
         } 
         else
         {
@@ -56,6 +56,7 @@ public class TabMenu : MonoBehaviour
     public void Exit()
     {
         isActive = !isActive;
+        CheckState();
     }
 
     //used by section buttons

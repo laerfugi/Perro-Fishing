@@ -30,11 +30,14 @@ public class FishingPole : MonoBehaviour
     void Update()
     {
         //start fishing
-        if (state == FishingState.Inactive)
+        if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (state == FishingState.Inactive)
             {
-                StartCoroutine(Fishing());
+                if (Input.GetMouseButtonDown(0))
+                {
+                    StartCoroutine(Fishing());
+                }
             }
         }
         //what happens during Catching
@@ -71,7 +74,7 @@ public class FishingPole : MonoBehaviour
 
         yield return new WaitUntil(() => elapsedTime > castTime);
 
-        //post fishing states
+        //post cast states
         littleGuy.GetComponent<LittleGuy>().state = LittleGuyState.Active;
 
         yield return new WaitForSeconds(2f);

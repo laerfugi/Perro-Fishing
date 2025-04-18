@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState {Active,Inactive}
+public enum PlayerState {Active,Inactive,Menu}
 
 public class Player : MonoBehaviour
 {
@@ -40,6 +40,11 @@ public class Player : MonoBehaviour
             movementHandler.HandleMovement(inputHandler);
         }
         else if (state == PlayerState.Inactive)     //player can't move
+        {
+            //camera stuff
+            cameraPivot.enabled = true;
+        }
+        else if (state == PlayerState.Menu)     //player can't move and can't move camera
         {
             //camera stuff
             cameraPivot.enabled = false;
