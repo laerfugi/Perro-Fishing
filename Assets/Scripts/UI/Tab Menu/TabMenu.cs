@@ -16,17 +16,20 @@ public class TabMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //in case you forget to set the menu inactive in play mode
+        isActive = menu.activeSelf;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) { isActive = !isActive; }
-        CheckState();
+        if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active) {      //only execute when player is active
+            if (Input.GetKeyDown(KeyCode.Tab)) { 
+                isActive = !isActive; 
+            }
 
-        //in case you forget to set the menu inactive in play mode
-        isActive = menu.activeSelf;
+            CheckState();
+        }
     }
 
     //opens/closes menu and sets player settings based on isActive
@@ -37,10 +40,7 @@ public class TabMenu : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            //NEED TO CHANGE THIS WHEN WE DEFINE PLAYER STATES FOR MENU
-            //disable player movement
-            GameObject.FindWithTag("Player").GetComponent<Player>().enabled = false;        //disable player input movement 
-            GameObject.FindWithTag("Player").GetComponentInChildren<CameraPivot>().enabled = false;     //disable camera movement
+            GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Inactive;
         } 
         else
         {
@@ -48,9 +48,7 @@ public class TabMenu : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
-            //enable player movement
-            GameObject.FindWithTag("Player").GetComponent<Player>().enabled = true;         //enable player input movement 
-            GameObject.FindWithTag("Player").GetComponentInChildren<CameraPivot>().enabled = true;     //enable camera movement
+            GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Active;
         }
     }
 

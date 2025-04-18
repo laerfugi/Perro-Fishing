@@ -19,7 +19,6 @@ public class PlayerInventory : MonoBehaviour
     [Header("Money")]
     public int money;
 
-    public int heldObjectIndex = -1; // back to 0-based index
 
     private void Awake()
     {
@@ -32,8 +31,6 @@ public class PlayerInventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //inventoryArray = new ItemData[INVENTORY_SIZE];
     }
 
     #region Inventory Methods
@@ -46,21 +43,6 @@ public class PlayerInventory : MonoBehaviour
         else { itemInventoryList.Add(itemData); }
 
         EventManager.OnInventoryEvent();
-        /*
-        for (int i = 0; i < inventoryArray.Length; i++)
-        {
-            if (inventoryArray[i] == null)
-            {
-                inventoryArray[i] = itemData;
-                Debug.Log($"Added {itemData.name} to inventory.");
-                return;
-            }
-        }
-        
-
-        EventManager.OnInventoryEvent();
-        Debug.LogWarning("Inventory is full.");
-        */
     }
 
     public void RemoveItem(ItemData itemData)
@@ -76,20 +58,6 @@ public class PlayerInventory : MonoBehaviour
 
             EventManager.OnInventoryEvent();
         }
-
-        /*
-        for (int i = 0; i < inventoryArray.Length; i++)
-        {
-            if (inventoryArray[i] == itemData)
-            {
-                inventoryArray[i] = null;
-                Debug.Log($"Removed {itemData.name} from inventory.");
-                return;
-            }
-        }
-        EventManager.OnInventoryEvent();
-        Debug.LogWarning("Item not found in inventory.");
-        */
     }
 
     public bool InInventory(ItemData itemData)
@@ -101,34 +69,6 @@ public class PlayerInventory : MonoBehaviour
         else { if (itemInventoryList.Contains(itemData)) { return true; } }
 
         return false;
-
-        /*
-        foreach (var item in inventoryArray)
-        {
-            if (item == itemData)
-            {
-                return true;
-            }
-        }
-
-        return false;
-        */
     }
-
-    //might need this in case if we are going to limit inventory space, but not yet
-    /*
-    public bool IsFull()
-    {
-        foreach (var item in inventoryArray)
-        {
-            if (item == null)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-    */
     #endregion
 }

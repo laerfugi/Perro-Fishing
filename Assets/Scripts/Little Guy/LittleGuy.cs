@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum LittleGuyState { AI, Active, Inactive}
+
 [RequireComponent(typeof(LittleGuyNav))]
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(NavMeshAgent))]
+
 public class LittleGuy : MonoBehaviour
 {
     private LittleGuyNav navHandler;
@@ -14,8 +17,12 @@ public class LittleGuy : MonoBehaviour
 
     private NavMeshAgent nav;
     private CharacterController controller;
+    public GameObject vCam;     //idk how to make this private
+    private CameraPivot cameraPivot;
 
-    private bool isPlayerControlled;
+    //private bool isPlayerControlled;
+    [Header("State")]
+    public LittleGuyState state;
 
     void Start()
     {
@@ -27,33 +34,54 @@ public class LittleGuy : MonoBehaviour
         // Get components to enable/disable
         nav = GetComponent<NavMeshAgent>();
         controller = GetComponent<CharacterController>();
+        cameraPivot = GetComponentInChildren<CameraPivot>();
 
-        SetAIControlled();
+        //SetAIControlled();
     }
 
     void Update()
     {
-        if (isPlayerControlled)
+        if (state == LittleGuyState.AI)                     //Little Guy is AI controlled
         {
+            //state stuff
+            controller.enabled = false;
+            nav.enabled = true;
+
+            navHandler.HandleAI();
+        }
+        else if (state == LittleGuyState.Active)            //Little Guy is player controlled
+        {
+            //camera stuff
+            EventManager.OnSwitchVCamEvent(vCam);
+            cameraPivot.enabled = true;
+
+            //state stuff
+            nav.enabled = false;
+            controller.enabled = true;
+
             inputHandler.HandleInput();
             movementHandler.HandleMovement(inputHandler);
         }
-        else
+        else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
-            navHandler.HandleAI();
+            //camera stuff
+            cameraPivot.enabled = false;
         }
     }
 
+    /*
     public void SetPlayerControlled()
     {
-        isPlayerControlled = true;
+        //isPlayerControlled = true;
+        state = LittleGuyState.Active;
         nav.enabled = false;
         controller.enabled = true;
     }
 
     public void SetAIControlled()
     {
-        isPlayerControlled = false;
+        //isPlayerControlled = false;
+        state = LittleGuyState.AI;
 
         if (!IsGrounded())
         {
@@ -63,6 +91,7 @@ public class LittleGuy : MonoBehaviour
         controller.enabled = false;
         nav.enabled = true;
     }
+    */
 
     private bool IsGrounded()
     {

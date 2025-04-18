@@ -13,6 +13,9 @@ public static class EventManager
     public static event UnityAction<string> PlayerCanInteractEvent;
     public static event UnityAction PlayerCannotInteractEvent;
 
+    /*---Camera Manager Events---*/
+    public static event UnityAction<GameObject> SwitchVCamEvent;
+
     /*---UI Events---*/
     #region UI Events
     //Notification UI
@@ -26,6 +29,7 @@ public static class EventManager
     public static void OnInventoryEvent() => InventoryEvent?.Invoke();
     public static void OnPlayerCanInteractEvent(string message) => PlayerCanInteractEvent?.Invoke(message);
     public static void OnPlayerCannotInteractEvent() => PlayerCannotInteractEvent?.Invoke();
+    public static void OnSwitchVCamEvent(GameObject vcam) => SwitchVCamEvent?.Invoke(vcam);
     public static void OnDisplayNotificationEvent(string message) => DisplayNotificationEvent?.Invoke(message);
     public static void OnHideNotificationEvent() => HideNotificationEvent?.Invoke();
     #endregion

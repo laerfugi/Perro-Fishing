@@ -2,115 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Unity.VisualScripting;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Transform[] targets;
-    [SerializeField] private char char_keybind;
-    private KeyCode keybind;
+    public GameObject currentVCam;
 
-    private int activeTargetIndex = 0;
-
-    void Start()
+    private void OnEnable()
     {
-        char_keybind = char.ToUpper(char_keybind);
-        keybind = (KeyCode)System.Enum.Parse(typeof(KeyCode), char_keybind.ToString());
-
-        if (targets.Length > 0)
-        {
-            SetActiveCam(0);
-        }
+        EventManager.SwitchVCamEvent += switchVCam;
     }
 
-    void Update()
+    private void OnDisable()
     {
-        if (Input.GetKeyDown(keybind))
-        {
-            SwapTarget();
-        }
+        EventManager.SwitchVCamEvent -= switchVCam;
     }
 
-    public void SwapTarget()
+    private void Start()
     {
-        DeactivateCam(targets[activeTargetIndex]);
-        activeTargetIndex = (activeTargetIndex + 1) % targets.Length;
-        SetActiveCam(activeTargetIndex);
+
     }
 
-    private void SetActiveCam(int index)
+    void switchVCam(GameObject vcam)
     {
-        Transform target = targets[index];
+        currentVCam.SetActive(false);
+        currentVCam = vcam;
+        currentVCam.SetActive(true);
 
-        // Enable the virtual camera
-        CinemachineVirtualCamera virtualCamera = FindVirtualCamera(target);
-        if (virtualCamera != null)
-        {
-            virtualCamera.gameObject.SetActive(true);
-        }
-
-        EnableTarget(target);
-    }
-
-    private void DeactivateCam(Transform target)
-    {
-        // Disable the virtual camera
-        CinemachineVirtualCamera virtualCamera = FindVirtualCamera(target);
-        if (virtualCamera != null)
-        {
-            virtualCamera.gameObject.SetActive(false);
-        }
-
-        DisableTarget(target);
-    }
-
-    private CinemachineVirtualCamera FindVirtualCamera(Transform target)
-    {
-        foreach (Transform child in target)
-        {
-            CinemachineVirtualCamera virtualCamera = child.GetComponent<CinemachineVirtualCamera>();
-            if (virtualCamera != null)
-            {
-                return virtualCamera;
-            }
-        }
-
-        Debug.LogError($"Can't find VirtualCamera in {target.name}");
-        return null;
-    }
-
-    private void DisableTarget(Transform target)
-    {
-        // Check if the target is a Player
-        Player player = target.GetComponent<Player>();
-        if (player != null)
-        {
-            player.enabled = false;
-            return;
-        }
-
-        // Check if the target is a LittleGuy
-        LittleGuy littleGuy = target.GetComponent<LittleGuy>();
-        if (littleGuy != null)
-        {
-            littleGuy.SetAIControlled();
-        }
-    }
-
-    private void EnableTarget(Transform target)
-    {
-        // Check if the target is a Player
-        Player player = target.GetComponent<Player>();
-        if (player != null)
-        {
-            player.enabled = true;
-            return;
-        }
-
-        // Check if the target is a LittleGuy
-        LittleGuy littleGuy = target.GetComponent<LittleGuy>();
-        if (littleGuy != null)
-        {
-            littleGuy.SetPlayerControlled();
-        }
     }
 }
