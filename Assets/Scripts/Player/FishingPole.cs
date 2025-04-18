@@ -40,6 +40,7 @@ public class FishingPole : MonoBehaviour
             {
                 if (Input.GetMouseButton(0))
                 {
+                    FacePlayerToCamera();
                     ShowPath();
                 }
 
@@ -71,13 +72,28 @@ public class FishingPole : MonoBehaviour
 
         littleGuy.transform.position = startLocation.transform.position;
 
+        Vector3 previousPosition = startLocation.transform.position;
+
         //choose targetLocation
 
         //cast LittleGuy to targetLocation
         while (elapsedTime < castTime)
         {
             float t = elapsedTime / castTime;
-            littleGuy.transform.position = CalculateParabolaPosition(t, startLocation.transform.position, targetLocation.transform.position);
+            Vector3 nextPosition = CalculateParabolaPosition(t, startLocation.transform.position, targetLocation.transform.position);
+
+            // Check for collisions between the previous position and the next position
+            if (Physics.Linecast(previousPosition, nextPosition, out RaycastHit hit))
+            {
+                Debug.Log($"Collision detected at {hit.point}");
+                littleGuy.transform.position = previousPosition; // Place little guy before hit
+                elapsedTime += 1; // Forcibly break
+                break;
+            }
+
+            littleGuy.transform.position = nextPosition;
+            previousPosition = nextPosition;
+
             elapsedTime += Time.deltaTime;
 
             yield return null;
@@ -150,5 +166,17 @@ public class FishingPole : MonoBehaviour
         float height = Mathf.Lerp(start.y, apexHeight, t) * (1 - t) + Mathf.Lerp(apexHeight, target.y, t) * t;
 
         return new Vector3(horizontalPosition.x, height, horizontalPosition.z);
+    }
+
+    void FacePlayerToCamera()
+    {
+        Transform playerTransform = GameObject.FindWithTag("Player").transform;
+
+        Vector3 cameraForward = Camera.main.transform.forward;
+
+        cameraForward.y = 0;
+        cameraForward.Normalize();
+
+        playerTransform.rotation = Quaternion.LookRotation(cameraForward);
     }
 }
