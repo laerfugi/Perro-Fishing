@@ -69,6 +69,9 @@ public class LittleGuy : MonoBehaviour
         {
             //camera stuff
             cameraPivot.enabled = true;
+
+            // turn off nav early to fix position snapping bug
+            nav.enabled = false;
         }
     }
 

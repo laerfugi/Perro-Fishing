@@ -20,10 +20,14 @@ public class FishingPole : MonoBehaviour
 
     public FishingState state;
 
+    [Header("Path Indicator")]
+    public LineRenderer lineRenderer;
+    public int pathResolution = 20;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -34,8 +38,14 @@ public class FishingPole : MonoBehaviour
         {
             if (state == FishingState.Inactive)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButton(0))
                 {
+                    ShowPath();
+                }
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    ClearPath();
                     StartCoroutine(Fishing());
                 }
             }
@@ -66,7 +76,8 @@ public class FishingPole : MonoBehaviour
         //cast LittleGuy to targetLocation
         while (elapsedTime < castTime)
         {
-            littleGuy.transform.position = Vector3.Slerp(startLocation.transform.position, targetLocation.transform.position, elapsedTime / castTime);
+            float t = elapsedTime / castTime;
+            littleGuy.transform.position = CalculateParabolaPosition(t, startLocation.transform.position, targetLocation.transform.position);
             elapsedTime += Time.deltaTime;
 
             yield return null;
@@ -88,5 +99,56 @@ public class FishingPole : MonoBehaviour
         littleGuy.GetComponent<LittleGuy>().state = LittleGuyState.AI;
         yield return new WaitForSeconds(cooldownTime);
         state = FishingState.Inactive;
+    }
+    void ShowPath()
+    {
+        if (state != FishingState.Inactive) return;
+
+        Vector3[] pathPoints = CalculatePathPoints();
+
+        lineRenderer.positionCount = pathPoints.Length;
+        lineRenderer.SetPositions(pathPoints);
+    }
+
+    void ClearPath()
+    {
+        lineRenderer.positionCount = 0;
+    }
+
+    //Vector3[] CalculatePathPoints()
+    //{
+    //    Vector3[] points = new Vector3[pathResolution];
+    //    for (int i = 0; i < pathResolution; i++)
+    //    {
+    //        float t = (float)i / (pathResolution - 1); // Normalize t between 0 and 1
+    //        points[i] = Vector3.Slerp(startLocation.transform.position, targetLocation.transform.position, t);
+    //    }
+    //    return points;
+    //}
+
+    Vector3[] CalculatePathPoints()
+    {
+        Vector3[] points = new Vector3[pathResolution];
+        Vector3 start = startLocation.transform.position;
+        Vector3 target = targetLocation.transform.position;
+
+        for (int i = 0; i < pathResolution; i++)
+        {
+            float t = (float)i / (pathResolution - 1); // Normalize t between 0 and 1
+            points[i] = CalculateParabolaPosition(t, start, target);
+        }
+
+        return points;
+    }
+
+    Vector3 CalculateParabolaPosition(float t, Vector3 start, Vector3 target)
+    {
+        float apexHeight = Mathf.Max(start.y, target.y) + 4f; // Arc apex height
+        Vector3 horizontalPosition = Vector3.Lerp(start, target, t);
+
+        // Interpolate between start to peak to target height
+        float height = Mathf.Lerp(start.y, apexHeight, t) * (1 - t) + Mathf.Lerp(apexHeight, target.y, t) * t;
+
+        return new Vector3(horizontalPosition.x, height, horizontalPosition.z);
     }
 }
