@@ -10,8 +10,8 @@ public class TabMenu : MonoBehaviour
     public GameObject menu;
     public bool isActive;
 
-    [Header("Submenu")]
-    public GameObject activeSubmenu;        //please have 1 submenu active on start and place it here
+    [Header("TabMenu")]
+    public GameObject activeTabMenu;        //please have 1 tab menu active on start and place it here
 
     // Start is called before the first frame update
     void Start()
@@ -60,9 +60,9 @@ public class TabMenu : MonoBehaviour
     }
 
     //used by section buttons
-    public void OpenSubmenu(GameObject menu) {
-        activeSubmenu.SetActive(false);
+    public void OpenTabMenu(GameObject menu) {
+        activeTabMenu.SetActive(false);
         menu.SetActive(true);
-        activeSubmenu = menu;
+        activeTabMenu = menu;
     }
 }

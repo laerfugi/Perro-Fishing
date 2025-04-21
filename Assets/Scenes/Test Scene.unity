@@ -923,7 +923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 577144730}
   isActive: 0
-  activeSubmenu: {fileID: 1869592680}
+  activeTabMenu: {fileID: 0}
 --- !u!1 &434295501
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 434295504}
   - component: {fileID: 434295503}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Main Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1036,9 +1036,9 @@ RectTransform:
   m_Father: {fileID: 1868171440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &437592133
 MonoBehaviour:
@@ -1125,10 +1125,10 @@ RectTransform:
   - {fileID: 1243185080}
   m_Father: {fileID: 1496847112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -25}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &447706074
 MonoBehaviour:
@@ -1176,7 +1176,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 327136926}
         m_TargetAssemblyTypeName: TabMenu, Assembly-CSharp
-        m_MethodName: OpenSubmenu
+        m_MethodName: OpenTabMenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1869592680}
@@ -1652,8 +1652,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1564983864}
   m_HandleRect: {fileID: 1564983863}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.6666666
+  m_Value: 1
+  m_Size: 0.6666667
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4292,7 +4292,7 @@ GameObject:
   - component: {fileID: 1496847112}
   - component: {fileID: 1496847113}
   m_Layer: 5
-  m_Name: Section Buttons
+  m_Name: Tab Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4615,8 +4615,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1861445952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.33333337}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5409,7 +5409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823833731}
   m_Layer: 5
-  m_Name: Submenus
+  m_Name: Tab Menus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5934,10 +5934,10 @@ RectTransform:
   - {fileID: 1069861774}
   m_Father: {fileID: 1496847112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -25}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1929651081
 MonoBehaviour:
@@ -5985,7 +5985,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 327136926}
         m_TargetAssemblyTypeName: TabMenu, Assembly-CSharp
-        m_MethodName: OpenSubmenu
+        m_MethodName: OpenTabMenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2033396048}
