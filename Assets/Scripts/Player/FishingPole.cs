@@ -14,9 +14,11 @@ public class FishingPole : MonoBehaviour
     public GameObject targetLocation;
 
     [Header("Fishing Variables")]
-    private float elapsedTime;
     public float castTime;  //how long it takes to cast the bait
+    public float elapsedCastTime { get; private set; }
+
     public float cooldownTime;
+    public float elapsedCooldownTime { get; private set; }
 
     public FishingState state;
 
@@ -27,7 +29,8 @@ public class FishingPole : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        elapsedCooldownTime = cooldownTime;
+        targetLocation.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,8 +67,10 @@ public class FishingPole : MonoBehaviour
     IEnumerator Fishing()
     {
         //set up 
-        elapsedTime = 0;
+        elapsedCastTime = 0;
         state = FishingState.Casting;
+
+        elapsedCooldownTime = 0;
 
         GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Inactive;
         littleGuy.GetComponent<LittleGuy>().state = LittleGuyState.Inactive;
@@ -74,12 +79,10 @@ public class FishingPole : MonoBehaviour
 
         Vector3 previousPosition = startLocation.transform.position;
 
-        //choose targetLocation
-
         //cast LittleGuy to targetLocation
-        while (elapsedTime < castTime)
+        while (elapsedCastTime < castTime)
         {
-            float t = elapsedTime / castTime;
+            float t = elapsedCastTime / castTime;
             Vector3 nextPosition = CalculateParabolaPosition(t, startLocation.transform.position, targetLocation.transform.position);
 
             // Check for collisions between the previous position and the next position
@@ -87,25 +90,26 @@ public class FishingPole : MonoBehaviour
             {
                 Debug.Log($"Collision detected at {hit.point}");
                 littleGuy.transform.position = previousPosition; // Place little guy before hit
-                elapsedTime += 1; // Forcibly break
+                elapsedCastTime += 1; // Forcibly break
                 break;
             }
 
             littleGuy.transform.position = nextPosition;
             previousPosition = nextPosition;
 
-            elapsedTime += Time.deltaTime;
+            elapsedCastTime += Time.deltaTime;
 
             yield return null;
         }
 
-        yield return new WaitUntil(() => elapsedTime > castTime);
+        //yield return new WaitUntil(() => elapsedTime > castTime);
 
         //post cast states
         littleGuy.GetComponent<LittleGuy>().state = LittleGuyState.Active;
 
         yield return new WaitForSeconds(2f);
         state = FishingState.Catching;
+        targetLocation.SetActive(false);
     }
 
     IEnumerator Cooldown()
@@ -113,17 +117,29 @@ public class FishingPole : MonoBehaviour
         state = FishingState.Cooldown;
         GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Active;
         littleGuy.GetComponent<LittleGuy>().state = LittleGuyState.AI;
-        yield return new WaitForSeconds(cooldownTime);
+        //yield return new WaitForSeconds(cooldownTime);
+        elapsedCooldownTime = 0;
+        while (elapsedCooldownTime < cooldownTime) 
+        { 
+            elapsedCooldownTime += Time.deltaTime;
+            yield return null;
+        }
+
+        
         state = FishingState.Inactive;
     }
     void ShowPath()
     {
+        //line renderer
         if (state != FishingState.Inactive) return;
 
         Vector3[] pathPoints = CalculatePathPoints();
 
         lineRenderer.positionCount = pathPoints.Length;
         lineRenderer.SetPositions(pathPoints);
+
+        //marker
+        targetLocation.SetActive(true);
     }
 
     void ClearPath()

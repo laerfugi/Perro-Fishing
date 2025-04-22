@@ -18,9 +18,6 @@ public static class EventManager
 
     /*---UI Events---*/
     #region UI Events
-    //Notification UI
-    public static event UnityAction<string> DisplayNotificationEvent;
-    public static event UnityAction HideNotificationEvent;
     #endregion
 
     #endregion
@@ -30,7 +27,5 @@ public static class EventManager
     public static void OnPlayerCanInteractEvent(string message) => PlayerCanInteractEvent?.Invoke(message);
     public static void OnPlayerCannotInteractEvent() => PlayerCannotInteractEvent?.Invoke();
     public static void OnSwitchVCamEvent(GameObject vcam) => SwitchVCamEvent?.Invoke(vcam);
-    public static void OnDisplayNotificationEvent(string message) => DisplayNotificationEvent?.Invoke(message);
-    public static void OnHideNotificationEvent() => HideNotificationEvent?.Invoke();
     #endregion
 }
