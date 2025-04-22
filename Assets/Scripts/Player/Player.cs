@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     public GameObject vCam;     //idk how to make this private
     private CameraPivot cameraPivot;
 
-    [Header("State")]
-    public PlayerState state;
+    [field: Header("State")]
+    [field: SerializeField]
+    public PlayerState state { get; private set; }
 
     void Start()
     {
@@ -23,7 +24,9 @@ public class Player : MonoBehaviour
 
         // Get components to enable/disable
         cameraPivot = GetComponentInChildren<CameraPivot>();
-
+        
+        //Change State to Active
+        ChangeState(PlayerState.Active);
     }
 
     // Update is called once per frame
@@ -44,11 +47,18 @@ public class Player : MonoBehaviour
             //camera stuff
             cameraPivot.enabled = true;
         }
-        else if (state == PlayerState.Menu)     //player can't move and can't move camera
+        else if (state == PlayerState.Menu)         //player can't move and can't move camera
         {
             //camera stuff
             cameraPivot.enabled = false;
         }
 
+    }
+
+    public void ChangeState(PlayerState playerState)
+    {
+        state = playerState;
+
+        EventManager.OnPlayerStateEvent(state);
     }
 }

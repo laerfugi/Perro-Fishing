@@ -820,7 +820,7 @@ GameObject:
   - component: {fileID: 327136923}
   - component: {fileID: 327136926}
   m_Layer: 5
-  m_Name: Tab Menu
+  m_Name: Tab Menu Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -923,7 +923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 577144730}
   isActive: 0
-  activeTabMenu: {fileID: 0}
+  activeTabMenu: {fileID: 1869592680}
 --- !u!1 &363892001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 327136926}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TabMenu, Assembly-CSharp
         m_MethodName: OpenTabMenu
         m_Mode: 2
@@ -1505,7 +1505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCam: {fileID: 1524500624}
-  state: 0
+  <state>k__BackingField: 0
 --- !u!114 &473697378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2450,7 +2450,6 @@ RectTransform:
   m_Children:
   - {fileID: 1532782989}
   - {fileID: 1712281238}
-  - {fileID: 1753675746}
   m_Father: {fileID: 1294713906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2534,7 +2533,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 1712281239}
-  time: 0
 --- !u!1 &1069861773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2797,12 +2795,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079367275}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.000066, y: 5.161518, z: -2.0545754}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -707.95654, y: -286.3399, z: -2.6354055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1351264629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1099547077
 GameObject:
@@ -2865,7 +2863,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099547077}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3306,7 +3304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCam: {fileID: 294782620}
-  state: 0
+  <state>k__BackingField: 0
 --- !u!143 &1216105953
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3670,6 +3668,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1216105949}
+  menuIsOpen: 0
+  HUD: {fileID: 1294713905}
+  tabMenu: {fileID: 327136921}
 --- !u!1 &1315406173
 GameObject:
   m_ObjectHideFlags: 0
@@ -3931,6 +3932,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319323625}
   m_CullTransparentMesh: 1
+--- !u!1 &1351264628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1351264629}
+  m_Layer: 0
+  m_Name: -----Managers-----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1351264629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351264628}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 699.9565, y: 291.50143, z: 0.58083004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1079367277}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1375299609
 GameObject:
   m_ObjectHideFlags: 0
@@ -4382,7 +4415,7 @@ MonoBehaviour:
   startLocation: {fileID: 245858760}
   targetLocation: {fileID: 47805196}
   castTime: 1
-  cooldownTime: 5
+  cooldownTime: 2
   state: 0
   lineRenderer: {fileID: 1478412506}
   pathResolution: 20
@@ -4826,7 +4859,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 70}
+  m_AnchoredPosition: {x: -70, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1532782990
@@ -5429,11 +5462,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 363892002}
+  - {fileID: 1753675746}
   m_Father: {fileID: 1028602808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 70}
+  m_AnchoredPosition: {x: -70, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1712281239
@@ -5491,7 +5525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1718512306
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5789,11 +5823,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1028602808}
+  m_Father: {fileID: 1712281238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 350, y: 10.019989}
+  m_AnchoredPosition: {x: -0.0000019073486, y: -10}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1753675747
@@ -5816,7 +5850,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LMB
+  m_text: Mouse 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6477,7 +6511,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 327136926}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TabMenu, Assembly-CSharp
         m_MethodName: OpenTabMenu
         m_Mode: 2
@@ -7164,7 +7198,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 160616996}
   - {fileID: 1315406176}
-  - {fileID: 1079367277}
   - {fileID: 473697375}
   - {fileID: 1216105957}
   - {fileID: 1603271703}
@@ -7174,3 +7207,4 @@ SceneRoots:
   - {fileID: 6416120214439170042}
   - {fileID: 1099547080}
   - {fileID: 1300230618}
+  - {fileID: 1351264629}

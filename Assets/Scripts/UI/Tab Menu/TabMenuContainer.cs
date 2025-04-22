@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//The Tab Menu GameObject will hold all menus inside it. This script will open/close the menu.
-public class TabMenu : MonoBehaviour
+//The Tab Menu Container GameObject will hold all menus inside it. This script will open/close the menu.
+public class TabMenuContainer : MonoBehaviour
 {
-    [Header("Tab Menu")]
+    [Header("Tab Menu Container")]
     public GameObject menu;
     public bool isActive;
 
@@ -16,47 +16,44 @@ public class TabMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //in case you forget to set the menu inactive in play mode
-        isActive = menu.activeSelf;
+        isActive = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active) {      //only execute when player is active
+        if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active || isActive) {      //only execute when player or container menu is active
             if (Input.GetKeyDown(KeyCode.Tab)) { 
-                isActive = !isActive; 
+                isActive = !isActive;
+                StartCoroutine(CheckState());
             }
-
-            CheckState();
         }
     }
 
     //opens/closes menu and sets player settings based on isActive
-    void CheckState()
+    IEnumerator CheckState()
     {
         if (isActive) {
+            UIManager.Instance.menuIsOpen = true;
             menu.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
 
-            GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Menu;
+            GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Menu);
         } 
         else
         {
+            UIManager.Instance.menuIsOpen = false;
             menu.SetActive(false);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
 
-            GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Active;
+            yield return null;
+            GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Active);
         }
     }
 
     //used by exit button
     public void Exit()
     {
-        isActive = !isActive;
-        CheckState();
+        isActive = false;
+        StartCoroutine(CheckState());
     }
 
     //used by section buttons

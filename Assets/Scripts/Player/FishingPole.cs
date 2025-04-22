@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FishingState {Inactive,Casting,Catching,Cooldown}    //casting: Little Guy is being thrown, Catching: Little Guy touched the ground and is looking for fish
+public enum FishingState {Inactive,Casting,Catching,Cooldown}    //Inactive: You can press Mouse1 to Cast
+                                                                 //Casting: Little Guy is being thrown
+                                                                 //Catching: Little Guy touched the ground and is looking for fish
+                                                                 //Cooldown: Wait until starte becomes Inactive
 
 public class FishingPole : MonoBehaviour
 {
@@ -72,8 +75,8 @@ public class FishingPole : MonoBehaviour
 
         elapsedCooldownTime = 0;
 
-        GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Inactive;
-        littleGuy.GetComponent<LittleGuy>().state = LittleGuyState.Inactive;
+        GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Inactive);
+        littleGuy.GetComponent<LittleGuy>().ChangeState(LittleGuyState.Inactive);
 
         littleGuy.transform.position = startLocation.transform.position;
 
@@ -102,21 +105,17 @@ public class FishingPole : MonoBehaviour
             yield return null;
         }
 
-        //yield return new WaitUntil(() => elapsedTime > castTime);
+        //post cast
 
-        //post cast states
-        littleGuy.GetComponent<LittleGuy>().state = LittleGuyState.Active;
-
-        yield return new WaitForSeconds(2f);
+        littleGuy.GetComponent<LittleGuy>().ChangeState(LittleGuyState.Active);
         state = FishingState.Catching;
-        targetLocation.SetActive(false);
     }
 
     IEnumerator Cooldown()
     {
         state = FishingState.Cooldown;
-        GameObject.FindWithTag("Player").GetComponent<Player>().state = PlayerState.Active;
-        littleGuy.GetComponent<LittleGuy>().state = LittleGuyState.AI;
+        GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Active);
+        littleGuy.GetComponent<LittleGuy>().ChangeState(LittleGuyState.AI);
         //yield return new WaitForSeconds(cooldownTime);
         elapsedCooldownTime = 0;
         while (elapsedCooldownTime < cooldownTime) 
@@ -144,7 +143,11 @@ public class FishingPole : MonoBehaviour
 
     void ClearPath()
     {
+        //line renderer
         lineRenderer.positionCount = 0;
+
+        //marker
+        targetLocation.SetActive(false);
     }
 
     //Vector3[] CalculatePathPoints()

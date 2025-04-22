@@ -20,9 +20,9 @@ public class LittleGuy : MonoBehaviour
     public GameObject vCam;     //idk how to make this private
     private CameraPivot cameraPivot;
 
-    //private bool isPlayerControlled;
-    [Header("State")]
-    public LittleGuyState state;
+    [field: Header("State")]
+    [field: SerializeField]
+    public LittleGuyState state { get; private set; }
 
     void Start()
     {
@@ -37,6 +37,9 @@ public class LittleGuy : MonoBehaviour
         cameraPivot = GetComponentInChildren<CameraPivot>();
 
         //SetAIControlled();
+
+        //Change State to AI
+        ChangeState(LittleGuyState.AI);
     }
 
     void Update()
@@ -98,6 +101,12 @@ public class LittleGuy : MonoBehaviour
         nav.enabled = true;
     }
     */
+    public void ChangeState(LittleGuyState littleGuyState)
+    {
+        state = littleGuyState;
+
+        EventManager.OnLittleGuyStateEvent(littleGuyState);
+    }
 
     private bool IsGrounded()
     {

@@ -19,6 +19,11 @@ public class InteractNotification : MonoBehaviour
         EventManager.PlayerCannotInteractEvent -= HideNotification;
     }
 
+    private void Start()
+    {
+        notificationPanel.SetActive(false);
+    }
+
     public void DisplayNotification(string message)
     {
         notificationPanel.SetActive(true);

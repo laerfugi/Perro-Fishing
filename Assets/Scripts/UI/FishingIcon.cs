@@ -10,8 +10,6 @@ public class FishingIcon : MonoBehaviour
 
     public Image icon;
 
-    public float time;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +26,7 @@ public class FishingIcon : MonoBehaviour
     {
         icon.fillAmount = t;
 
-        time = t;
-
-        if (t <1)
+        if (t < 1)
         {   
             Color color = icon.color;
             color.a = .5f;

@@ -6,6 +6,9 @@ using UnityEngine.Events;
 public static class EventManager
 {
     #region Events
+
+    /*---Player---*/
+    #region Player
     // Player inventory is updated
     public static event UnityAction InventoryEvent;
 
@@ -13,12 +16,16 @@ public static class EventManager
     public static event UnityAction<string> PlayerCanInteractEvent;
     public static event UnityAction PlayerCannotInteractEvent;
 
-    /*---Camera Manager Events---*/
+    //Player State is switched
+    public static event UnityAction<PlayerState> PlayerStateEvent;
+    #endregion
+
+    //Little Guy State is switched
+    public static event UnityAction<LittleGuyState> LittleGuyStateEvent;
+
+    // VCam is switched
     public static event UnityAction<GameObject> SwitchVCamEvent;
 
-    /*---UI Events---*/
-    #region UI Events
-    #endregion
 
     #endregion
 
@@ -26,6 +33,8 @@ public static class EventManager
     public static void OnInventoryEvent() => InventoryEvent?.Invoke();
     public static void OnPlayerCanInteractEvent(string message) => PlayerCanInteractEvent?.Invoke(message);
     public static void OnPlayerCannotInteractEvent() => PlayerCannotInteractEvent?.Invoke();
+    public static void OnPlayerStateEvent(PlayerState playerState) => PlayerStateEvent?.Invoke(playerState);
+    public static void OnLittleGuyStateEvent(LittleGuyState littleGuyState) => LittleGuyStateEvent?.Invoke(littleGuyState);
     public static void OnSwitchVCamEvent(GameObject vcam) => SwitchVCamEvent?.Invoke(vcam);
     #endregion
 }
