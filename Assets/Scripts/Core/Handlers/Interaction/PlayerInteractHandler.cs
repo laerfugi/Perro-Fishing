@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteractHandler : MonoBehaviour, IInteractHandler
 {
-    private PlayerInteractHitbox interactHitbox;
+    public PlayerInteractHitbox interactHitbox { get; private set; }
 
     void Start()
     {
         interactHitbox = GetComponentInChildren<PlayerInteractHitbox>();
     }
 
-    void Update()
+    public void HandleInteract(IInputHandler inputHandler)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (inputHandler.IsPressingInteract)
         {
             interactHitbox.InteractWithClosest();
         }

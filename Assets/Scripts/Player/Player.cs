@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     private IInputHandler inputHandler;
     private IMovementHandler movementHandler;
+    private IInteractHandler interactHandler;
 
     public GameObject vCam;     //idk how to make this private
     private CameraPivot cameraPivot;
@@ -38,8 +39,9 @@ public class Player : MonoBehaviour
         movementHandler = GetComponent<IMovementHandler>();
 
         // Get components to enable/disable
+        interactHandler = GetComponent<IInteractHandler>();
         cameraPivot = GetComponentInChildren<CameraPivot>();
-        
+
         //Change State to Active
         ChangeState(PlayerState.Active);
     }
@@ -51,6 +53,8 @@ public class Player : MonoBehaviour
         {
             inputHandler.HandleInput();
             movementHandler.HandleMovement(inputHandler);
+            interactHandler.HandleInteract(inputHandler);
+            
         }
         else if (state == PlayerState.Inactive)     //player can't move
         {
