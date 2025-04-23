@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -123,7 +124,8 @@ public class LittleGuy : MonoBehaviour
             nav.enabled = false;
         }
 
-        EventManager.OnLittleGuyStateEvent(littleGuyState);
+        //EventManager.OnPlayerStateEvent(PlayerState.Active);
+        EventManager.OnLittleGuyStateEvent(state);
     }
 
     //used by menu event
