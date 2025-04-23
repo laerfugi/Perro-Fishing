@@ -16,15 +16,19 @@ public static class EventManager
     public static event UnityAction<string> PlayerCanInteractEvent;
     public static event UnityAction PlayerCannotInteractEvent;
 
-    //Player State is switched
+    //Player State has changed
     public static event UnityAction<PlayerState> PlayerStateEvent;
     #endregion
 
-    //Little Guy State is switched
+
+    //Little Guy State has changed
     public static event UnityAction<LittleGuyState> LittleGuyStateEvent;
 
-    // VCam is switched
+    //Switch VCam (used as a method)
     public static event UnityAction<GameObject> SwitchVCamEvent;
+
+    //A menu has been toggled
+    public static event UnityAction MenuEvent;
 
 
     #endregion
@@ -36,5 +40,6 @@ public static class EventManager
     public static void OnPlayerStateEvent(PlayerState playerState) => PlayerStateEvent?.Invoke(playerState);
     public static void OnLittleGuyStateEvent(LittleGuyState littleGuyState) => LittleGuyStateEvent?.Invoke(littleGuyState);
     public static void OnSwitchVCamEvent(GameObject vcam) => SwitchVCamEvent?.Invoke(vcam);
+    public static void OnMenuEvent() => MenuEvent?.Invoke();
     #endregion
 }

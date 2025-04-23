@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     [Header("Menu Is Open")]
     public bool menuIsOpen;     //please update this in a UI menu's logic
 
-    [Header("UI Menus")]
+    [Header("UI Elements")]
     public GameObject HUD;
     public GameObject tabMenu;
 

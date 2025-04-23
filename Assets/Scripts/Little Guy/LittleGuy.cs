@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum LittleGuyState { AI, Active, Inactive}
+public enum LittleGuyState { AI, Active, Inactive, Menu}
 
 [RequireComponent(typeof(LittleGuyNav))]
 [RequireComponent(typeof(CharacterController))]
@@ -24,6 +24,21 @@ public class LittleGuy : MonoBehaviour
     [field: SerializeField]
     public LittleGuyState state { get; private set; }
 
+    private LittleGuyState previousState;  //for MenuEventCheck()
+
+
+    //Events
+    private void OnEnable()
+    {
+        EventManager.MenuEvent += () => MenuEventCheck();
+    }
+
+    private void OnDisable()
+    {
+        EventManager.MenuEvent -= () => MenuEventCheck();
+    }
+    
+
     void Start()
     {
         // Get handlers
@@ -36,8 +51,6 @@ public class LittleGuy : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cameraPivot = GetComponentInChildren<CameraPivot>();
 
-        //SetAIControlled();
-
         //Change State to AI
         ChangeState(LittleGuyState.AI);
     }
@@ -46,14 +59,42 @@ public class LittleGuy : MonoBehaviour
     {
         if (state == LittleGuyState.AI)                     //Little Guy is AI controlled
         {
+            if (!IsGrounded())
+            {
+                //ForceGrounded();
+            }
+
+            navHandler.HandleAI();
+        }
+        else if (state == LittleGuyState.Active)            //Little Guy is player controlled
+        {
+            inputHandler.HandleInput();
+            movementHandler.HandleMovement(inputHandler);
+        }
+        else if (state == LittleGuyState.Inactive)          //Little Guy can't move
+        {
+
+        }
+        else if (state == LittleGuyState.Menu)          //Little Guy and cam can't move
+        {
+
+        }
+    }
+
+    /*---State Change methods---*/
+    #region State Change Methods
+    public void ChangeState(LittleGuyState littleGuyState)
+    {
+        state = littleGuyState;
+
+        if (state == LittleGuyState.AI)                     //Little Guy is AI controlled
+        {
             //camera stuff
             cameraPivot.enabled = true;
 
             //state stuff
             controller.enabled = false;
             nav.enabled = true;
-
-            navHandler.HandleAI();
         }
         else if (state == LittleGuyState.Active)            //Little Guy is player controlled
         {
@@ -64,9 +105,6 @@ public class LittleGuy : MonoBehaviour
             //state stuff
             nav.enabled = false;
             controller.enabled = true;
-
-            inputHandler.HandleInput();
-            movementHandler.HandleMovement(inputHandler);
         }
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
@@ -76,37 +114,25 @@ public class LittleGuy : MonoBehaviour
             // turn off nav early to fix position snapping bug
             nav.enabled = false;
         }
-    }
-
-    /*
-    public void SetPlayerControlled()
-    {
-        //isPlayerControlled = true;
-        state = LittleGuyState.Active;
-        nav.enabled = false;
-        controller.enabled = true;
-    }
-
-    public void SetAIControlled()
-    {
-        //isPlayerControlled = false;
-        state = LittleGuyState.AI;
-
-        if (!IsGrounded())
+        else if (state == LittleGuyState.Menu)          //Little Guy and cam can't move
         {
-            ForceGrounded();
-        }
+            //camera stuff
+            cameraPivot.enabled = false;
 
-        controller.enabled = false;
-        nav.enabled = true;
-    }
-    */
-    public void ChangeState(LittleGuyState littleGuyState)
-    {
-        state = littleGuyState;
+            // turn off nav early to fix position snapping bug
+            nav.enabled = false;
+        }
 
         EventManager.OnLittleGuyStateEvent(littleGuyState);
     }
+
+    //used by menu event
+    void MenuEventCheck()
+    {
+        if (state == LittleGuyState.Active || state == LittleGuyState.AI) { previousState = state;  ChangeState(LittleGuyState.Menu); }
+        else if (state == LittleGuyState.Menu) { ChangeState(previousState); }
+    }
+    #endregion
 
     private bool IsGrounded()
     {

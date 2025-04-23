@@ -9,10 +9,11 @@ public class CameraPivot : MonoBehaviour
     private float yRotation = 0f;
     [SerializeField] private float minVerticalAngle;
     [SerializeField] private float maxVerticalAngle;
+    private bool isActive = true;
 
     void LateUpdate()
     {
-        HandleRotation();
+        if (isActive) { HandleRotation(); }
     }
 
     private void HandleRotation()
