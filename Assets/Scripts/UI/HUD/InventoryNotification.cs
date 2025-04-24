@@ -13,6 +13,7 @@ public class InventoryNotification : MonoBehaviour
 
     [Header("Fade Out Time")]
     public float fadeOutTime;
+    private IEnumerator coroutine;
 
     private void OnEnable()
     {
@@ -35,23 +36,22 @@ public class InventoryNotification : MonoBehaviour
         Reset();
         name.text = itemData.name;
         if (itemData.icon != null) { icon.sprite = itemData.icon; }
-        StartCoroutine(FadeOut());
+
+        coroutine = FadeOut();
+        StartCoroutine(coroutine);
     }
 
     private void Reset()
     {
-        StopAllCoroutines();
+        //StopAllCoroutines();
+        if (coroutine != null) { StopCoroutine(coroutine); }
         canvasGroup.alpha = 1.0f;
         name.text = "";
-        icon = null;
-
-
-        Debug.Log("stopped coroutine");
+        icon.sprite = null;
     }
 
     IEnumerator FadeOut()
     {
-        Debug.Log("starting fadeout");
         yield return new WaitForSeconds(2f);
 
         float timeElapsed = 0;

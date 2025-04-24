@@ -28,6 +28,17 @@ public class LittleGuy : MonoBehaviour
 
     private LittleGuyState previousState;  //for MenuEventCheck()
 
+    //Events
+    private void OnEnable()
+    {
+        EventManager.MenuEvent += () => MenuEventCheck();   //if menu is toggled, change player state
+    }
+
+    private void OnDisable()
+    {
+        EventManager.MenuEvent -= () => MenuEventCheck();
+    }
+
     void Start()
     {
         // Get handlers
@@ -107,6 +118,14 @@ public class LittleGuy : MonoBehaviour
         //EventManager.OnPlayerStateEvent(PlayerState.Active);
         EventManager.OnLittleGuyStateEvent(state);
     }
+
+    //used by menu event
+    void MenuEventCheck()
+    {
+        if (state == LittleGuyState.Active) { previousState = state; ChangeState(LittleGuyState.Menu); }
+        else if (state == LittleGuyState.Menu) { ChangeState(previousState); }
+    }
+
     #endregion
 
     private bool IsGrounded()
