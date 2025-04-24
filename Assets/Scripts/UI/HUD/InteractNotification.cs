@@ -10,13 +10,13 @@ public class InteractNotification : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.PlayerCanInteractEvent += DisplayNotification;
-        EventManager.PlayerCannotInteractEvent += HideNotification;
+        EventManager.CanInteractEvent += DisplayNotification;
+        EventManager.CannotInteractEvent += HideNotification;
     }
     private void OnDisable()
     {
-        EventManager.PlayerCanInteractEvent -= DisplayNotification;
-        EventManager.PlayerCannotInteractEvent -= HideNotification;
+        EventManager.CanInteractEvent -= DisplayNotification;
+        EventManager.CannotInteractEvent -= HideNotification;
     }
 
     private void Start()

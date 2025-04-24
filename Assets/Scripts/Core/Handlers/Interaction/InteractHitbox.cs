@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInteractHitbox : MonoBehaviour
+//Contains a list of interactable gameobjects (objects with an IInteractable component).
+//Interactable gameobjects should have a PlayerInteractable or LittleGuyInteractable layer
+
+public class InteractHitbox : MonoBehaviour
 {
     [SerializeReference]
     public List<GameObject> interactablesInHitbox = new List<GameObject>();
@@ -16,7 +19,7 @@ public class PlayerInteractHitbox : MonoBehaviour
 
             if (interactablesInHitbox.Count == 1)
             {
-                EventManager.OnPlayerCanInteractEvent(interactable.GetInteractionPrompt());
+                EventManager.OnCanInteractEvent(interactable.GetInteractionPrompt());
             }
         }
     }
@@ -30,7 +33,7 @@ public class PlayerInteractHitbox : MonoBehaviour
 
             if (interactablesInHitbox.Count == 0)
             {
-                EventManager.OnPlayerCannotInteractEvent();
+                EventManager.OnCannotInteractEvent();
             }
         }
     }
@@ -46,7 +49,7 @@ public class PlayerInteractHitbox : MonoBehaviour
 
             if (interactablesInHitbox.Count == 0)
             {
-                EventManager.OnPlayerCannotInteractEvent();
+                EventManager.OnCannotInteractEvent();
             }
             
         }

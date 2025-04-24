@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IInteractHandler
 {
-    PlayerInteractHitbox interactHitbox { get;}
+    InteractHitbox interactHitbox { get;}
 
     void HandleInteract(IInputHandler inputHandler);
 }

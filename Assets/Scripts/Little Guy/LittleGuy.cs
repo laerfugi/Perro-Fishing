@@ -15,6 +15,7 @@ public class LittleGuy : MonoBehaviour
     private LittleGuyNav navHandler;
     private IMovementHandler movementHandler;
     private IInputHandler inputHandler;
+    private IInteractHandler interactHandler;
 
     private NavMeshAgent nav;
     private CharacterController controller;
@@ -46,6 +47,7 @@ public class LittleGuy : MonoBehaviour
         navHandler = GetComponent<LittleGuyNav>();
         movementHandler = GetComponent<IMovementHandler>();
         inputHandler = GetComponent<IInputHandler>();
+        interactHandler = GetComponent<IInteractHandler>();
 
         // Get components to enable/disable
         nav = GetComponent<NavMeshAgent>();
@@ -71,6 +73,7 @@ public class LittleGuy : MonoBehaviour
         {
             inputHandler.HandleInput();
             movementHandler.HandleMovement(inputHandler);
+            interactHandler.HandleInteract(inputHandler);
         }
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {

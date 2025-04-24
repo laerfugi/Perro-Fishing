@@ -14,8 +14,8 @@ public static class EventManager
     public static event UnityAction InventoryEvent;
 
     // Player can use/interact with an item
-    public static event UnityAction<string> PlayerCanInteractEvent;
-    public static event UnityAction PlayerCannotInteractEvent;
+    public static event UnityAction<string> CanInteractEvent;
+    public static event UnityAction CannotInteractEvent;
 
     //Player State has changed
     public static event UnityAction<PlayerState> PlayerStateEvent;
@@ -36,8 +36,8 @@ public static class EventManager
 
     #region Invoke Methods
     public static void OnInventoryEvent() => InventoryEvent?.Invoke();
-    public static void OnPlayerCanInteractEvent(string message) => PlayerCanInteractEvent?.Invoke(message);
-    public static void OnPlayerCannotInteractEvent() => PlayerCannotInteractEvent?.Invoke();
+    public static void OnCanInteractEvent(string message) => CanInteractEvent?.Invoke(message);
+    public static void OnCannotInteractEvent() => CannotInteractEvent?.Invoke();
     public static void OnPlayerStateEvent(PlayerState playerState) => PlayerStateEvent?.Invoke(playerState);
     public static void OnLittleGuyStateEvent(LittleGuyState littleGuyState) => LittleGuyStateEvent?.Invoke(littleGuyState);
     public static void OnSwitchVCamEvent(GameObject vcam) => SwitchVCamEvent?.Invoke(vcam);

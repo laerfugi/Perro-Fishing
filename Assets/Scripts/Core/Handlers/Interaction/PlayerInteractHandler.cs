@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerInteractHandler : MonoBehaviour, IInteractHandler
 {
-    public PlayerInteractHitbox interactHitbox { get; private set; }
+    public InteractHitbox interactHitbox { get; private set; }
 
     void Start()
     {
-        interactHitbox = GetComponentInChildren<PlayerInteractHitbox>();
+        interactHitbox = GetComponentInChildren<InteractHitbox>();
     }
 
     public void HandleInteract(IInputHandler inputHandler)

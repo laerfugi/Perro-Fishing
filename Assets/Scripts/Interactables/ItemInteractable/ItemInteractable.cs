@@ -5,7 +5,7 @@ using UnityEngine;
 //parent class for all items in the game that can go in the player inventory and be held (fish, flashlight)
 public abstract class ItemInteractable : MonoBehaviour, IInteractable
 {
-    [SerializeField] protected ItemData itemData;
+    public ItemData itemData;
 
     public void Interact()
     {
@@ -19,7 +19,7 @@ public abstract class ItemInteractable : MonoBehaviour, IInteractable
 
     public string GetInteractionPrompt()
     {
-        return $"Press E to pick up {itemData.name}";
+        return $"[E] {itemData.name}";
     }
 
     public virtual void Use() { }
