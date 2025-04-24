@@ -42,7 +42,7 @@ public class PlayerInventory : MonoBehaviour
         //Item Case
         else { itemInventoryList.Add(itemData); }
 
-        EventManager.OnInventoryEvent();
+        EventManager.OnInventoryAddEvent(itemData);
     }
 
     public void RemoveItem(ItemData itemData)
@@ -56,7 +56,7 @@ public class PlayerInventory : MonoBehaviour
             //Item Case
             else { itemInventoryList.Remove(itemData); }
 
-            EventManager.OnInventoryEvent();
+            EventManager.OnInventoryRemoveEvent(itemData);
         }
     }
 

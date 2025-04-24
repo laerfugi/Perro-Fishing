@@ -11,7 +11,8 @@ public static class EventManager
     /*---Player---*/
     #region Player
     // Player inventory is updated
-    public static event UnityAction InventoryEvent;
+    public static event UnityAction<ItemData> InventoryAddEvent;
+    public static event UnityAction<ItemData> InventoryRemoveEvent;
 
     // Player can use/interact with an item
     public static event UnityAction<string> CanInteractEvent;
@@ -35,7 +36,8 @@ public static class EventManager
     #endregion
 
     #region Invoke Methods
-    public static void OnInventoryEvent() => InventoryEvent?.Invoke();
+    public static void OnInventoryAddEvent(ItemData data) => InventoryAddEvent?.Invoke(data);
+    public static void OnInventoryRemoveEvent(ItemData data) => InventoryRemoveEvent?.Invoke(data);
     public static void OnCanInteractEvent(string message) => CanInteractEvent?.Invoke(message);
     public static void OnCannotInteractEvent() => CannotInteractEvent?.Invoke();
     public static void OnPlayerStateEvent(PlayerState playerState) => PlayerStateEvent?.Invoke(playerState);

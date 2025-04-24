@@ -28,19 +28,6 @@ public class LittleGuy : MonoBehaviour
 
     private LittleGuyState previousState;  //for MenuEventCheck()
 
-
-    //Events
-    private void OnEnable()
-    {
-        EventManager.MenuEvent += () => MenuEventCheck();
-    }
-
-    private void OnDisable()
-    {
-        EventManager.MenuEvent -= () => MenuEventCheck();
-    }
-    
-
     void Start()
     {
         // Get handlers
@@ -93,9 +80,6 @@ public class LittleGuy : MonoBehaviour
 
         if (state == LittleGuyState.AI)                     //Little Guy is AI controlled
         {
-            //camera stuff
-            cameraPivot.enabled = true;
-
             //state stuff
             controller.enabled = false;
             nav.enabled = true;
@@ -104,7 +88,6 @@ public class LittleGuy : MonoBehaviour
         {
             //camera stuff
             EventManager.OnSwitchVCamEvent(vCam);
-            cameraPivot.enabled = true;
 
             //state stuff
             nav.enabled = false;
@@ -112,30 +95,17 @@ public class LittleGuy : MonoBehaviour
         }
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
-            //camera stuff
-            cameraPivot.enabled = true;
-
             // turn off nav early to fix position snapping bug
             nav.enabled = false;
         }
         else if (state == LittleGuyState.Menu)          //Little Guy and cam can't move
         {
-            //camera stuff
-            cameraPivot.enabled = false;
-
             // turn off nav early to fix position snapping bug
             nav.enabled = false;
         }
 
         //EventManager.OnPlayerStateEvent(PlayerState.Active);
         EventManager.OnLittleGuyStateEvent(state);
-    }
-
-    //used by menu event
-    void MenuEventCheck()
-    {
-        if (state == LittleGuyState.Active || state == LittleGuyState.AI) { previousState = state;  ChangeState(LittleGuyState.Menu); }
-        else if (state == LittleGuyState.Menu) { ChangeState(previousState); }
     }
     #endregion
 

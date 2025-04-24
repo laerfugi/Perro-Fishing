@@ -78,17 +78,14 @@ public class Player : MonoBehaviour
         {
             //camera stuff
             EventManager.OnSwitchVCamEvent(vCam);
-            cameraPivot.enabled = true;
         }
         else if (state == PlayerState.Inactive)     //player can't move
         {
-            //camera stuff
-            cameraPivot.enabled = true;
+
         }
         else if (state == PlayerState.Menu)         //player and cam can't move
         {
-            //camera stuff
-            cameraPivot.enabled = false;
+
         }
 
         EventManager.OnPlayerStateEvent(state);

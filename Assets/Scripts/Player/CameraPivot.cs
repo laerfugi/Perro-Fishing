@@ -11,6 +11,15 @@ public class CameraPivot : MonoBehaviour
     [SerializeField] private float maxVerticalAngle;
     private bool isActive = true;
 
+    private void OnEnable()
+    {
+        EventManager.MenuEvent += toggleActive;
+    }
+    private void OnDisable()
+    {
+        EventManager.MenuEvent -= toggleActive;
+    }
+
     void LateUpdate()
     {
         if (isActive) { HandleRotation(); }
@@ -27,5 +36,11 @@ public class CameraPivot : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+    }
+
+    //for menus
+    private void toggleActive()
+    {
+        isActive = !isActive;
     }
 }

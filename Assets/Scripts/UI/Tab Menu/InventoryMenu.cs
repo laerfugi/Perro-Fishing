@@ -31,13 +31,13 @@ public class InventoryMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.InventoryEvent += LoadMenu;    //in case if inventory updates in menu
+        EventManager.InventoryAddEvent += LoadMenu;    //in case if inventory updates in menu
 
-        LoadMenu();
+        LoadMenu(null);//need to change
     }
     private void OnDisable()
     {
-        EventManager.InventoryEvent -= LoadMenu;    //in case if inventory updates in menu
+        EventManager.InventoryAddEvent -= LoadMenu;    //in case if inventory updates in menu
     }
 
     private void Start()
@@ -50,7 +50,7 @@ public class InventoryMenu : MonoBehaviour
 
     }
 
-    void LoadMenu()
+    void LoadMenu(ItemData thingy)  //need to change
     {
 
         if (inventoryButtons.Count > 0)
