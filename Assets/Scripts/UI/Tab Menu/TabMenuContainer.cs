@@ -16,6 +16,7 @@ public class TabMenuContainer : MonoBehaviour
     void Start()
     {
         isActive = false;
+        if (menu.activeSelf) { menu.SetActive(false); }
     }
 
     // Update is called once per frame

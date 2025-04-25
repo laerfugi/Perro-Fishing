@@ -58,11 +58,11 @@ public class Player : MonoBehaviour
         }
         else if (state == PlayerState.Inactive)     //player can't move
         {
-            
+            movementHandler.HandleMovement(inputHandler); //gravity
         }
         else if (state == PlayerState.Menu)         //player and cam can't move
         {
-            
+            movementHandler.HandleMovement(inputHandler);   //gravity
         }
 
     }

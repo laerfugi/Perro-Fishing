@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 //given itemdata in DisplayInfo(), displays the itemdata.
 
-public class ItemInfoDisplayer : MonoBehaviour
+public class ItemDataDisplayer : MonoBehaviour
 {
 
     new public TMP_Text name;

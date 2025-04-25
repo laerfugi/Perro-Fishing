@@ -27,17 +27,21 @@ public class InventoryMenu : MonoBehaviour
     public List<GameObject> inventoryButtons;
 
     [Header("Item Info Displayer")]
-    public ItemInfoDisplayer itemInfoDisplayer;
+    public ItemDataDisplayer itemDataDisplayer;
 
     private void OnEnable()
     {
-        EventManager.InventoryAddEvent += LoadMenu;    //in case if inventory updates in menu
+        //in case if inventory updates in menu
+        EventManager.InventoryAddEvent += LoadMenu;
+        EventManager.InventoryRemoveEvent += LoadMenu;
 
         LoadMenu(null);//need to change
     }
     private void OnDisable()
     {
-        EventManager.InventoryAddEvent -= LoadMenu;    //in case if inventory updates in menu
+        //in case if inventory updates in menu
+        EventManager.InventoryAddEvent -= LoadMenu;    
+        EventManager.InventoryRemoveEvent -= LoadMenu;
     }
 
     private void Start()
@@ -50,7 +54,7 @@ public class InventoryMenu : MonoBehaviour
 
     }
 
-    void LoadMenu(ItemData thingy)  //need to change
+    void LoadMenu(ItemData changedItem)  //changedItem is not needed but event requires the parameter
     {
 
         if (inventoryButtons.Count > 0)
@@ -61,23 +65,24 @@ public class InventoryMenu : MonoBehaviour
             }
         }
 
-        List<ItemData> chosenList = new List<ItemData>();
+        List<ItemDataWrapper> chosenList = new List<ItemDataWrapper>();
         if (menuType == MenuType.ItemMenu)
         {
             chosenList = inventory.itemInventoryList;
         }
         else if (menuType == MenuType.FishMenu)
         {
-            chosenList = inventory.fishInventoryList.Cast<ItemData>().ToList();     //cast back to ItemData
+            chosenList = inventory.fishInventoryList;
         }
 
-        foreach (ItemData itemData in chosenList)
+        foreach (ItemDataWrapper itemDataWrapper in chosenList)
             {
                 GameObject newButton = Instantiate(button, menuContent.transform);
                 inventoryButtons.Add(newButton);
-                newButton.name = itemData.name;
-                newButton.GetComponent<Image>().sprite = itemData.icon;
-                newButton.GetComponent<Button>().onClick.AddListener(() => { itemInfoDisplayer.DisplayInfo(itemData); });
+                newButton.name = itemDataWrapper.itemData.name;
+                newButton.GetComponent<InventoryButton>().image.sprite = itemDataWrapper.itemData.icon;
+                newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper.itemData); });
+                newButton.GetComponent<InventoryButton>().countText.text = itemDataWrapper.count.ToString();
             }
     }
 

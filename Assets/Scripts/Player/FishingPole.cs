@@ -60,7 +60,7 @@ public class FishingPole : MonoBehaviour
         //what happens during Catching
         else if (state == FishingState.Catching)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 StartCoroutine(Cooldown());
             }
