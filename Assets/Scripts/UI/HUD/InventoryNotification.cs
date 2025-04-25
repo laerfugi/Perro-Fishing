@@ -12,6 +12,7 @@ public class InventoryNotification : MonoBehaviour
     public Image icon;
 
     [Header("Fade Out Time")]
+    public float slideInTime;
     public float fadeOutTime;
     private IEnumerator coroutine;
 
@@ -37,7 +38,7 @@ public class InventoryNotification : MonoBehaviour
         name.text = itemData.name;
         if (itemData.icon != null) { icon.sprite = itemData.icon; }
 
-        coroutine = FadeOut();
+        coroutine = Animate();
         StartCoroutine(coroutine);
     }
 
@@ -50,11 +51,22 @@ public class InventoryNotification : MonoBehaviour
         icon.sprite = null;
     }
 
-    IEnumerator FadeOut()
+    IEnumerator Animate()
     {
+        //slide in
+        canvasGroup.gameObject.transform.position += new Vector3(-150, 0);
+        float timeElapsed = 0;
+        while (timeElapsed < slideInTime)
+        {
+            canvasGroup.gameObject.transform.position = new Vector3(-150 + 150*(timeElapsed / slideInTime), canvasGroup.gameObject.transform.position.y);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
         yield return new WaitForSeconds(2f);
 
-        float timeElapsed = 0;
+        //fade out
+        timeElapsed = 0;
         while (timeElapsed < fadeOutTime)
         {
             canvasGroup.alpha = (fadeOutTime - timeElapsed)/fadeOutTime;

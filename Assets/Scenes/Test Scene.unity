@@ -1341,7 +1341,8 @@ MonoBehaviour:
   canvasGroup: {fileID: 937175170}
   name: {fileID: 685267024}
   icon: {fileID: 329302918}
-  fadeOutTime: 2
+  slideInTime: 0.25
+  fadeOutTime: 1
 --- !u!1 &447706072
 GameObject:
   m_ObjectHideFlags: 0

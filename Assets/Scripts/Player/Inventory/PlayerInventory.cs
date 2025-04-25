@@ -41,7 +41,6 @@ public class PlayerInventory : MonoBehaviour
         //if item already exists, +1 to count
         if (targetWrapper != null)
         {
-            Debug.Log("wrapper exists");
             //Fish Case
             if (itemData.GetType() == typeof(Fish_ItemData))
             {
@@ -54,12 +53,10 @@ public class PlayerInventory : MonoBehaviour
                 targetWrapper.count += 1;
             }
 
-            EventManager.OnInventoryRemoveEvent(itemData);
         }
         //else, make new wrapper
         else
         {
-            Debug.Log("make new wrapper");
             //Fish Case
             if (itemData.GetType() == typeof(Fish_ItemData))
             {
@@ -72,6 +69,8 @@ public class PlayerInventory : MonoBehaviour
                 itemInventoryList.Add(new ItemDataWrapper(itemData, 1));
             }
         }
+
+        EventManager.OnInventoryAddEvent(itemData);
     }
 
     public void RemoveItem(ItemData itemData)
