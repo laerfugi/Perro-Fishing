@@ -29,10 +29,19 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
 
     public void HandleMovement(IInputHandler inputHandler)
     {
-        GroundCheck();
-        Move(inputHandler);
-        ApplyGravity();
-        Jump(inputHandler);
+        if (inputHandler != null)
+        {
+            GroundCheck();
+            Move(inputHandler);
+            ApplyGravity();
+            Jump(inputHandler);
+        }
+        else
+        {
+            //to be used while player's inactive (disable input but still have gravity)
+            GroundCheck();
+            ApplyGravity();
+        }
     }
 
     protected void GroundCheck()

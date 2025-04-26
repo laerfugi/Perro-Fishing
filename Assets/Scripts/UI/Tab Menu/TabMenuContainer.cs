@@ -4,11 +4,8 @@ using UnityEditor;
 using UnityEngine;
 
 //The Tab Menu Container GameObject will hold all menus inside it. This script will open/close the menu.
-public class TabMenuContainer : MonoBehaviour
+public class TabMenuContainer : MenuClass
 {
-    public GameObject menu;
-    public bool isActive;
-
     [Header("Current Tab Menu")]
     public GameObject activeTabMenu;        //please have 1 tab menu active on start and place it here
 
@@ -16,7 +13,7 @@ public class TabMenuContainer : MonoBehaviour
     void Start()
     {
         isActive = false;
-        if (menu.activeSelf) { menu.SetActive(false); }
+        menu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,40 +21,16 @@ public class TabMenuContainer : MonoBehaviour
     {
         //when can we press tab to open menu?
         if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active || isActive) {      
-            if (Input.GetKeyDown(KeyCode.Tab)) { 
-                isActive = !isActive;
-                StartCoroutine(CheckState());
+            if (Input.GetKeyDown(KeyCode.Tab)) {
+                ToggleMenu();
             }
-        }
-    }
-
-    IEnumerator CheckState()
-    {
-        //open menu
-        if (isActive) {
-            UIManager.Instance.menuIsOpen = true;
-            menu.SetActive(true);
-
-            EventManager.OnMenuEvent();
-            //GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Menu);
-        } 
-        //close menu
-        else
-        {
-            UIManager.Instance.menuIsOpen = false;
-            menu.SetActive(false);
-
-            yield return null;
-            EventManager.OnMenuEvent();
-            //GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Active);
         }
     }
 
     //used by exit button
     public void Exit()
     {
-        isActive = false;
-        StartCoroutine(CheckState());
+        ToggleMenu();
     }
 
     //used by tab buttons

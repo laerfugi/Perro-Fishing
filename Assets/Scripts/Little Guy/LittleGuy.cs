@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum LittleGuyState { AI, Active, Inactive, Menu}
+public enum LittleGuyState { AI, Active, Inactive}
 
 [RequireComponent(typeof(LittleGuyNav))]
 [RequireComponent(typeof(CharacterController))]
@@ -77,10 +77,6 @@ public class LittleGuy : MonoBehaviour
         {
 
         }
-        else if (state == LittleGuyState.Menu)          //Little Guy and cam can't move
-        {
-
-        }
     }
 
     /*---State Change methods---*/
@@ -109,11 +105,6 @@ public class LittleGuy : MonoBehaviour
             // turn off nav early to fix position snapping bug
             nav.enabled = false;
         }
-        else if (state == LittleGuyState.Menu)          //Little Guy and cam can't move
-        {
-            // turn off nav early to fix position snapping bug
-            nav.enabled = false;
-        }
 
         //EventManager.OnPlayerStateEvent(PlayerState.Active);
         EventManager.OnLittleGuyStateEvent(state);
@@ -122,8 +113,8 @@ public class LittleGuy : MonoBehaviour
     //used by menu event
     void MenuEventCheck()
     {
-        if (state == LittleGuyState.Active) { previousState = state; ChangeState(LittleGuyState.Menu); }
-        else if (state == LittleGuyState.Menu) { ChangeState(previousState); }
+        if (state == LittleGuyState.Active) { previousState = state; ChangeState(LittleGuyState.Inactive); }
+        else if (state == LittleGuyState.Inactive) { ChangeState(previousState); }
     }
 
     #endregion

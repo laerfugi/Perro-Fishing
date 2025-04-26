@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState {Active,Inactive,Menu}
+public enum PlayerState {Active,Inactive}
 
 public class Player : MonoBehaviour
 {
@@ -58,11 +58,7 @@ public class Player : MonoBehaviour
         }
         else if (state == PlayerState.Inactive)     //player can't move
         {
-            movementHandler.HandleMovement(inputHandler); //gravity
-        }
-        else if (state == PlayerState.Menu)         //player and cam can't move
-        {
-            movementHandler.HandleMovement(inputHandler);   //gravity
+            movementHandler.HandleMovement(null); //gravity
         }
 
     }
@@ -83,10 +79,6 @@ public class Player : MonoBehaviour
         {
 
         }
-        else if (state == PlayerState.Menu)         //player and cam can't move
-        {
-
-        }
 
         EventManager.OnPlayerStateEvent(state);
     }
@@ -94,8 +86,8 @@ public class Player : MonoBehaviour
     //used by menu event
     void MenuEventCheck()
     {
-        if (state == PlayerState.Active) { previousState = state; ChangeState(PlayerState.Menu);}
-        else if (state == PlayerState.Menu) { ChangeState(previousState); }
+        if (state == PlayerState.Active) { previousState = state; ChangeState(PlayerState.Inactive);}
+        else if (state == PlayerState.Inactive) { ChangeState(previousState); }
     }
     #endregion
 }
