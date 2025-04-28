@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState {Active,Inactive}
+public enum PlayerState {Active,Inactive,Fishing}
 
 public class Player : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class Player : MonoBehaviour
     private IInteractHandler interactHandler;
 
     public GameObject vCam;     //idk how to make this private
-    private CameraPivot cameraPivot;
 
     [field: Header("State")]
     [field: SerializeField]
@@ -23,12 +23,14 @@ public class Player : MonoBehaviour
     //Events
     private void OnEnable()
     {
-        EventManager.MenuEvent += () => MenuEventCheck();   //if menu is toggled, change player state
+        EventManager.OpenMenuEvent += () => OpenMenuEventCheck();   //if menu is toggled, change player state
+        EventManager.CloseMenuEvent += () => CloseMenuEventCheck();
     }
 
     private void OnDisable()
     {
-        EventManager.MenuEvent -= () => MenuEventCheck();
+        EventManager.OpenMenuEvent -= () => OpenMenuEventCheck();   //if menu is toggled, change player state
+        EventManager.CloseMenuEvent -= () => CloseMenuEventCheck();
     }
     
 
@@ -40,7 +42,6 @@ public class Player : MonoBehaviour
 
         // Get components to enable/disable
         interactHandler = GetComponent<IInteractHandler>();
-        cameraPivot = GetComponentInChildren<CameraPivot>();
 
         //Change State to Active
         ChangeState(PlayerState.Active);
@@ -58,7 +59,11 @@ public class Player : MonoBehaviour
         }
         else if (state == PlayerState.Inactive)     //player can't move
         {
-            movementHandler.HandleMovement(null); //gravity
+            movementHandler.HandleMovement(null);   //gravity
+        }
+        else if (state == PlayerState.Inactive)     //special form of Inactive
+        {
+
         }
 
     }
@@ -79,15 +84,23 @@ public class Player : MonoBehaviour
         {
 
         }
+        else if (state == PlayerState.Fishing)     //special form of Inactive
+        {
+
+        }
 
         EventManager.OnPlayerStateEvent(state);
     }
 
     //used by menu event
-    void MenuEventCheck()
+    void OpenMenuEventCheck()
     {
-        if (state == PlayerState.Active) { previousState = state; ChangeState(PlayerState.Inactive);}
-        else if (state == PlayerState.Inactive) { ChangeState(previousState); }
+        if (state == PlayerState.Active) { previousState = state; ChangeState(PlayerState.Inactive); }
+    }
+
+    void CloseMenuEventCheck()
+    {
+        if (state == PlayerState.Inactive) { ChangeState(previousState); }
     }
     #endregion
 }

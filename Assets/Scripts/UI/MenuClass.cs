@@ -20,11 +20,10 @@ public class MenuClass : MonoBehaviour
         //open menu
         if (!isActive && UIManager.Instance.menuIsOpen == false)
         {
-            UIManager.Instance.menuIsOpen = true;
             isActive = true;
             menu.SetActive(true);
 
-            EventManager.OnMenuEvent();
+            EventManager.OnOpenMenuEvent();
         }
 
         //close menu
@@ -37,11 +36,10 @@ public class MenuClass : MonoBehaviour
     //delayed event call to prevent mouse click being registered after closing menu
     IEnumerator CloseMenu()
     {
-        UIManager.Instance.menuIsOpen = false;
         isActive = false;
         menu.SetActive(false);
 
         yield return null;
-        EventManager.OnMenuEvent();
+        EventManager.OnCloseMenuEvent();
     }
 }

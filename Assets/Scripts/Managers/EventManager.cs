@@ -29,9 +29,13 @@ public static class EventManager
     //Switch VCam (used as a method)
     public static event UnityAction<GameObject> SwitchVCamEvent;
 
-    //A menu has been toggled
-    public static event UnityAction MenuEvent;
+    //A menu has been opened/closed
+    public static event UnityAction OpenMenuEvent;
+    public static event UnityAction CloseMenuEvent;
 
+    //Minigame
+    public static event UnityAction StartMinigameEvent;
+    public static event UnityAction<bool> EndMinigameEvent;
 
     #endregion
 
@@ -43,6 +47,9 @@ public static class EventManager
     public static void OnPlayerStateEvent(PlayerState playerState) => PlayerStateEvent?.Invoke(playerState);
     public static void OnLittleGuyStateEvent(LittleGuyState littleGuyState) => LittleGuyStateEvent?.Invoke(littleGuyState);
     public static void OnSwitchVCamEvent(GameObject vcam) => SwitchVCamEvent?.Invoke(vcam);
-    public static void OnMenuEvent() => MenuEvent?.Invoke();
+    public static void OnOpenMenuEvent() => OpenMenuEvent?.Invoke();
+    public static void OnCloseMenuEvent() => CloseMenuEvent?.Invoke();
+    public static void OnStartMinigameEvent() => StartMinigameEvent?.Invoke();
+    public static void OnEndMinigameEvent(bool hasWon) => EndMinigameEvent?.Invoke(hasWon);
     #endregion
 }

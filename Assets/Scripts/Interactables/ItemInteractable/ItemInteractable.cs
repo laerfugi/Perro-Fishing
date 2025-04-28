@@ -7,7 +7,7 @@ public abstract class ItemInteractable : MonoBehaviour, IInteractable
 {
     public ItemData itemData;
 
-    public void Interact()
+    public virtual void Interact()
     {
         Debug.Log($"Attempting to pick up {itemData.name}");
         //if (!PlayerInventory.Instance.IsFull())

@@ -13,11 +13,13 @@ public class CameraPivot : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.MenuEvent += toggleActive;
+        EventManager.OpenMenuEvent += toggleActive;
+        EventManager.CloseMenuEvent += toggleActive;
     }
     private void OnDisable()
     {
-        EventManager.MenuEvent -= toggleActive;
+        EventManager.OpenMenuEvent -= toggleActive;
+        EventManager.CloseMenuEvent -= toggleActive;
     }
 
     void LateUpdate()

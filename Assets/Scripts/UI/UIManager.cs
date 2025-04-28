@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     public GameObject player;
 
     [Header("Menu Is Open")]
-    public bool menuIsOpen;     //please update this in a UI menu's logic
+    public bool menuIsOpen;     //public bool to tell if a menu is open
 
     [Header("UI Elements")]
     public GameObject PlayerHUD;
@@ -29,12 +29,18 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.OpenMenuEvent += MenuOpen;
+        EventManager.CloseMenuEvent += MenuClose;
+
         EventManager.PlayerStateEvent += UpdatePlayerHUD;
         EventManager.LittleGuyStateEvent += UpdateLittleGuyHUD;
     }
 
     private void OnDisable()
     {
+        EventManager.OpenMenuEvent -= MenuOpen;
+        EventManager.CloseMenuEvent -= MenuClose;
+
         EventManager.PlayerStateEvent -= UpdatePlayerHUD;
         EventManager.LittleGuyStateEvent -= UpdateLittleGuyHUD;
     }
@@ -57,6 +63,19 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+
+    //update menuIsOpen
+    void MenuOpen()
+    {
+        menuIsOpen = true;
+    }
+
+    void MenuClose()
+    {
+        menuIsOpen = false;
+    }
+
+    //Update HUD calls
     void UpdatePlayerHUD(PlayerState state)
     {
         if (state == PlayerState.Active)

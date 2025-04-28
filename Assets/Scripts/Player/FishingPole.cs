@@ -39,30 +39,33 @@ public class FishingPole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //start fishing
-        if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active)
+        if (!UIManager.Instance.menuIsOpen)     //need to change how to disable inputs 
         {
-            if (state == FishingState.Inactive)
+            //start fishing
+            if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active)
             {
-                if (Input.GetMouseButton(0))
+                if (state == FishingState.Inactive)
                 {
-                    FacePlayerToCamera();
-                    ShowPath();
-                }
+                    if (Input.GetMouseButton(0))
+                    {
+                        FacePlayerToCamera();
+                        ShowPath();
+                    }
 
-                if (Input.GetMouseButtonUp(0))
-                {
-                    ClearPath();
-                    StartCoroutine(Fishing());
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        ClearPath();
+                        StartCoroutine(Fishing());
+                    }
                 }
             }
-        }
-        //what happens during Catching
-        else if (state == FishingState.Catching)
-        {
-            if (Input.GetMouseButtonDown(1))
+            //what happens during Catching
+            else if (state == FishingState.Catching)
             {
-                StartCoroutine(Cooldown());
+                if (Input.GetMouseButtonDown(1))
+                {
+                    StartCoroutine(Cooldown());
+                }
             }
         }
     }
@@ -75,7 +78,7 @@ public class FishingPole : MonoBehaviour
 
         elapsedCooldownTime = 0;
 
-        GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Inactive);
+        GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Fishing);
         littleGuy.GetComponent<LittleGuy>().ChangeState(LittleGuyState.Inactive);
 
         littleGuy.transform.position = startLocation.transform.position;

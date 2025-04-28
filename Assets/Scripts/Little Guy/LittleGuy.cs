@@ -31,12 +31,14 @@ public class LittleGuy : MonoBehaviour
     //Events
     private void OnEnable()
     {
-        EventManager.MenuEvent += () => MenuEventCheck();   //if menu is toggled, change player state
+        EventManager.OpenMenuEvent += () => OpenMenuEventCheck();   //if menu is toggled, change player state
+        EventManager.CloseMenuEvent += () => CloseMenuEventCheck();
     }
 
     private void OnDisable()
     {
-        EventManager.MenuEvent -= () => MenuEventCheck();
+        EventManager.OpenMenuEvent -= () => OpenMenuEventCheck();
+        EventManager.CloseMenuEvent -= () => CloseMenuEventCheck();
     }
 
     void Start()
@@ -110,11 +112,15 @@ public class LittleGuy : MonoBehaviour
         EventManager.OnLittleGuyStateEvent(state);
     }
 
-    //used by menu event
-    void MenuEventCheck()
+    //used by menu events
+    void OpenMenuEventCheck()
     {
         if (state == LittleGuyState.Active) { previousState = state; ChangeState(LittleGuyState.Inactive); }
-        else if (state == LittleGuyState.Inactive) { ChangeState(previousState); }
+    }
+
+    void CloseMenuEventCheck()
+    {
+        if (state == LittleGuyState.Inactive) { ChangeState(previousState); }
     }
 
     #endregion
