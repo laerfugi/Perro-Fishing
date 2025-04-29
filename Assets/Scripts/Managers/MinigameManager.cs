@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-//starts/ends minigame scenes
+//Launches/Closes minigame scenes
 public class MinigameManager : MonoBehaviour
 {
     public static MinigameManager Instance { get; private set; }
@@ -17,6 +18,8 @@ public class MinigameManager : MonoBehaviour
 
     [Header("Current Minigame")]
     public Minigame currentMinigame;
+
+    public List<Result> results;
 
     private void Awake()
     {
@@ -38,7 +41,7 @@ public class MinigameManager : MonoBehaviour
     void Start()
     {
         //StartCoroutine(StartMinigame(null));
-        StartCoroutine(StartMinigames(2));
+        //StartCoroutine(LaunchMinigames(2));
     }
 
     // Update is called once per frame
@@ -49,7 +52,7 @@ public class MinigameManager : MonoBehaviour
 
     /*---Private methods---*/
     #region Private methods
-    private IEnumerator StartMinigameCoroutine(string name)
+    private IEnumerator LaunchMinigameCoroutine(string name)
     {
         //reset vars
         minigameSceneName = "Minigame";
@@ -61,18 +64,26 @@ public class MinigameManager : MonoBehaviour
         SceneManager.LoadScene("Minigame", LoadSceneMode.Additive);
         yield return minigameTransition.StartCoroutine(minigameTransition.OpenCurtains());
 
-        //start minigame Event
+        //start the minigame with an event call
         EventManager.OnStartMinigameEvent();
 
         //wait until game is done
         yield return new WaitUntil(() => currentMinigame.minigameState == MinigameState.Finish);
+
+        //update results list
+        //results.Add(currentMinigame.result);
+        for (int i = 0; i < results.Count; i++)
+        {
+            if (results[i] == Result.Null) { results[i] = currentMinigame.result; break; }
+        }
+
 
         //end game
         yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
         SceneManager.UnloadSceneAsync(minigameSceneName);
     }
 
-    private IEnumerator EndMinigameCoroutine()
+    private IEnumerator CloseMinigameCoroutine()
     {
         //Transition
         yield return minigameTransition.StartCoroutine(minigameTransition.OpenCurtains());
@@ -82,38 +93,51 @@ public class MinigameManager : MonoBehaviour
 
         //Event call
         EventManager.OnCloseMenuEvent();
-
-        //End minigame Event
-        EventManager.OnEndMinigameEvent(currentMinigame.hasWon);
     }
     #endregion
 
     /*---public methods to start minigame(s)---*/
     #region public methods
-    public IEnumerator StartMinigame(string name)
+    public IEnumerator LaunchMinigame(string name)
     {
         //Event call
         EventManager.OnOpenMenuEvent();
 
+        //reset results list
+        results.Clear();
+        for (int i = 0; i < 1; i++)
+        {
+            results.Add(Result.Null);
+        }
+
         yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
-        yield return StartMinigameCoroutine(name);
-        yield return EndMinigameCoroutine();
+        yield return LaunchMinigameCoroutine(name);
+        yield return CloseMinigameCoroutine();
     }
 
-    public IEnumerator StartMinigames(int count)
+    public IEnumerator LaunchMinigames(int count)
     {
         //Event call
         EventManager.OnOpenMenuEvent();
 
-        yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
+        //reset results list
+        results.Clear();
+        for (int i = 0; i < count; i++)
+        {
+            results.Add(Result.Null);
+        }
+
+            yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
         for (int i = 0; i < count; i++)
         {
             Debug.Log("minigame " + i);
-            yield return StartMinigameCoroutine(null);
+            yield return LaunchMinigameCoroutine(null);
             yield return new WaitUntil(()=> currentMinigame.minigameState == MinigameState.Finish);
+
+            if (results.Contains(Result.Lose)) { break; }
         }
 
-        yield return EndMinigameCoroutine();
+        yield return CloseMinigameCoroutine();
     }
     #endregion
 }

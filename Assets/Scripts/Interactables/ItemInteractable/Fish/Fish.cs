@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class Fish : ItemInteractable
 {
-    private void OnEnable()
-    {
-        EventManager.EndMinigameEvent += ProcessMinigameResult;
-    }
-    private void OnDisable()
-    {
-        EventManager.EndMinigameEvent -= ProcessMinigameResult;   
-    }
-
     //instead of adding fish to inventory, initiates a minigame
     public override void Interact()
     {
-        Debug.Log("start minigame");
-        MinigameManager.Instance.StartMinigame("minigamename");
+        StartCoroutine(Minigame());
     }
 
     public override void Use()
@@ -25,9 +15,24 @@ public class Fish : ItemInteractable
         Debug.Log("I am a fish");
     }
 
-    void ProcessMinigameResult(bool result)
+    IEnumerator Minigame()
     {
-        if (result == true) { Debug.Log("you won! i should despawn and go to inventory"); }
-        else if (result == false) { Debug.Log("you lost... i should despawn and run away"); }
+        yield return MinigameManager.Instance.StartCoroutine(MinigameManager.Instance.LaunchMinigame(null));
+        ProcessMinigameResults(MinigameManager.Instance.results);
+    }
+
+    void ProcessMinigameResults(List<Result> results)
+    {
+        if (results.Contains(Result.Lose)) 
+        { 
+            Debug.Log("you lost... i should despawn and run away"); 
+        
+        }
+        else 
+        { 
+            Debug.Log("you won! i should despawn and go to inventory");
+            PlayerInventory.Instance.AddItem(itemData);
+            Destroy(gameObject);
+        }
     }
 }

@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 //Singleton to be added in each minigame scene. Controls flow of the minigame and a bool to show if player has won.
 public enum MinigameState {Start, Play, End, Finish}
+public enum Result {Null, Win, Lose}
 
 public class Minigame : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class Minigame : MonoBehaviour
 
     [Header("States")]
     public MinigameState minigameState;
-    public bool hasWon;
+    public Result result;
     private bool startMinigame;
 
     [Header("Time")]
@@ -39,7 +40,7 @@ public class Minigame : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        hasWon = false;
+        result = Result.Lose;
         startMinigame = false;
     }
 
@@ -47,7 +48,6 @@ public class Minigame : MonoBehaviour
     {
         if (MinigameManager.Instance != null) { MinigameManager.Instance.currentMinigame = this; }
         if (MinigameManager.Instance != null) { yield return new WaitUntil(() => startMinigame == true); }
-        Debug.Log("starting game");
         yield return StartCoroutine(StartMinigame());
         yield return StartCoroutine(PlayMinigame());
         yield return StartCoroutine(EndMinigame());
@@ -60,7 +60,7 @@ public class Minigame : MonoBehaviour
         //reset vars and display message
         minigameState = MinigameState.Start;
 
-        hasWon = false;
+        result = Result.Lose;
         minigameTime = maxMinigameTime;
 
         //event system
@@ -105,8 +105,8 @@ public class Minigame : MonoBehaviour
         eventSystem.enabled = false;
 
         //when timer ends, show win/lose message
-        if (hasWon) { MinigameUI.Instance.ShowWinMessage(); }
-        else if (!hasWon) { MinigameUI.Instance.ShowLoseMessage(); }
+        if (result == Result.Win) { MinigameUI.Instance.ShowWinMessage(); }
+        else if (result == Result .Lose) { MinigameUI.Instance.ShowLoseMessage(); }
 
         yield return new WaitForSeconds(endTime);
 
@@ -118,7 +118,7 @@ public class Minigame : MonoBehaviour
 
     public void Win()
     {
-        hasWon = true;
+        result = Result.Win;
         MinigameUI.Instance.ShowWinMessage();
 
         StartCoroutine(EndMinigame());
@@ -126,9 +126,12 @@ public class Minigame : MonoBehaviour
 
     public void Lose()
     {
-        hasWon = false;
-        MinigameUI.Instance.ShowLoseMessage();
+        if (result != Result.Win)   //can't lose after you win
+        {
+            result = Result.Lose;
+            MinigameUI.Instance.ShowLoseMessage();
 
-        StartCoroutine(EndMinigame());
+            StartCoroutine(EndMinigame());
+        }
     }
 }

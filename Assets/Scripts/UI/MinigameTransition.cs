@@ -14,9 +14,16 @@ public class MinigameTransition : MonoBehaviour
     public RectTransform rightPanel;
     public GameObject infoPanel;
 
+    [Header("Minigame Manager Results")]
+    public List<Result> results;
+
     void Awake()
     {
         canvas = GetComponent<Canvas>();
+        results = MinigameManager.Instance.results;
+
+        leftPanel.gameObject.SetActive(false); rightPanel.gameObject.SetActive(false); infoPanel.gameObject.SetActive(false);
+
     }
 
     public IEnumerator Transition()
@@ -49,6 +56,9 @@ public class MinigameTransition : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         infoPanel.SetActive(true);
+
+        //add data here
+
         yield return new WaitForSeconds(2f);
         infoPanel.SetActive(false);
     }

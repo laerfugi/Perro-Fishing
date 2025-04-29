@@ -41,7 +41,7 @@ public class MinigameUI : MonoBehaviour
     {
         timeText.text = Mathf.Round(Minigame.Instance.minigameTime).ToString();
 
-        if (Minigame.Instance.minigameTime <= 0 && !Minigame.Instance.hasWon) { timeText.text = ":("; }
+        if (Minigame.Instance.minigameTime <= 0 && Minigame.Instance.result == Result.Lose) { timeText.text = ":("; }
     }
 
     /*---public methods---*/
