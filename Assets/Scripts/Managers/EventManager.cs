@@ -34,8 +34,8 @@ public static class EventManager
     public static event UnityAction CloseMenuEvent;
 
     //Minigame
-    //public static event UnityAction StartMinigameEvent;
-    //public static event UnityAction<bool?> EndMinigameEvent;
+    public static event UnityAction StartMinigameEvent;
+    public static event UnityAction<bool> EndMinigameEvent;
 
     #endregion
 
@@ -49,7 +49,7 @@ public static class EventManager
     public static void OnSwitchVCamEvent(GameObject vcam) => SwitchVCamEvent?.Invoke(vcam);
     public static void OnOpenMenuEvent() => OpenMenuEvent?.Invoke();
     public static void OnCloseMenuEvent() => CloseMenuEvent?.Invoke();
-    //public static void OnStartMinigameEvent() => StartMinigameEvent?.Invoke();
-    //public static void OnEndMinigameEvent(bool? hasWon) => EndMinigameEvent?.Invoke(hasWon);
+    public static void OnStartMinigameEvent() => StartMinigameEvent?.Invoke();
+    public static void OnEndMinigameEvent(bool hasWon) => EndMinigameEvent?.Invoke(hasWon);
     #endregion
 }

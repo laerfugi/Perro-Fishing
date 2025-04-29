@@ -17,14 +17,6 @@ public class MinigameTransition : MonoBehaviour
     void Awake()
     {
         canvas = GetComponent<Canvas>();
-
-        //StartCoroutine(Transition());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public IEnumerator Transition()

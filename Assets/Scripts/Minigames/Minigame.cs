@@ -19,6 +19,7 @@ public class Minigame : MonoBehaviour
     [Header("States")]
     public MinigameState minigameState;
     public bool hasWon;
+    private bool startMinigame;
 
     [Header("Time")]
     public float startTime;
@@ -26,16 +27,27 @@ public class Minigame : MonoBehaviour
     public float maxMinigameTime;
     public float endTime;
 
+    private void OnEnable()
+    {
+        EventManager.StartMinigameEvent += ()=> startMinigame = true;
+    }
+    private void OnDisable()
+    {
+        EventManager.StartMinigameEvent -= () => startMinigame = true;
+    }
+
     private void Awake()
     {
-        hasWon = false;
         Instance = this;
+        hasWon = false;
+        startMinigame = false;
     }
 
     IEnumerator Start()
     {
-        //if (MinigameManager.Instance != null) { yield return new WaitUntil(() => MinigameManager.Instance.startGame); }
         if (MinigameManager.Instance != null) { MinigameManager.Instance.currentMinigame = this; }
+        if (MinigameManager.Instance != null) { yield return new WaitUntil(() => startMinigame == true); }
+        Debug.Log("starting game");
         yield return StartCoroutine(StartMinigame());
         yield return StartCoroutine(PlayMinigame());
         yield return StartCoroutine(EndMinigame());

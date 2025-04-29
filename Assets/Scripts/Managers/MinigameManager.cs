@@ -12,10 +12,10 @@ public class MinigameManager : MonoBehaviour
     private EventSystem eventSystem;
     private string minigameSceneName;
 
+    [Header("Minigame Transition")]
     public MinigameTransition minigameTransition;   //coupled ui stuff
 
-    //public bool startGame;
-
+    [Header("Current Minigame")]
     public Minigame currentMinigame;
 
     private void Awake()
@@ -60,8 +60,9 @@ public class MinigameManager : MonoBehaviour
         //transition and load scene
         SceneManager.LoadScene("Minigame", LoadSceneMode.Additive);
         yield return minigameTransition.StartCoroutine(minigameTransition.OpenCurtains());
-        
-        //start minigame
+
+        //start minigame Event
+        EventManager.OnStartMinigameEvent();
 
         //wait until game is done
         yield return new WaitUntil(() => currentMinigame.minigameState == MinigameState.Finish);
@@ -81,6 +82,9 @@ public class MinigameManager : MonoBehaviour
 
         //Event call
         EventManager.OnCloseMenuEvent();
+
+        //End minigame Event
+        EventManager.OnEndMinigameEvent(currentMinigame.hasWon);
     }
     #endregion
 
