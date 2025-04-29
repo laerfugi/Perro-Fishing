@@ -6,11 +6,11 @@ public class Fish : ItemInteractable
 {
     private void OnEnable()
     {
-        EventManager.EndMinigameEvent += ProcessMinigameResult;
+        //EventManager.EndMinigameEvent += ProcessMinigameResult;
     }
     private void OnDisable()
     {
-        EventManager.EndMinigameEvent -= ProcessMinigameResult;   
+        //EventManager.EndMinigameEvent -= ProcessMinigameResult;   
     }
 
     //instead of adding fish to inventory, initiates a minigame
@@ -25,7 +25,7 @@ public class Fish : ItemInteractable
         Debug.Log("I am a fish");
     }
 
-    void ProcessMinigameResult(bool result)
+    void ProcessMinigameResult(bool? result)
     {
         if (result == true) { Debug.Log("you won! i should despawn and go to inventory"); }
         else if (result == false) { Debug.Log("you lost... i should despawn and run away"); }

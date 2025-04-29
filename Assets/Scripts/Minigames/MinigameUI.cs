@@ -34,18 +34,28 @@ public class MinigameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateClock();
     }
 
+    private void UpdateClock()
+    {
+        timeText.text = Mathf.Round(Minigame.Instance.minigameTime).ToString();
 
+        if (Minigame.Instance.minigameTime <= 0 && !Minigame.Instance.hasWon) { timeText.text = ":("; }
+    }
 
+    /*---public methods---*/
+    #region public methods
     public void ShowWinMessage()
     {
+        loseMessage.SetActive(false);
         winMessage.SetActive(true);
     }
 
     public void ShowLoseMessage()
     {
+        winMessage.SetActive(false);
         loseMessage.SetActive(true);
     }
+    #endregion
 }

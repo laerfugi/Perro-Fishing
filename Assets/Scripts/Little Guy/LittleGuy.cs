@@ -31,14 +31,14 @@ public class LittleGuy : MonoBehaviour
     //Events
     private void OnEnable()
     {
-        EventManager.OpenMenuEvent += () => OpenMenuEventCheck();   //if menu is toggled, change player state
-        EventManager.CloseMenuEvent += () => CloseMenuEventCheck();
+        EventManager.OpenMenuEvent += OpenMenuEventCheck;   //if menu is toggled, change player state
+        EventManager.CloseMenuEvent +=  CloseMenuEventCheck;
     }
 
     private void OnDisable()
     {
-        EventManager.OpenMenuEvent -= () => OpenMenuEventCheck();
-        EventManager.CloseMenuEvent -= () => CloseMenuEventCheck();
+        EventManager.OpenMenuEvent -= OpenMenuEventCheck;
+        EventManager.CloseMenuEvent -= CloseMenuEventCheck;
     }
 
     void Start()

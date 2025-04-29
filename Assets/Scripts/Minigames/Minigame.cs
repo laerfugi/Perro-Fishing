@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 //Singleton to be added in each minigame scene. Controls flow of the minigame and a bool to show if player has won.
-public enum MinigameState {Start, Play, End}
+public enum MinigameState {Start, Play, End, Finish}
 
 public class Minigame : MonoBehaviour
 {
@@ -28,27 +28,23 @@ public class Minigame : MonoBehaviour
 
     private void Awake()
     {
+        hasWon = false;
         Instance = this;
     }
 
-    void Start()
+    IEnumerator Start()
     {
-        StartCoroutine(StartMinigame());
-    }
-
-    private void Update()
-    {
-        if (minigameState == MinigameState.Play)
-        {
-            CheckTime();
-        }
+        //if (MinigameManager.Instance != null) { yield return new WaitUntil(() => MinigameManager.Instance.startGame); }
+        if (MinigameManager.Instance != null) { MinigameManager.Instance.currentMinigame = this; }
+        yield return StartCoroutine(StartMinigame());
+        yield return StartCoroutine(PlayMinigame());
+        yield return StartCoroutine(EndMinigame());
     }
 
     /*---States---*/
     #region States
     IEnumerator StartMinigame()
     {
-
         //reset vars and display message
         minigameState = MinigameState.Start;
 
@@ -62,45 +58,48 @@ public class Minigame : MonoBehaviour
         MinigameUI.Instance.startMessage.SetActive(true);
 
         yield return new WaitForSeconds(startTime);
-        
-        //change state
-        minigameState = MinigameState.Play;
 
         MinigameUI.Instance.startMessage.SetActive(false);
 
         //event system
         eventSystem.enabled = true;
     }
-    private void CheckTime()
+
+    IEnumerator PlayMinigame()
     {
-        minigameTime -= Time.deltaTime;
-        minigameTime = Mathf.Clamp(minigameTime, 0.0f, maxMinigameTime);
-
-        //ui
-        MinigameUI.Instance.timeText.text = "time: " + minigameTime.ToString();
-
         //change state
-        if (minigameTime <= 0.0f)
+        minigameState = MinigameState.Play;
+
+        minigameTime = maxMinigameTime;
+
+        while (minigameTime > 0)
         {
-            StartCoroutine(EndMinigame());
+            minigameTime -= Time.deltaTime;
+            minigameTime = Mathf.Clamp(minigameTime, 0.0f, maxMinigameTime);
+
+            yield return null;
         }
     }
 
     IEnumerator EndMinigame()
     {
+        //if minigame ends earlier than default call, don't run default call
+        if (minigameState == MinigameState.End) { yield break; }
+
+        //change state
         minigameState = MinigameState.End;
 
         //event system
         eventSystem.enabled = false;
 
-        //ui
+        //when timer ends, show win/lose message
         if (hasWon) { MinigameUI.Instance.ShowWinMessage(); }
         else if (!hasWon) { MinigameUI.Instance.ShowLoseMessage(); }
 
         yield return new WaitForSeconds(endTime);
 
         //change state
-        if (MinigameManager.Instance != null) MinigameManager.Instance.EndMinigame(hasWon);
+        minigameState = MinigameState.Finish;
     }
 
     #endregion
@@ -108,10 +107,16 @@ public class Minigame : MonoBehaviour
     public void Win()
     {
         hasWon = true;
+        MinigameUI.Instance.ShowWinMessage();
+
+        StartCoroutine(EndMinigame());
     }
 
     public void Lose()
     {
         hasWon = false;
+        MinigameUI.Instance.ShowLoseMessage();
+
+        StartCoroutine(EndMinigame());
     }
 }

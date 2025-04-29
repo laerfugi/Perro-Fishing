@@ -23,16 +23,21 @@ public class Player : MonoBehaviour
     //Events
     private void OnEnable()
     {
-        EventManager.OpenMenuEvent += () => OpenMenuEventCheck();   //if menu is toggled, change player state
-        EventManager.CloseMenuEvent += () => CloseMenuEventCheck();
+        EventManager.OpenMenuEvent += OpenMenuEventCheck;   //if menu is toggled, change player state
+        EventManager.CloseMenuEvent += CloseMenuEventCheck;
     }
 
     private void OnDisable()
     {
-        EventManager.OpenMenuEvent -= () => OpenMenuEventCheck();   //if menu is toggled, change player state
-        EventManager.CloseMenuEvent -= () => CloseMenuEventCheck();
+        EventManager.OpenMenuEvent -= OpenMenuEventCheck;   //if menu is toggled, change player state
+        EventManager.CloseMenuEvent -= CloseMenuEventCheck;
     }
-    
+
+    private void Awake()
+    {
+        //Change State to Active
+        ChangeState(PlayerState.Active);
+    }
 
     void Start()
     {
@@ -42,9 +47,6 @@ public class Player : MonoBehaviour
 
         // Get components to enable/disable
         interactHandler = GetComponent<IInteractHandler>();
-
-        //Change State to Active
-        ChangeState(PlayerState.Active);
     }
 
     // Update is called once per frame
@@ -61,7 +63,7 @@ public class Player : MonoBehaviour
         {
             movementHandler.HandleMovement(null);   //gravity
         }
-        else if (state == PlayerState.Inactive)     //special form of Inactive
+        else if (state == PlayerState.Fishing)     //special form of Inactive
         {
 
         }
@@ -72,6 +74,8 @@ public class Player : MonoBehaviour
     #region State Change Methods
     public void ChangeState(PlayerState playerState)
     {
+        Debug.Log("i am being changed");
+
         state = playerState;
 
         //execute code on entering a new state

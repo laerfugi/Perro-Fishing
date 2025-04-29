@@ -945,10 +945,10 @@ MonoBehaviour:
   eventSystem: {fileID: 2084828067}
   minigameState: 0
   hasWon: 0
-  startTime: 2
+  startTime: 1
   minigameTime: 0
-  maxMinigameTime: 5
-  endTime: 2
+  maxMinigameTime: 3
+  endTime: 1
 --- !u!4 &1101239749
 Transform:
   m_ObjectHideFlags: 0
