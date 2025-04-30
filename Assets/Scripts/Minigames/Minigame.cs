@@ -17,6 +17,10 @@ public class Minigame : MonoBehaviour
 
     public static Minigame Instance;
 
+    [Header("Minigame Info")]
+    public string startMessage;
+    public float maxMinigameTime;
+
     [Header("States")]
     public MinigameState minigameState;
     public Result result;
@@ -25,7 +29,6 @@ public class Minigame : MonoBehaviour
     [Header("Time")]
     public float startTime;
     public float minigameTime;
-    public float maxMinigameTime;
     public float endTime;
 
     private void OnEnable()
@@ -66,12 +69,13 @@ public class Minigame : MonoBehaviour
         //event system
         eventSystem.enabled = false;
 
-        //ui
-        MinigameUI.Instance.startMessage.SetActive(true);
+        //
+        MinigameUI.Instance.startMessage.text = startMessage;
+        MinigameUI.Instance.startMessage.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(startTime);
 
-        MinigameUI.Instance.startMessage.SetActive(false);
+        MinigameUI.Instance.startMessage.gameObject.SetActive(false);
 
         //event system
         eventSystem.enabled = true;
@@ -116,7 +120,27 @@ public class Minigame : MonoBehaviour
 
     #endregion
 
+    /*---Methods to control the game---*/
+    
+    /// <summary>
+    /// At minigame start, result = Lose. Use these methods to change the state. 
+    /// </summary>
+    
+    #region Methods to control the game
+
+    //passively sets result
     public void Win()
+    {
+        result = Result.Win;
+    }
+
+    public void Lose()
+    {
+        result = Result.Lose;
+    }
+
+    //instantly sets result and ends game.
+    public void InstantWin()
     {
         result = Result.Win;
         MinigameUI.Instance.ShowWinMessage();
@@ -124,7 +148,7 @@ public class Minigame : MonoBehaviour
         StartCoroutine(EndMinigame());
     }
 
-    public void Lose()
+    public void InstantLose()   //don't recommend to use this bc warioware doesnt use it
     {
         if (result != Result.Win)   //can't lose after you win
         {
@@ -134,4 +158,6 @@ public class Minigame : MonoBehaviour
             StartCoroutine(EndMinigame());
         }
     }
+
+    #endregion
 }

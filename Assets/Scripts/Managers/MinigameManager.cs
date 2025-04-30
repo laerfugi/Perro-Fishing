@@ -41,7 +41,7 @@ public class MinigameManager : MonoBehaviour
     void Start()
     {
         //StartCoroutine(StartMinigame(null));
-        //StartCoroutine(LaunchMinigames(2));
+        //StartCoroutine(LaunchMinigames(3));
     }
 
     // Update is called once per frame

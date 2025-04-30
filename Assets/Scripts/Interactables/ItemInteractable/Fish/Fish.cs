@@ -25,8 +25,9 @@ public class Fish : ItemInteractable
     {
         if (results.Contains(Result.Lose)) 
         { 
-            Debug.Log("you lost... i should despawn and run away"); 
-        
+            Debug.Log("you lost... i should despawn and run away");
+            Destroy(gameObject);
+
         }
         else 
         { 

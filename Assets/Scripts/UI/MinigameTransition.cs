@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MinigameTransition : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class MinigameTransition : MonoBehaviour
     public RectTransform leftPanel;
     public RectTransform rightPanel;
     public GameObject infoPanel;
+
+    [Header("Progress Panel")]
+    public GameObject progressPanel;
+    public GameObject progressIcon;
 
     [Header("Minigame Manager Results")]
     public List<Result> results;
@@ -49,18 +54,52 @@ public class MinigameTransition : MonoBehaviour
             yield return null;
         }
 
-        yield return StartCoroutine(ShowInfo());
+        yield return StartCoroutine(ShowProgress());
     }
 
-    IEnumerator ShowInfo()
+    IEnumerator ShowProgress()
     {
+        //Intro Delay
         yield return new WaitForSeconds(.1f);
         infoPanel.SetActive(true);
 
-        //add data here
+        //Create Start Icon
+        GameObject startIcon = Instantiate(progressIcon, progressPanel.transform);
+        startIcon.GetComponent<Image>().color = Color.cyan;
 
+        //Create a row of progress icons representing minigame results
+        List <GameObject> progressIconList = new List<GameObject>();
+        for (int i = 0; i < MinigameManager.Instance.results.Count; i++)
+        {
+            GameObject newProgressIcon = Instantiate(progressIcon, progressPanel.transform);
+            progressIconList.Add(newProgressIcon);
+            
+            //win/lose icons
+            if (MinigameManager.Instance.results[i] == Result.Win)
+            {
+                newProgressIcon.GetComponent<Image>().color = Color.green;
+            }
+            else if (MinigameManager.Instance.results[i] == Result.Lose)
+            {
+                newProgressIcon.GetComponent<Image>().color = Color.red;
+            }
+        }
+
+        //Create Finish icon
+        GameObject finishIcon = Instantiate(progressIcon, progressPanel.transform);
+        finishIcon.GetComponent<Image>().color = Color.cyan;
+
+        //Outro Delay
         yield return new WaitForSeconds(2f);
         infoPanel.SetActive(false);
+
+        //delete all icons, this is so bad but it works
+        Destroy(startIcon);
+        for (int i = 0; i < progressIconList.Count; i++)
+        {
+            Destroy(progressIconList[i]);
+        }
+        Destroy(finishIcon);
     }
 
     public IEnumerator OpenCurtains()
