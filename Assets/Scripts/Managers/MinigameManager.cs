@@ -11,15 +11,18 @@ public class MinigameManager : MonoBehaviour
 {
     public static MinigameManager Instance { get; private set; }
     private EventSystem eventSystem;
-    private string minigameSceneName;
+    //private string minigameSceneName;
 
     [Header("Minigame Transition")]
     public MinigameTransition minigameTransition;   //coupled ui stuff
 
     [Header("Current Minigame")]
     public Minigame currentMinigame;
-
     public List<Result> results;
+
+    [Header("Minigame Data List")]
+    public MinigameDataList minigameDataList;
+
 
     private void Awake()
     {
@@ -41,7 +44,7 @@ public class MinigameManager : MonoBehaviour
     void Start()
     {
         //StartCoroutine(StartMinigame(null));
-        //StartCoroutine(LaunchMinigames(3));
+        StartCoroutine(LaunchMinigames(3));
     }
 
     // Update is called once per frame
@@ -52,10 +55,8 @@ public class MinigameManager : MonoBehaviour
 
     /*---Private methods---*/
     #region Private methods
-    private IEnumerator LaunchMinigameCoroutine(string name)
+    private IEnumerator LaunchMinigameCoroutine(string sceneName)
     {
-        //reset vars
-        minigameSceneName = "Minigame";
 
         //disable event system
         if (eventSystem != null) eventSystem.enabled = false;
@@ -80,7 +81,7 @@ public class MinigameManager : MonoBehaviour
 
         //end game
         yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
-        SceneManager.UnloadSceneAsync(minigameSceneName);
+        SceneManager.UnloadSceneAsync(sceneName);
     }
 
     private IEnumerator CloseMinigameCoroutine()
@@ -98,7 +99,9 @@ public class MinigameManager : MonoBehaviour
 
     /*---public methods to start minigame(s)---*/
     #region public methods
-    public IEnumerator LaunchMinigame(string name)
+
+    //launch 1 minigame given minigameData
+    public IEnumerator LaunchMinigame(MinigameData minigameData)
     {
         //Event call
         EventManager.OnOpenMenuEvent();
@@ -111,10 +114,29 @@ public class MinigameManager : MonoBehaviour
         }
 
         yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
-        yield return LaunchMinigameCoroutine(name);
+        yield return LaunchMinigameCoroutine(minigameData.sceneName);
         yield return CloseMinigameCoroutine();
     }
 
+    // (FOR DEBUGGING) launch 1 minigame given name of minigame scene
+    public IEnumerator LaunchMinigame(string sceneName)
+    {
+        //Event call
+        EventManager.OnOpenMenuEvent();
+
+        //reset results list
+        results.Clear();
+        for (int i = 0; i < 1; i++)
+        {
+            results.Add(Result.Null);
+        }
+
+        yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
+        yield return LaunchMinigameCoroutine(sceneName);
+        yield return CloseMinigameCoroutine();
+    }
+
+    //launch multiple minigames
     public IEnumerator LaunchMinigames(int count)
     {
         //Event call
@@ -127,11 +149,19 @@ public class MinigameManager : MonoBehaviour
             results.Add(Result.Null);
         }
 
-            yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
+        yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
         for (int i = 0; i < count; i++)
         {
             Debug.Log("minigame " + i);
-            yield return LaunchMinigameCoroutine(null);
+
+            //choose random minigame
+            string sceneName;
+            List<MinigameData> list = minigameDataList.list;
+
+            sceneName = list[Random.Range(0, list.Count)].sceneName;
+
+            //launch
+            yield return LaunchMinigameCoroutine(sceneName);
             yield return new WaitUntil(()=> currentMinigame.minigameState == MinigameState.Finish);
 
             if (results.Contains(Result.Lose)) { break; }

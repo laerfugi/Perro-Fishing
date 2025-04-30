@@ -796,7 +796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &719401706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -943,8 +943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 2084828067}
-  startMessage: Choose!
-  maxMinigameTime: 3
+  minigameData: {fileID: 11400000, guid: 7b04e004bc799414f8a61db9a7965840, type: 2}
   minigameState: 0
   result: 0
   startTime: 1
@@ -982,7 +981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1113602950
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1295,7 +1294,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1761116895
 RectTransform:
   m_ObjectHideFlags: 0

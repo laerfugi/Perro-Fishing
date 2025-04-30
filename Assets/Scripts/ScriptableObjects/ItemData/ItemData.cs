@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //holds data of an item. Can be edited as a ScriptableObject
-[CreateAssetMenu(fileName = "New Item", menuName = "Interactable/ItemData")]
+[CreateAssetMenu(fileName = "New Item", menuName = "ScriptableObjects/Interactable/ItemData")]
 public class ItemData : ScriptableObject
 {
     new public string name = "New Item";

@@ -13,20 +13,22 @@ public enum Result {Null, Win, Lose}
 
 public class Minigame : MonoBehaviour
 {
-    public EventSystem eventSystem;
+    private EventSystem eventSystem;
 
     public static Minigame Instance;
 
-    [Header("Minigame Info")]
-    public string startMessage;
-    public float maxMinigameTime;
+    [Header("Minigame Data")]
+    public MinigameData minigameData;
+    private string startMessage;
+    private float maxMinigameTime;
 
-    [Header("States")]
+    [Header("DEBUG")]
+    //[Header("States")]
     public MinigameState minigameState;
     public Result result;
     private bool startMinigame;
 
-    [Header("Time")]
+    //[Header("Time")]
     public float startTime;
     public float minigameTime;
     public float endTime;
@@ -43,9 +45,14 @@ public class Minigame : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        eventSystem = FindObjectOfType<EventSystem>();
+
         result = Result.Lose;
         startMinigame = false;
-    }
+        startMessage = minigameData.startMessage;
+        maxMinigameTime = minigameData.maxMinigameTime;
+}
 
     IEnumerator Start()
     {

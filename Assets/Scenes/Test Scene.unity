@@ -1178,6 +1178,7 @@ MonoBehaviour:
   minigameTransition: {fileID: 1293540834}
   currentMinigame: {fileID: 0}
   results: 
+  minigameDataList: {fileID: 11400000, guid: 97f4a22b81541d649bdf666ed7a6d9ab, type: 2}
 --- !u!1 &363892001
 GameObject:
   m_ObjectHideFlags: 0
