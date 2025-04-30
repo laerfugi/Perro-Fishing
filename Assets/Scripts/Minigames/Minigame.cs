@@ -46,7 +46,7 @@ public class Minigame : MonoBehaviour
     {
         Instance = this;
 
-        eventSystem = FindObjectOfType<EventSystem>();
+        if (EventSystem.current != null) eventSystem = EventSystem.current;
 
         result = Result.Lose;
         startMinigame = false;
@@ -74,7 +74,7 @@ public class Minigame : MonoBehaviour
         minigameTime = maxMinigameTime;
 
         //event system
-        eventSystem.enabled = false;
+        if (eventSystem!= null) eventSystem.enabled = false;
 
         //
         MinigameUI.Instance.startMessage.text = startMessage;
@@ -85,7 +85,7 @@ public class Minigame : MonoBehaviour
         MinigameUI.Instance.startMessage.gameObject.SetActive(false);
 
         //event system
-        eventSystem.enabled = true;
+        if (eventSystem != null) eventSystem.enabled = true;
     }
 
     IEnumerator PlayMinigame()
