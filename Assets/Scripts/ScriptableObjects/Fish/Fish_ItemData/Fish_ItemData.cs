@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "ScriptableObjects/Interactable/Fish_ItemData")]
 public class Fish_ItemData : ItemData
 {
+    [Header("Fish_ItemData")]
     public CombinationType combinationType;
     public int price;
 }
