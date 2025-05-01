@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -63,17 +64,13 @@ public class MinigameTransition : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         infoPanel.SetActive(true);
 
-        //Create Start Icon
-        GameObject startIcon = Instantiate(progressIcon, progressPanel.transform);
-        startIcon.GetComponent<Image>().color = Color.cyan;
-
         //Create a row of progress icons representing minigame results
-        List <GameObject> progressIconList = new List<GameObject>();
+        List<GameObject> progressIconList = new List<GameObject>();
         for (int i = 0; i < MinigameManager.Instance.results.Count; i++)
         {
             GameObject newProgressIcon = Instantiate(progressIcon, progressPanel.transform);
             progressIconList.Add(newProgressIcon);
-            
+
             //win/lose icons
             if (MinigameManager.Instance.results[i] == Result.Win)
             {
@@ -85,21 +82,15 @@ public class MinigameTransition : MonoBehaviour
             }
         }
 
-        //Create Finish icon
-        GameObject finishIcon = Instantiate(progressIcon, progressPanel.transform);
-        finishIcon.GetComponent<Image>().color = Color.cyan;
-
         //Outro Delay
         yield return new WaitForSeconds(2f);
         infoPanel.SetActive(false);
 
         //delete all icons, this is so bad but it works
-        Destroy(startIcon);
         for (int i = 0; i < progressIconList.Count; i++)
         {
             Destroy(progressIconList[i]);
         }
-        Destroy(finishIcon);
     }
 
     public IEnumerator OpenCurtains()

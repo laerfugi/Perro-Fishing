@@ -14,7 +14,7 @@ public class MinigameManager : MonoBehaviour
     //private string minigameSceneName;
 
     [Header("Minigame Transition")]
-    public MinigameTransition minigameTransition;   //coupled ui stuff
+    private MinigameTransition minigameTransition;   //ui stuff
 
     [Header("Current Minigame")]
     public Minigame currentMinigame;
@@ -37,14 +37,15 @@ public class MinigameManager : MonoBehaviour
             Instance = this;
         }
 
-        eventSystem = GameObject.FindObjectOfType<EventSystem>();
+        eventSystem = FindObjectOfType<EventSystem>();
+        minigameTransition = FindObjectOfType<MinigameTransition>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         //StartCoroutine(StartMinigame(null));
-        StartCoroutine(LaunchMinigames(3));
+        //StartCoroutine(LaunchMinigames(3));
     }
 
     // Update is called once per frame
@@ -77,7 +78,6 @@ public class MinigameManager : MonoBehaviour
         {
             if (results[i] == Result.Null) { results[i] = currentMinigame.result; break; }
         }
-
 
         //end game
         yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());

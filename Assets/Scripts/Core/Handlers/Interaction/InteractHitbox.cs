@@ -17,7 +17,7 @@ public class InteractHitbox : MonoBehaviour
         {
             interactablesInHitbox.Add(collider.gameObject);
 
-            if (interactablesInHitbox.Count == 1)
+            if (interactablesInHitbox.Count >= 1)
             {
                 EventManager.OnCanInteractEvent(interactable.GetInteractionPrompt());
             }
@@ -29,12 +29,10 @@ public class InteractHitbox : MonoBehaviour
         IInteractable interactable = collider.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            interactablesInHitbox.Remove(collider.gameObject);
+            EventManager.OnCannotInteractEvent();
+            if (interactablesInHitbox.Count > 1) { EventManager.OnCanInteractEvent(interactablesInHitbox[1].GetComponent<IInteractable>().GetInteractionPrompt()); }    //update ui with next interactable in list
 
-            if (interactablesInHitbox.Count == 0)
-            {
-                EventManager.OnCannotInteractEvent();
-            }
+            interactablesInHitbox.Remove(collider.gameObject);
         }
     }
 
@@ -42,16 +40,14 @@ public class InteractHitbox : MonoBehaviour
     {
         if (interactablesInHitbox.Count > 0)
         {
+            EventManager.OnCannotInteractEvent();
+            if (interactablesInHitbox.Count >1) { EventManager.OnCanInteractEvent(interactablesInHitbox[1].GetComponent<IInteractable>().GetInteractionPrompt()); }    //update ui with next interactable in list
+
+
             IInteractable closestInteractable = interactablesInHitbox[0].GetComponent<IInteractable>();
             closestInteractable.Interact();
 
             interactablesInHitbox.Remove(interactablesInHitbox[0]);
-
-            if (interactablesInHitbox.Count == 0)
-            {
-                EventManager.OnCannotInteractEvent();
-            }
-            
         }
     }
 }

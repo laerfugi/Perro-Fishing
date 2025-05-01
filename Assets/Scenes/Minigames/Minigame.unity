@@ -942,7 +942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0649af324821f7e46b8ff8c1ebb428ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 2084828067}
   minigameData: {fileID: 11400000, guid: 7b04e004bc799414f8a61db9a7965840, type: 2}
   minigameState: 0
   result: 0
