@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class InventoryNotification : MonoBehaviour
 {
+    [Header("Notification")]
+    public GameObject notification;
     public CanvasGroup canvasGroup;
     new public TMP_Text name;
     public Image icon;
@@ -23,11 +25,13 @@ public class InventoryNotification : MonoBehaviour
     private void OnDisable()
     {
         EventManager.InventoryAddEvent -= Display;
+
+        notification.SetActive(false);
     }
 
     private void Start()
     {
-        canvasGroup.alpha = 0;
+        notification.SetActive(false);
     }
 
     //display a notification
@@ -44,8 +48,8 @@ public class InventoryNotification : MonoBehaviour
 
     private void Reset()
     {
-        //StopAllCoroutines();
         if (coroutine != null) { StopCoroutine(coroutine); }
+        notification.SetActive(true);
         canvasGroup.alpha = 1.0f;
         name.text = "";
         icon.sprite = null;
@@ -74,6 +78,7 @@ public class InventoryNotification : MonoBehaviour
             yield return null;
         }
 
+        notification.SetActive(false);
         canvasGroup.alpha = 0;
     }
 }

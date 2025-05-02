@@ -11,6 +11,9 @@ public class MinigameTransition : MonoBehaviour
 
     public float transitionTime;
 
+    [Header("Parent gameobject")]
+    public GameObject transition;
+
     [Header("Panels")]
     public RectTransform leftPanel;
     public RectTransform rightPanel;
@@ -28,8 +31,7 @@ public class MinigameTransition : MonoBehaviour
         canvas = GetComponent<Canvas>();
         results = MinigameManager.Instance.results;
 
-        leftPanel.gameObject.SetActive(false); rightPanel.gameObject.SetActive(false); infoPanel.gameObject.SetActive(false);
-
+        transition.SetActive(false);
     }
 
     public IEnumerator Transition()
@@ -41,7 +43,8 @@ public class MinigameTransition : MonoBehaviour
 
     public IEnumerator CloseCurtains()
     {
-        leftPanel.gameObject.SetActive(true); rightPanel.gameObject.SetActive(true);
+        transition.SetActive(true);
+        leftPanel.gameObject.SetActive(true); rightPanel.gameObject.SetActive(true); infoPanel.SetActive(false);
 
         float elapsedTime = 0;
         while (elapsedTime < transitionTime)
@@ -108,6 +111,7 @@ public class MinigameTransition : MonoBehaviour
             yield return null;
         }
 
+        transition.SetActive(false);
         leftPanel.gameObject.SetActive(false); rightPanel.gameObject.SetActive(false);
     }
 }
