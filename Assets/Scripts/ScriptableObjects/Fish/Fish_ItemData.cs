@@ -7,6 +7,5 @@ using UnityEngine;
 public class Fish_ItemData : ItemData
 {
     [Header("Fish_ItemData")]
-    public CombinationType combinationType;
     public int price;
 }

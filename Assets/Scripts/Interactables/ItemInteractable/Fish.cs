@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Fish : ItemInteractable
 {
+    public List<Fish_ItemData> fish_ItemDataList;
+
     //instead of adding fish to inventory, initiates a minigame
     public override void Interact()
     {
@@ -17,8 +19,8 @@ public class Fish : ItemInteractable
 
     IEnumerator Minigame()
     {
-        yield return MinigameManager.Instance.StartCoroutine(MinigameManager.Instance.LaunchMinigame("Minigame"));
-        ProcessMinigameResults(MinigameManager.Instance.results);
+            yield return MinigameManager.Instance.StartCoroutine(MinigameManager.Instance.LaunchMinigame("Minigame"));
+            ProcessMinigameResults(MinigameManager.Instance.results);
     }
 
     void ProcessMinigameResults(List<Result> results)
@@ -32,6 +34,10 @@ public class Fish : ItemInteractable
         else 
         { 
             Debug.Log("you won! i should despawn and go to inventory");
+
+            //choose random fish from list
+            itemData = fish_ItemDataList[Random.Range(0, fish_ItemDataList.Count)];
+
             PlayerInventory.Instance.AddItem(itemData);
             Destroy(gameObject);
         }
