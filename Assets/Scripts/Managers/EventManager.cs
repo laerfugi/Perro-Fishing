@@ -36,6 +36,7 @@ public static class EventManager
     //Minigame
     public static event UnityAction StartMinigameEvent;
     //public static event UnityAction<bool> EndMinigameEvent;
+    public static event UnityAction Tick;       //will call every 1 second during minigame
 
     #endregion
 
@@ -51,5 +52,6 @@ public static class EventManager
     public static void OnCloseMenuEvent() => CloseMenuEvent?.Invoke();
     public static void OnStartMinigameEvent() => StartMinigameEvent?.Invoke();
     //public static void OnEndMinigameEvent(bool hasWon) => EndMinigameEvent?.Invoke(hasWon);
+    public static void OnTick() => Tick?.Invoke();
     #endregion
 }

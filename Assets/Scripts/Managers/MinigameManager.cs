@@ -23,6 +23,7 @@ public class MinigameManager : MonoBehaviour
     [Header("Minigame Data List")]
     public MinigameDataList minigameDataList;
 
+    private AudioListener audioListener;    //1000% need to change this 
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class MinigameManager : MonoBehaviour
         }
 
         eventSystem = FindObjectOfType<EventSystem>();
+        audioListener = FindObjectOfType<AudioListener>();
         minigameTransition = FindObjectOfType<MinigameTransition>();
     }
 
@@ -58,12 +60,14 @@ public class MinigameManager : MonoBehaviour
     #region Private methods
     private IEnumerator LaunchMinigameCoroutine(string sceneName)
     {
+        //disable audio listener
+        audioListener.enabled = false;
 
         //disable event system
         if (eventSystem != null) eventSystem.enabled = false;
 
         //transition and load scene
-        SceneManager.LoadScene("Minigame", LoadSceneMode.Additive);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
         yield return minigameTransition.StartCoroutine(minigameTransition.OpenCurtains());
 
         //start the minigame with an event call
@@ -91,6 +95,9 @@ public class MinigameManager : MonoBehaviour
 
         //reenable event system
         if (eventSystem != null) eventSystem.enabled = true;
+        
+        //reenable audio listener
+        audioListener.enabled = true;
 
         //Event call
         EventManager.OnCloseMenuEvent();

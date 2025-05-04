@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cf2fc01b71098c429284e5781e5d429, type: 3}
-  m_Name: All Minigames
+  m_Script: {fileID: 11500000, guid: c58e6dae2b5d66746a6c511114f6d99a, type: 3}
+  m_Name: Flappy Bird
   m_EditorClassIdentifier: 
-  list:
-  - {fileID: 11400000, guid: 7b04e004bc799414f8a61db9a7965840, type: 2}
-  - {fileID: 11400000, guid: 08bce52dbea674f448f716e70c6869b9, type: 2}
+  sceneName: Flappy Bird
+  startMessage: Jump!
+  maxMinigameTime: 5
+  minigameControls: 2

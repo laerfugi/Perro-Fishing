@@ -33,8 +33,8 @@ public class Minigame : MonoBehaviour
     private bool startMinigame;
 
     //[Header("Time")]
-    public float startTime;
     public float minigameTime;
+    public float startTime;
     public float endTime;
 
     private void OnEnable()
@@ -58,12 +58,12 @@ public class Minigame : MonoBehaviour
         controlsMessage = "Use " + minigameData.minigameControls.ToString();
         maxMinigameTime = minigameData.maxMinigameTime;
 
-        contents.transform.position = new Vector3(100,100,100);
+        if (MinigameManager.Instance != null) { MinigameManager.Instance.currentMinigame = this; }
+        if (MinigameManager.Instance != null) { contents.transform.position = new Vector3(100, 100, 0); }       //offset contents if the scene's being launched by MinigameManager
 }
 
     IEnumerator Start()
     {
-        if (MinigameManager.Instance != null) { MinigameManager.Instance.currentMinigame = this; }
         if (MinigameManager.Instance != null) { yield return new WaitUntil(() => startMinigame == true); }
         yield return StartCoroutine(StartMinigame());
         yield return StartCoroutine(PlayMinigame());
@@ -104,9 +104,16 @@ public class Minigame : MonoBehaviour
         minigameState = MinigameState.Play;
 
         minigameTime = maxMinigameTime;
-
+        float temp = maxMinigameTime;
         while (minigameTime > 0)
         {
+            //call tick event
+            if (temp != Mathf.Round(minigameTime))
+            {
+                temp = Mathf.Round(minigameTime);
+                EventManager.OnTick();
+            }
+
             minigameTime -= Time.deltaTime;
             minigameTime = Mathf.Clamp(minigameTime, 0.0f, maxMinigameTime);
 
@@ -123,11 +130,11 @@ public class Minigame : MonoBehaviour
         minigameState = MinigameState.End;
 
         //event system
-        eventSystem.enabled = false;
+        if (eventSystem != null) eventSystem.enabled = false;
 
         //when timer ends, show win/lose message
         if (result == Result.Win) { MinigameUI.Instance.ShowWinMessage(); }
-        else if (result == Result .Lose) { MinigameUI.Instance.ShowLoseMessage(); }
+        else if (result == Result.Lose) { MinigameUI.Instance.ShowLoseMessage(); }
 
         yield return new WaitForSeconds(endTime);
 
@@ -165,15 +172,12 @@ public class Minigame : MonoBehaviour
         StartCoroutine(EndMinigame());
     }
 
-    public void InstantLose()   //don't recommend to use this bc warioware doesnt use it
+    public void InstantLose()
     {
-        if (result != Result.Win)   //can't lose after you win
-        {
-            result = Result.Lose;
-            MinigameUI.Instance.ShowLoseMessage();
+        result = Result.Lose;
+        MinigameUI.Instance.ShowLoseMessage();
 
-            StartCoroutine(EndMinigame());
-        }
+        StartCoroutine(EndMinigame());
     }
 
     #endregion

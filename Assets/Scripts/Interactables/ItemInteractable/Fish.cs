@@ -19,7 +19,7 @@ public class Fish : ItemInteractable
 
     IEnumerator Minigame()
     {
-            yield return MinigameManager.Instance.StartCoroutine(MinigameManager.Instance.LaunchMinigame("Minigame"));
+            yield return MinigameManager.Instance.StartCoroutine(MinigameManager.Instance.LaunchMinigames(1));
             ProcessMinigameResults(MinigameManager.Instance.results);
     }
 
