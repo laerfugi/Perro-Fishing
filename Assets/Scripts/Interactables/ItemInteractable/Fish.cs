@@ -7,6 +7,9 @@ public class Fish : ItemInteractable
     public List<Fish_ItemData> fish_ItemDataList;
     public Lake lake;
 
+    [Header("Debug")]
+    public bool skipMinigame;
+
     private void OnDisable()
     {
         if (lake) { lake.fishList.Remove(this.gameObject); }
@@ -15,6 +18,13 @@ public class Fish : ItemInteractable
     //instead of adding fish to inventory, initiates a minigame
     public override void Interact()
     {
+        if (skipMinigame) 
+        {
+            itemData = fish_ItemDataList[Random.Range(0, fish_ItemDataList.Count)];
+            PlayerInventory.Instance.AddItem(itemData);
+            Destroy(gameObject);
+            return;
+        }
         StartCoroutine(Minigame());
     }
 

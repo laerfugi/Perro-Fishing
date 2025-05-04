@@ -160,6 +160,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22e0231fe4e721047bfca52da9796ba3, type: 2}
   - {fileID: 11400000, guid: 740093bab6d37354788638e8ed0c0c23, type: 2}
   - {fileID: 11400000, guid: fcfced3a40a77e74d8c68563c4d49a55, type: 2}
+  lake: {fileID: 0}
+  skipMinigame: 1
 --- !u!1 &4981329482049179529
 GameObject:
   m_ObjectHideFlags: 0

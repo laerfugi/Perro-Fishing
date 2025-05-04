@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//parent class for all items in the game that can go in the player inventory and be held (fish, flashlight)
+//parent class for all worldspace representations of items in the game that can go in the player inventory and be held (fish, flashlight)
 public abstract class ItemInteractable : MonoBehaviour, IInteractable
 {
     public ItemData itemData;
