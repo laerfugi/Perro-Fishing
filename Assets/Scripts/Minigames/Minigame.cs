@@ -20,7 +20,11 @@ public class Minigame : MonoBehaviour
     [Header("Minigame Data")]
     public MinigameData minigameData;
     private string startMessage;
+    private string controlsMessage;
     private float maxMinigameTime;
+
+    [Header("Minigame Contents")]
+    public GameObject contents;
 
     [Header("DEBUG")]
     //[Header("States")]
@@ -51,7 +55,10 @@ public class Minigame : MonoBehaviour
         result = Result.Lose;
         startMinigame = false;
         startMessage = minigameData.startMessage;
+        controlsMessage = "Use " + minigameData.minigameControls.ToString();
         maxMinigameTime = minigameData.maxMinigameTime;
+
+        contents.transform.position = new Vector3(100,100,100);
 }
 
     IEnumerator Start()
@@ -76,13 +83,16 @@ public class Minigame : MonoBehaviour
         //event system
         if (eventSystem!= null) eventSystem.enabled = false;
 
-        //
+        //show start messages
         MinigameUI.Instance.startMessage.text = startMessage;
         MinigameUI.Instance.startMessage.gameObject.SetActive(true);
+        MinigameUI.Instance.controlsMessage.text = controlsMessage;
+        MinigameUI.Instance.controlsMessage.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(startTime);
 
         MinigameUI.Instance.startMessage.gameObject.SetActive(false);
+        MinigameUI.Instance.controlsMessage.gameObject.SetActive(false);
 
         //event system
         if (eventSystem != null) eventSystem.enabled = true;

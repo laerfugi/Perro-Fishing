@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Scene.unity
     guid: 39cbd33b651dfb6439c3976e950a9e4b
   - enabled: 1
-    path: Assets/Scenes/Minigames/Minigame.unity
+    path: Assets/Scenes/Minigames/Minigames/Minigame.unity
     guid: b9c339d22498dbe49b30a332bc748261
   m_configObjects: {}

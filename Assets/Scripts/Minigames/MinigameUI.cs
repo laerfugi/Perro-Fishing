@@ -9,8 +9,9 @@ public class MinigameUI : MonoBehaviour
 {
     public static MinigameUI Instance;
 
-    [Header("Start Message")]
+    [Header("Start Messages")]
     public TMP_Text startMessage;
+    public TMP_Text controlsMessage;
 
     [Header("Time")]
     public TMP_Text timeText;
@@ -27,7 +28,7 @@ public class MinigameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startMessage.gameObject.SetActive(false);
+        startMessage.gameObject.SetActive(false); controlsMessage.gameObject.SetActive(false); 
         winMessage.SetActive(false); loseMessage.SetActive(false);   
     }
 
