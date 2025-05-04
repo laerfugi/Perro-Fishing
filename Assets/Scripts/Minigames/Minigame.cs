@@ -52,11 +52,11 @@ public class Minigame : MonoBehaviour
 
         if (EventSystem.current != null) eventSystem = EventSystem.current;
 
-        result = Result.Lose;
         startMinigame = false;
         startMessage = minigameData.startMessage;
         controlsMessage = "Use " + minigameData.minigameControls.ToString();
         maxMinigameTime = minigameData.maxMinigameTime;
+        result = Result.Null;
 
         if (MinigameManager.Instance != null) { MinigameManager.Instance.currentMinigame = this; }
         if (MinigameManager.Instance != null) { contents.transform.position = new Vector3(100, 100, 0); }       //offset contents if the scene's being launched by MinigameManager
@@ -77,7 +77,6 @@ public class Minigame : MonoBehaviour
         //reset vars and display message
         minigameState = MinigameState.Start;
 
-        result = Result.Lose;
         minigameTime = maxMinigameTime;
 
         //event system

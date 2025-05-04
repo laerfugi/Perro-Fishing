@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8075841345094049268}
   - component: {fileID: 6134929842394256125}
   - component: {fileID: 1195458697738363201}
-  m_Layer: 0
+  - component: {fileID: 7149830616054729350}
+  m_Layer: 7
   m_Name: stupid idiot fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,6 +139,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7149830616054729350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419022890915657522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f35a0f4d476a64ea4b891960171ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 67f09e55359561341bff361a1caadfeb, type: 2}
+  fish_ItemDataList:
+  - {fileID: 11400000, guid: e31032a2aa95e4c49905c2e1d7595b08, type: 2}
+  - {fileID: 11400000, guid: 7154f470ae1f9ff42b16aee8760ac0de, type: 2}
+  - {fileID: 11400000, guid: 485bb9962af3ac141a2640eae9d411f7, type: 2}
+  - {fileID: 11400000, guid: 59ab690db2dfedf4b96d943a642109a3, type: 2}
+  - {fileID: 11400000, guid: 22e0231fe4e721047bfca52da9796ba3, type: 2}
+  - {fileID: 11400000, guid: 740093bab6d37354788638e8ed0c0c23, type: 2}
+  - {fileID: 11400000, guid: fcfced3a40a77e74d8c68563c4d49a55, type: 2}
 --- !u!1 &4981329482049179529
 GameObject:
   m_ObjectHideFlags: 0

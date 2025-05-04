@@ -21,7 +21,7 @@ public class MinigameManager : MonoBehaviour
     public List<Result> results;
 
     [Header("Minigame Data List")]
-    public MinigameDataList minigameDataList;
+    public ScriptableObjectList minigameDataList;
 
     private AudioListener audioListener;    //1000% need to change this 
 

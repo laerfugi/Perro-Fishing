@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class PipeSpawner : MonoBehaviour
+public class FlappyBird_PipeSpawner : MonoBehaviour
 {
     public GameObject pipe;
     public Transform topSpawn;

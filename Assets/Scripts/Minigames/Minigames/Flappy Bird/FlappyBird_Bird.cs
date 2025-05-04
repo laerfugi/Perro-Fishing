@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bird : MonoBehaviour
+public class FlappyBird_Bird : MonoBehaviour
 {
     Rigidbody2D rb;
 
@@ -14,6 +14,7 @@ public class Bird : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
+
         Minigame.Instance.Win();
     }
 

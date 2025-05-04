@@ -5,6 +5,12 @@ using UnityEngine;
 public class Fish : ItemInteractable
 {
     public List<Fish_ItemData> fish_ItemDataList;
+    public Lake lake;
+
+    private void OnDisable()
+    {
+        if (lake) { lake.fishList.Remove(this.gameObject); }
+    }
 
     //instead of adding fish to inventory, initiates a minigame
     public override void Interact()
