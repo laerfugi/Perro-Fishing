@@ -29,7 +29,7 @@ public class LittleGuy : MonoBehaviour
     private LittleGuyState previousState;  //for MenuEventCheck()
 
     [Header("ItemData")]
-    public ItemData itemData;
+    public LittleGuy_ItemData itemData;
 
     //Events
     private void OnEnable()
@@ -50,6 +50,7 @@ public class LittleGuy : MonoBehaviour
         PlayerInventory.Instance.RemoveLittleGuy(this);
     }
 
+
     void Start()
     {
         // Get handlers
@@ -63,12 +64,11 @@ public class LittleGuy : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cameraPivot = GetComponentInChildren<CameraPivot>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.sprite = itemData.icon;
 
         //Change State to AI
         ChangeState(LittleGuyState.AI);
 
-        //Change sprite
-        spriteRenderer.sprite = itemData.icon;
 
         //Add to player inventory
         PlayerInventory.Instance.AddLittleGuy(this);

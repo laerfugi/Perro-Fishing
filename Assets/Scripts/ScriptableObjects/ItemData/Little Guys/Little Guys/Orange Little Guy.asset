@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44b34b739a502b64e9128ffd8076de05, type: 3}
-  m_Name: Yellow Little Guy
+  m_Script: {fileID: 11500000, guid: e986a99fef1270341a4b0a8d601b7f36, type: 3}
+  m_Name: Orange Little Guy
   m_EditorClassIdentifier: 
-  name: Yellow Little Guy
+  name: Orange Little Guy
   itemType: 3
   description: 
-  icon: {fileID: 21300000, guid: 4db630d298b59b0418e46239d4641329, type: 3}
+  icon: {fileID: 21300000, guid: dbfcfd6c89ca02a4e82ede52a5e79892, type: 3}
   item: {fileID: 8531474145895555203, guid: dc3b5357709854540a7fca1449fac146, type: 3}

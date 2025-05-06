@@ -43,9 +43,13 @@ public class TabMenuContainer : MenuClass
     }
 
     //used by tab buttons
-    public void OpenTabMenu(GameObject menu) {
-        currentTabMenu.SetActive(false);
-        menu.SetActive(true);
-        currentTabMenu = menu;
+    public void OpenTabMenu(GameObject menu) 
+    {
+        if (menu != currentTabMenu)
+        {
+            currentTabMenu.SetActive(false);
+            menu.SetActive(true);
+            currentTabMenu = menu;
+        }
     }
 }

@@ -674,7 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vCam: {fileID: 465556714112148319}
   <state>k__BackingField: 0
-  itemData: {fileID: 11400000, guid: e898c33b2a2e0c846b8fcf8a68a4df21, type: 2}
+  itemData: {fileID: 11400000, guid: baec9e6fb2390054eba145b6bfa2ef4a, type: 2}
 --- !u!114 &6519658412424455794
 MonoBehaviour:
   m_ObjectHideFlags: 0

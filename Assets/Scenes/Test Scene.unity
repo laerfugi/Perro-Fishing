@@ -3660,7 +3660,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1564983864}
   m_HandleRect: {fileID: 1564983863}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999997
   m_Size: 0.6666667
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5023,10 +5023,26 @@ PrefabInstance:
     - target: {fileID: 2874929202974194712, guid: dc3b5357709854540a7fca1449fac146, type: 3}
       propertyPath: itemData
       value: 
-      objectReference: {fileID: 11400000, guid: c0b08c92d9dc63941ba8faeb6ca0e402, type: 2}
+      objectReference: {fileID: 11400000, guid: 0c76cb663da18224482adf950b934a8d, type: 2}
+    - target: {fileID: 7501100520099569829, guid: dc3b5357709854540a7fca1449fac146, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dbfcfd6c89ca02a4e82ede52a5e79892, type: 3}
+    - target: {fileID: 7501100520099569829, guid: dc3b5357709854540a7fca1449fac146, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501100520099569829, guid: dc3b5357709854540a7fca1449fac146, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8531474145895555203, guid: dc3b5357709854540a7fca1449fac146, type: 3}
       propertyPath: m_Name
       value: Little Guy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531474145895555203, guid: dc3b5357709854540a7fca1449fac146, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11122,10 +11138,22 @@ PrefabInstance:
     - target: {fileID: 2874929202974194712, guid: dc3b5357709854540a7fca1449fac146, type: 3}
       propertyPath: itemData
       value: 
-      objectReference: {fileID: 11400000, guid: 88a5bc4c62d71ea49ab85bd2e35ee756, type: 2}
+      objectReference: {fileID: 11400000, guid: dd640b91f6feec84e841490e73313b20, type: 2}
+    - target: {fileID: 7501100520099569829, guid: dc3b5357709854540a7fca1449fac146, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dbfcfd6c89ca02a4e82ede52a5e79892, type: 3}
+    - target: {fileID: 7501100520099569829, guid: dc3b5357709854540a7fca1449fac146, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8531474145895555203, guid: dc3b5357709854540a7fca1449fac146, type: 3}
       propertyPath: m_Name
       value: Little Guy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531474145895555203, guid: dc3b5357709854540a7fca1449fac146, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12981,10 +13009,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2874929202974194712, guid: dc3b5357709854540a7fca1449fac146, type: 3}
-      propertyPath: itemData
-      value: 
-      objectReference: {fileID: 11400000, guid: b2b894b58473bf44ba6b9b515e8b4e1f, type: 2}
     - target: {fileID: 8531474145895555203, guid: dc3b5357709854540a7fca1449fac146, type: 3}
       propertyPath: m_Name
       value: Little Guy
