@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private IInteractHandler interactHandler;
 
     public GameObject vCam;     //idk how to make this private
+    public FishingPole fishingPole;
 
     [field: Header("State")]
     [field: SerializeField]
@@ -44,9 +45,9 @@ public class Player : MonoBehaviour
         // Get handlers
         inputHandler = GetComponent<IInputHandler>();
         movementHandler = GetComponent<IMovementHandler>();
-
-        // Get components to enable/disable
         interactHandler = GetComponent<IInteractHandler>();
+        // Get components to enable/disable
+        fishingPole = GetComponentInChildren<FishingPole>();
     }
 
     // Update is called once per frame

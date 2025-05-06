@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum FishingState {Inactive,Casting,Catching,Cooldown}    //Inactive: You can press Mouse1 to Cast
@@ -10,7 +11,8 @@ public enum FishingState {Inactive,Casting,Catching,Cooldown}    //Inactive: You
 
 public class FishingPole : MonoBehaviour
 {
-    public GameObject littleGuy;
+    public LittleGuy_ItemDataWrapper littleGuy_ItemDataWrapper;
+    private GameObject littleGuy;
 
     [Header("Locations")]
     public GameObject startLocation;
@@ -32,6 +34,12 @@ public class FishingPole : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //this is so bad
+        if (PlayerInventory.Instance.littleGuyInventoryList.Count > 1) {
+            littleGuy_ItemDataWrapper = PlayerInventory.Instance.littleGuyInventoryList[0];
+            PlayerInventory.Instance.littleGuyInventoryList[0].equipped = true;
+        }
+
         elapsedCooldownTime = cooldownTime;
         targetLocation.SetActive(false);
     }
@@ -57,6 +65,7 @@ public class FishingPole : MonoBehaviour
                         ClearPath();
                         StartCoroutine(Fishing());
                     }
+
                 }
             }
             //what happens during Catching
@@ -72,6 +81,10 @@ public class FishingPole : MonoBehaviour
 
     IEnumerator Fishing()
     {
+        if (littleGuy_ItemDataWrapper == null) { Debug.Log("need to equip little guy!"); yield break; }
+
+        littleGuy = littleGuy_ItemDataWrapper.littleGuy;
+
         //set up 
         elapsedCastTime = 0;
         state = FishingState.Casting;

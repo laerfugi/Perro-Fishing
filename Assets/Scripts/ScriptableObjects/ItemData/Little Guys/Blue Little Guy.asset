@@ -15,5 +15,5 @@ MonoBehaviour:
   name: Blue Little Guy
   itemType: 3
   description: 
-  icon: {fileID: 21300000, guid: 2126f1000e3a64c44af6429fdeabc0b5, type: 3}
+  icon: {fileID: 21300000, guid: 50f8da2f5c43baf40b2a556088e8541a, type: 3}
   item: {fileID: 8531474145895555203, guid: dc3b5357709854540a7fca1449fac146, type: 3}

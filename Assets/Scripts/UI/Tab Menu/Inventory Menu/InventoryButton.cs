@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryButton : MonoBehaviour
 {
+    public Image border;
     public Image image;
     public Button button;
     public TMP_Text countText;

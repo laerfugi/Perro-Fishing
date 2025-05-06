@@ -6,14 +6,23 @@ using UnityEngine;
 //The Tab Menu Container GameObject will hold all menus inside it. This script will open/close the menu.
 public class TabMenuContainer : MenuClass
 {
-    [Header("Current Tab Menu")]
-    public GameObject activeTabMenu;        //please have 1 tab menu active on start and place it here
+    [Header("Tab Menus")]
+    public GameObject currentTabMenu;
+
+    public List<GameObject> tabMenus;
 
     // Start is called before the first frame update
     void Start()
     {
-        isActive = false;
         menu.SetActive(false);
+
+        foreach(var tabMenu in tabMenus)
+        {
+            tabMenu.SetActive(false);
+        }
+
+        currentTabMenu = tabMenus[0];
+        currentTabMenu.SetActive(true);
     }
 
     // Update is called once per frame
@@ -35,8 +44,8 @@ public class TabMenuContainer : MenuClass
 
     //used by tab buttons
     public void OpenTabMenu(GameObject menu) {
-        activeTabMenu.SetActive(false);
+        currentTabMenu.SetActive(false);
         menu.SetActive(true);
-        activeTabMenu = menu;
+        currentTabMenu = menu;
     }
 }

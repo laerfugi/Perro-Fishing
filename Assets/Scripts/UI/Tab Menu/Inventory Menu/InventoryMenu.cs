@@ -22,12 +22,13 @@ public class InventoryMenu : MonoBehaviour
     public GameObject menu;
     public GameObject menuContent;  //where to spawn the buttons
 
+    [Header("Item Data Displayer")]
+    public ItemDataDisplayer itemDataDisplayer;
+
     [Header("Buttons")]
     public GameObject button;       //button prefab to represent each item
+    public InventoryButton selectedButton;
     public List<GameObject> inventoryButtons;
-
-    [Header("Item Info Displayer")]
-    public ItemDataDisplayer itemDataDisplayer;
 
     private void OnEnable()
     {
@@ -35,7 +36,8 @@ public class InventoryMenu : MonoBehaviour
         EventManager.InventoryAddEvent += LoadMenu;
         EventManager.InventoryRemoveEvent += LoadMenu;
 
-        LoadMenu(null);//need to change
+        LoadMenu(null);
+        selectedButton = null;
     }
     private void OnDisable()
     {
@@ -56,7 +58,6 @@ public class InventoryMenu : MonoBehaviour
 
     void LoadMenu(ItemData changedItem)  //changedItem is not needed but event requires the parameter
     {
-
         if (inventoryButtons.Count > 0)
         {
             foreach (GameObject button in inventoryButtons)
@@ -64,6 +65,7 @@ public class InventoryMenu : MonoBehaviour
                 Destroy(button);
             }
         }
+        inventoryButtons.Clear();
 
         List<ItemDataWrapper> chosenList = new List<ItemDataWrapper>();
         if (menuType == MenuType.ItemMenu)
@@ -92,7 +94,8 @@ public class InventoryMenu : MonoBehaviour
             inventoryButtons.Add(newButton);
             newButton.name = itemDataWrapper.itemData.name;
             newButton.GetComponent<InventoryButton>().image.sprite = itemDataWrapper.itemData.icon;
-            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper.itemData); });
+            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper); });
+            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { SetSelectedButton(newButton.GetComponent<InventoryButton>()); });
             newButton.GetComponent<InventoryButton>().countText.text = itemDataWrapper.count.ToString();
         }
     }
@@ -106,9 +109,17 @@ public class InventoryMenu : MonoBehaviour
             inventoryButtons.Add(newButton);
             newButton.name = itemDataWrapper.itemData.name;
             newButton.GetComponent<InventoryButton>().image.sprite = itemDataWrapper.itemData.icon;
-            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper.itemData); });
-            newButton.GetComponent<InventoryButton>().countText.gameObject.SetActive(false);    //i really need to create a different itemdatadisplayer instead of this
+            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper); });
+            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { SetSelectedButton(newButton.GetComponent<InventoryButton>()); });
+            newButton.GetComponent<InventoryButton>().countText.gameObject.SetActive(false);    //should i make a new button prefab for little guys?
         }
     }
 
+    void SetSelectedButton(InventoryButton inventoryButton)
+    {
+        if (selectedButton) { selectedButton.border.color = Color.clear; }
+
+        selectedButton = inventoryButton;
+        selectedButton.border.color = Color.green;
+    }
 }
