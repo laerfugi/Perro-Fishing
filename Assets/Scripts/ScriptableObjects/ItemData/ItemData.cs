@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum itemType {Item,Material,Fish};
+public enum itemType {Item,Material,Fish,LittleGuy};
 
 //holds data of an item. Can be edited as a ScriptableObject
 [CreateAssetMenu(fileName = "New Item", menuName = "ScriptableObjects/Interactable/ItemData")]

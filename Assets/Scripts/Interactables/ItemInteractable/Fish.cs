@@ -10,7 +10,7 @@ public class Fish : ItemInteractable
     [Header("Debug")]
     public bool skipMinigame;
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (lake) { lake.fishList.Remove(this.gameObject); }
     }

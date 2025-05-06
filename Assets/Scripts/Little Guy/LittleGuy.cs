@@ -21,12 +21,15 @@ public class LittleGuy : MonoBehaviour
     private CharacterController controller;
     public GameObject vCam;     //idk how to make this private
     private CameraPivot cameraPivot;
+    private SpriteRenderer spriteRenderer;
 
     [field: Header("State")]
     [field: SerializeField]
     public LittleGuyState state { get; private set; }
-
     private LittleGuyState previousState;  //for MenuEventCheck()
+
+    [Header("ItemData")]
+    public ItemData itemData;
 
     //Events
     private void OnEnable()
@@ -41,6 +44,12 @@ public class LittleGuy : MonoBehaviour
         EventManager.CloseMenuEvent -= CloseMenuEventCheck;
     }
 
+    private void OnDestroy()
+    {
+        //Remove from player inventory
+        PlayerInventory.Instance.RemoveLittleGuy(this);
+    }
+
     void Start()
     {
         // Get handlers
@@ -49,13 +58,20 @@ public class LittleGuy : MonoBehaviour
         inputHandler = GetComponent<IInputHandler>();
         interactHandler = GetComponent<IInteractHandler>();
 
-        // Get components to enable/disable
+        // Get components
         nav = GetComponent<NavMeshAgent>();
         controller = GetComponent<CharacterController>();
         cameraPivot = GetComponentInChildren<CameraPivot>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         //Change State to AI
         ChangeState(LittleGuyState.AI);
+
+        //Change sprite
+        spriteRenderer.sprite = itemData.icon;
+
+        //Add to player inventory
+        PlayerInventory.Instance.AddLittleGuy(this);
     }
 
     void Update()
