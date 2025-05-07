@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Fish : ItemInteractable
 {
+    public new Fish_ItemData itemData { get; set; }
+
     public List<Fish_ItemData> fish_ItemDataList;
     public Lake lake;
 

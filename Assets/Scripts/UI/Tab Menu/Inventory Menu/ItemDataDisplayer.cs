@@ -79,6 +79,7 @@ public class ItemDataDisplayer : MonoBehaviour
         player.fishingPole.littleGuy_ItemDataWrapper = littleGuy_ItemDataWrapper;
 
         DisplayInfo(littleGuy_ItemDataWrapper);
+        EventManager.OnInventoryAddEvent(null);
     }
 }
 

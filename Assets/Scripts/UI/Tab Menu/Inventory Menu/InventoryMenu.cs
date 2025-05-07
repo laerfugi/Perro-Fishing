@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 //displays a menu of items in player inventory based on enum itemType.
 //The menu contains buttons which contain references to each item.
@@ -23,9 +24,15 @@ public class InventoryMenu : MonoBehaviour
     public ItemDataDisplayer itemDataDisplayer;
 
     [Header("Buttons")]
-    public GameObject button;       //button prefab to represent each item
-    public InventoryButton selectedButton;
     public List<GameObject> inventoryButtons;
+    public InventoryButton selectedButton;
+    public InventoryButton markedButton;
+
+    public ItemDataWrapper previousSelectedItemDataWrapper;
+    
+
+    [Header("Button Prefab")]
+    public GameObject button;       //represents each item
 
     private void OnEnable()
     {
@@ -51,6 +58,7 @@ public class InventoryMenu : MonoBehaviour
     private void Update()
     {
         if (selectedButton) selectedButton.border.color = Color.green;
+        if (markedButton) markedButton.mark.color = Color.yellow;
     }
 
     void LoadMenu(ItemData changedItem)  //changedItem is not needed but event requires the parameter
@@ -93,9 +101,12 @@ public class InventoryMenu : MonoBehaviour
             inventoryButtons.Add(newButton);
             newButton.name = itemDataWrapper.itemData.name;
             newButton.GetComponent<InventoryButton>().image.sprite = itemDataWrapper.itemData.icon;
+            newButton.GetComponent<InventoryButton>().countText.text = itemDataWrapper.count.ToString();
             newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper); });
             newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { SetSelectedButton(newButton.GetComponent<InventoryButton>()); });
-            newButton.GetComponent<InventoryButton>().countText.text = itemDataWrapper.count.ToString();
+            newButton.GetComponent<InventoryButton>().itemDataWrapper = itemDataWrapper;
+
+            if (itemDataWrapper == previousSelectedItemDataWrapper) { SetSelectedButton(newButton.GetComponent<InventoryButton>()); }
         }
     }
 
@@ -107,11 +118,18 @@ public class InventoryMenu : MonoBehaviour
             GameObject newButton = Instantiate(button, menuContent.transform);
             inventoryButtons.Add(newButton);
             newButton.name = itemDataWrapper.itemData.name;
-            InventoryButton inventoryButton = newButton.GetComponent<InventoryButton>();
-            inventoryButton.image.sprite = itemDataWrapper.itemData.icon;
-            inventoryButton.countText.gameObject.SetActive(false);    //should i make a new button prefab for little guys?
-            inventoryButton.button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper); });
-            inventoryButton.button.onClick.AddListener(() => { SetSelectedButton(newButton.GetComponent<InventoryButton>()); });
+            newButton.GetComponent<InventoryButton>().image.sprite = itemDataWrapper.itemData.icon;
+            newButton.GetComponent<InventoryButton>().countText.gameObject.SetActive(false);    //should i make a new button prefab for little guys?
+            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper); });
+            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { SetSelectedButton(newButton.GetComponent<InventoryButton>()); });
+            newButton.GetComponent<InventoryButton>().itemDataWrapper = itemDataWrapper;
+
+            if ((itemDataWrapper as LittleGuy_ItemDataWrapper) == GameObject.FindWithTag("Player").GetComponentInChildren<FishingPole>().littleGuy_ItemDataWrapper)
+            {
+                markedButton = newButton.GetComponent<InventoryButton>();
+            }
+
+            if (itemDataWrapper == previousSelectedItemDataWrapper) {SetSelectedButton(newButton.GetComponent<InventoryButton>()); }
         }
     }
 
@@ -120,5 +138,6 @@ public class InventoryMenu : MonoBehaviour
         if (selectedButton) {selectedButton.border.color = Color.clear; }
 
         selectedButton = inventoryButton;
+        previousSelectedItemDataWrapper = inventoryButton.itemDataWrapper;
     }
 }

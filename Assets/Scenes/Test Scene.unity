@@ -3876,6 +3876,10 @@ MonoBehaviour:
   image: {fileID: 1732706673}
   button: {fileID: 1732706672}
   countText: {fileID: 568958465}
+  mark: {fileID: 0}
+  itemDataWrapper:
+    itemData: {fileID: 0}
+    count: 0
 --- !u!1 &479241652
 GameObject:
   m_ObjectHideFlags: 0
@@ -6511,9 +6515,13 @@ MonoBehaviour:
   inventory: {fileID: 1216105960}
   menuContent: {fileID: 713068521}
   itemDataDisplayer: {fileID: 261645148}
-  button: {fileID: 1989956307127102209, guid: 43df3168b0df2404ea231210e0823e58, type: 3}
-  selectedButton: {fileID: 0}
   inventoryButtons: []
+  selectedButton: {fileID: 0}
+  markedButton: {fileID: 0}
+  previousSelectedItemDataWrapper:
+    itemData: {fileID: 0}
+    count: 0
+  button: {fileID: 1989956307127102209, guid: 43df3168b0df2404ea231210e0823e58, type: 3}
 --- !u!224 &992377607
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12082,9 +12090,13 @@ MonoBehaviour:
   inventory: {fileID: 1216105960}
   menuContent: {fileID: 1096764649}
   itemDataDisplayer: {fileID: 1661440807}
-  button: {fileID: 1989956307127102209, guid: 43df3168b0df2404ea231210e0823e58, type: 3}
-  selectedButton: {fileID: 0}
   inventoryButtons: []
+  selectedButton: {fileID: 0}
+  markedButton: {fileID: 0}
+  previousSelectedItemDataWrapper:
+    itemData: {fileID: 0}
+    count: 0
+  button: {fileID: 1989956307127102209, guid: 43df3168b0df2404ea231210e0823e58, type: 3}
 --- !u!1 &1871472391
 GameObject:
   m_ObjectHideFlags: 0
@@ -13291,9 +13303,13 @@ MonoBehaviour:
   inventory: {fileID: 1216105960}
   menuContent: {fileID: 113054316}
   itemDataDisplayer: {fileID: 480918305}
-  button: {fileID: 1989956307127102209, guid: 43df3168b0df2404ea231210e0823e58, type: 3}
-  selectedButton: {fileID: 0}
   inventoryButtons: []
+  selectedButton: {fileID: 0}
+  markedButton: {fileID: 0}
+  previousSelectedItemDataWrapper:
+    itemData: {fileID: 0}
+    count: 0
+  button: {fileID: 1989956307127102209, guid: 43df3168b0df2404ea231210e0823e58, type: 3}
 --- !u!1 &2066454891
 GameObject:
   m_ObjectHideFlags: 0
@@ -13779,21 +13795,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1367998825958310022, guid: 04612b83f6c6d764a91426703b44271a, type: 3}
-      propertyPath: itemData
-      value: 
-      objectReference: {fileID: 11400000, guid: 84a8b4bea4f947e4e95ed47ccef11d53, type: 2}
     - target: {fileID: 1959219161524722427, guid: 04612b83f6c6d764a91426703b44271a, type: 3}
       propertyPath: m_Name
       value: Test Item
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959219161524722427, guid: 04612b83f6c6d764a91426703b44271a, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959219161524722427, guid: 04612b83f6c6d764a91426703b44271a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4399290468836992154, guid: 04612b83f6c6d764a91426703b44271a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13835,8 +13839,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1367998825958310022, guid: 04612b83f6c6d764a91426703b44271a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -13950,6 +13953,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: stupid idiot fish
       objectReference: {fileID: 0}
+    - target: {fileID: 7149830616054729350, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7154f470ae1f9ff42b16aee8760ac0de, type: 2}
+    - target: {fileID: 7149830616054729350, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
+      propertyPath: <itemData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: e31032a2aa95e4c49905c2e1d7595b08, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

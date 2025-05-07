@@ -5,7 +5,8 @@ using UnityEngine;
 //parent class for all worldspace representations of items in the game that can go in the player inventory and be held (fish, flashlight)
 public abstract class ItemInteractable : MonoBehaviour, IInteractable
 {
-    public ItemData itemData;
+    [field: SerializeField]
+    public ItemData itemData { get; set; }
 
     public virtual void Interact()
     {
