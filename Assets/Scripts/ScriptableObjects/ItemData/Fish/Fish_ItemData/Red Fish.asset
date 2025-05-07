@@ -17,4 +17,4 @@ MonoBehaviour:
   description: A red fish
   icon: {fileID: 21300000, guid: 68936f732210dec4fa14813dd80460ee, type: 3}
   item: {fileID: 1419022890915657522, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
-  price: 0
+  price: 70

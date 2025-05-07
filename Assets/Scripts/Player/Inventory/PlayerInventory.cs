@@ -147,4 +147,10 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
     #endregion
+
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        EventManager.OnMoneyEvent(amount);
+    }
 }

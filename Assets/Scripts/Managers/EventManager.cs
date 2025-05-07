@@ -18,10 +18,11 @@ public static class EventManager
     public static event UnityAction<string> CanInteractEvent;
     public static event UnityAction CannotInteractEvent;
 
+    public static event UnityAction<int> MoneyEvent;
+
     //Player State has changed
     public static event UnityAction<PlayerState> PlayerStateEvent;
     #endregion
-
 
     //Little Guy State has changed
     public static event UnityAction<LittleGuyState> LittleGuyStateEvent;
@@ -45,6 +46,7 @@ public static class EventManager
     public static void OnInventoryRemoveEvent(ItemData data) => InventoryRemoveEvent?.Invoke(data);
     public static void OnCanInteractEvent(string message) => CanInteractEvent?.Invoke(message);
     public static void OnCannotInteractEvent() => CannotInteractEvent?.Invoke();
+    public static void OnMoneyEvent(int amount) => MoneyEvent?.Invoke(amount);
     public static void OnPlayerStateEvent(PlayerState playerState) => PlayerStateEvent?.Invoke(playerState);
     public static void OnLittleGuyStateEvent(LittleGuyState littleGuyState) => LittleGuyStateEvent?.Invoke(littleGuyState);
     public static void OnSwitchVCamEvent(GameObject vcam) => SwitchVCamEvent?.Invoke(vcam);

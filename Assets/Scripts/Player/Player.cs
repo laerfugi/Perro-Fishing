@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private IInputHandler inputHandler;
     private IMovementHandler movementHandler;
     private IInteractHandler interactHandler;
+    private IAnimationHandler animationHandler;
 
     public GameObject vCam;     //idk how to make this private
     public FishingPole fishingPole;
@@ -68,7 +69,6 @@ public class Player : MonoBehaviour
         {
 
         }
-
     }
 
     /*---State Change methods---*/

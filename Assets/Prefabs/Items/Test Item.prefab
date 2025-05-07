@@ -148,4 +148,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c0e41454ed52446b8d37833082c58d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <itemData>k__BackingField: {fileID: 11400000, guid: 84a8b4bea4f947e4e95ed47ccef11d53, type: 2}
+  itemData: {fileID: 11400000, guid: 84a8b4bea4f947e4e95ed47ccef11d53, type: 2}

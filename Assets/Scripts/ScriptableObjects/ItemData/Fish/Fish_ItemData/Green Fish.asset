@@ -17,4 +17,4 @@ MonoBehaviour:
   description: A green fish
   icon: {fileID: 21300000, guid: f90f6828451d21140a56925fc4f547de, type: 3}
   item: {fileID: 1419022890915657522, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
-  price: 0
+  price: 40
