@@ -37,7 +37,6 @@ public class FishingPole : MonoBehaviour
         //this is so bad
         if (PlayerInventory.Instance.littleGuyInventoryList.Count > 1) {
             littleGuy_ItemDataWrapper = PlayerInventory.Instance.littleGuyInventoryList[0];
-            PlayerInventory.Instance.littleGuyInventoryList[0].equipped = true;
         }
 
         elapsedCooldownTime = cooldownTime;

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ItemDataDisplayer : MonoBehaviour
 {
+    public Player player;
+
     [Header("ItemData Fields")]
     new public TMP_Text name;
     public TMP_Text description;
@@ -30,6 +32,8 @@ public class ItemDataDisplayer : MonoBehaviour
     //used as button onclick() listener by the buttons spawned by InventoryMenu.cs
     public void DisplayInfo(ItemDataWrapper itemDataWrapper)
     {
+        ResetInfo();
+
         //default ItemData case
         ItemData itemData = itemDataWrapper.itemData;
 
@@ -49,7 +53,6 @@ public class ItemDataDisplayer : MonoBehaviour
         else if (itemDataWrapper is LittleGuy_ItemDataWrapper)
         {
             LittleGuy_ItemDataWrapper littleGuy_ItemDataWrapper = itemDataWrapper as LittleGuy_ItemDataWrapper;
-            extraText.text = "Equipped: " + littleGuy_ItemDataWrapper.equipped.ToString();
 
             buttons.SetActive(true);
             leftButton.gameObject.SetActive(true); rightButton.gameObject.SetActive(false);
@@ -68,16 +71,14 @@ public class ItemDataDisplayer : MonoBehaviour
         extraText.text = "";
 
         buttons.SetActive(false);
+        leftButton.onClick.RemoveAllListeners(); rightButton.onClick.RemoveAllListeners();
     }
 
     public void SetAsBait(LittleGuy_ItemDataWrapper littleGuy_ItemDataWrapper)
     {
-        GameObject.FindWithTag("Player").GetComponent<Player>().fishingPole.littleGuy_ItemDataWrapper.equipped = false;
-        GameObject.FindWithTag("Player").GetComponent<Player>().fishingPole.littleGuy_ItemDataWrapper = littleGuy_ItemDataWrapper;
-        littleGuy_ItemDataWrapper.equipped = true;
+        player.fishingPole.littleGuy_ItemDataWrapper = littleGuy_ItemDataWrapper;
 
         DisplayInfo(littleGuy_ItemDataWrapper);
-
     }
 }
 

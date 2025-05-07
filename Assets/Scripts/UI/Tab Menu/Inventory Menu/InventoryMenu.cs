@@ -6,20 +6,17 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-//displays a menu of objects in player inventory based on enum MenuType.
+//displays a menu of items in player inventory based on enum itemType.
 //The menu contains buttons which contain references to each item.
-
-public enum MenuType {ItemMenu,FishMenu,LittleGuyMenu}
 
 public class InventoryMenu : MonoBehaviour
 {
-    public MenuType menuType;
+    public ItemType itemType;
 
     [Header("Inventory")]
     public PlayerInventory inventory;
 
     [Header("Menu")]
-    public GameObject menu;
     public GameObject menuContent;  //where to spawn the buttons
 
     [Header("Item Data Displayer")]
@@ -53,32 +50,34 @@ public class InventoryMenu : MonoBehaviour
 
     private void Update()
     {
-
+        if (selectedButton) selectedButton.border.color = Color.green;
     }
 
     void LoadMenu(ItemData changedItem)  //changedItem is not needed but event requires the parameter
     {
         if (inventoryButtons.Count > 0)
         {
+            
             foreach (GameObject button in inventoryButtons)
             {
                 Destroy(button);
             }
+            
         }
         inventoryButtons.Clear();
 
         List<ItemDataWrapper> chosenList = new List<ItemDataWrapper>();
-        if (menuType == MenuType.ItemMenu)
+        if (itemType == ItemType.Item || itemType == ItemType.Material)
         {
             chosenList = inventory.itemInventoryList;
             CreateItemMenuButtons(chosenList);
         }
-        else if (menuType == MenuType.FishMenu)
+        else if (itemType == ItemType.Fish)
         {
             chosenList = inventory.fishInventoryList;
             CreateItemMenuButtons(chosenList);
         }
-        else if (menuType == MenuType.LittleGuyMenu)
+        else if (itemType == ItemType.LittleGuy)
         {
             chosenList = inventory.littleGuyInventoryList.Cast<ItemDataWrapper>().ToList();     //this is so bad
             CreateLittleGuyMenuButtons(chosenList);
@@ -108,18 +107,18 @@ public class InventoryMenu : MonoBehaviour
             GameObject newButton = Instantiate(button, menuContent.transform);
             inventoryButtons.Add(newButton);
             newButton.name = itemDataWrapper.itemData.name;
-            newButton.GetComponent<InventoryButton>().image.sprite = itemDataWrapper.itemData.icon;
-            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper); });
-            newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { SetSelectedButton(newButton.GetComponent<InventoryButton>()); });
-            newButton.GetComponent<InventoryButton>().countText.gameObject.SetActive(false);    //should i make a new button prefab for little guys?
+            InventoryButton inventoryButton = newButton.GetComponent<InventoryButton>();
+            inventoryButton.image.sprite = itemDataWrapper.itemData.icon;
+            inventoryButton.countText.gameObject.SetActive(false);    //should i make a new button prefab for little guys?
+            inventoryButton.button.onClick.AddListener(() => { itemDataDisplayer.DisplayInfo(itemDataWrapper); });
+            inventoryButton.button.onClick.AddListener(() => { SetSelectedButton(newButton.GetComponent<InventoryButton>()); });
         }
     }
 
     void SetSelectedButton(InventoryButton inventoryButton)
     {
-        if (selectedButton) { selectedButton.border.color = Color.clear; }
+        if (selectedButton) {selectedButton.border.color = Color.clear; }
 
         selectedButton = inventoryButton;
-        selectedButton.border.color = Color.green;
     }
 }

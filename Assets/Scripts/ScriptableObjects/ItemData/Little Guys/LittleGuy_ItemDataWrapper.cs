@@ -7,7 +7,6 @@ using UnityEngine;
 public class LittleGuy_ItemDataWrapper:ItemDataWrapper
 {
     public GameObject littleGuy;    //the little guy currently in scene
-    public bool equipped;
 
     public LittleGuy_ItemDataWrapper(ItemData itemData, GameObject littleGuy) : base(itemData, 1)
     {
