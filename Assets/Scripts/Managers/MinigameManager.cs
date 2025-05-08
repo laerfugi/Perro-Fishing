@@ -21,7 +21,7 @@ public class MinigameManager : MonoBehaviour
     public List<Result> results;
 
     [Header("Minigame Data List")]
-    public ScriptableObjectList minigameDataList;
+    public Database database;
 
     private AudioListener audioListener;    //1000% need to change this 
 
@@ -163,7 +163,7 @@ public class MinigameManager : MonoBehaviour
 
             //choose random minigame
             string sceneName;
-            List<MinigameData> list = minigameDataList.list;
+            List<MinigameData> list = database.minigameList;
 
             sceneName = list[Random.Range(0, list.Count)].sceneName;
 

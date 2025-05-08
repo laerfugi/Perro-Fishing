@@ -35,7 +35,7 @@ public class Lake : MonoBehaviour
 
     void SpawnFish()
     {
-        GameObject newFish = Instantiate(fish, spawnAreaList[Random.Range(0, spawnAreaList.Count)].position, Quaternion.identity);
+        GameObject newFish = Instantiate(fish, spawnAreaList[Random.Range(0, spawnAreaList.Count)].position, fish.transform.rotation);
         newFish.transform.SetParent(this.transform);
         newFish.GetComponent<Fish>().lake = this;
         fishList.Add(newFish);
