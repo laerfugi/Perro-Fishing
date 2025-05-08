@@ -42,6 +42,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
             Move(inputHandler);
             ApplyGravity();
             Jump(inputHandler);
+            RotateCheck();
         }
         else
         {
@@ -49,8 +50,6 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
             GroundCheck();
             ApplyGravity();
         }
-
-        RotateCheck();
     }
 
     protected void GroundCheck()
