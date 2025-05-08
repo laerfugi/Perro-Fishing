@@ -17,6 +17,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
     [SerializeField] protected float jumpHeight;
 
     // States
+    [field: Header("States")]
     [field: SerializeField]
     public bool IsGrounded { get; private set; }
     [field: SerializeField]

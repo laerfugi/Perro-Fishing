@@ -6141,6 +6141,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5249095251205932837, guid: 160d3b1dae45d7e49890f0ed4031eea0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8531474145895555203, guid: 160d3b1dae45d7e49890f0ed4031eea0, type: 3}
       propertyPath: m_Name
       value: Blue Little Guy
@@ -8496,8 +8500,10 @@ MonoBehaviour:
   sprintSpeed: 15
   gravityValue: -1
   jumpHeight: 0.12
-  moving: 0
-  fishing: 0
+  <IsGrounded>k__BackingField: 0
+  <IsMoving>k__BackingField: 0
+  <IsSprinting>k__BackingField: 0
+  IsFishing: 0
 --- !u!114 &1216105951
 MonoBehaviour:
   m_ObjectHideFlags: 0

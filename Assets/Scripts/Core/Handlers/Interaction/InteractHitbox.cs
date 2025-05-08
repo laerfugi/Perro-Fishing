@@ -12,6 +12,7 @@ public class InteractHitbox : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        Debug.Log("item is " + collider.gameObject.name);
         IInteractable interactable = collider.GetComponent<IInteractable>();
         if (interactable != null)
         {
