@@ -11,6 +11,9 @@ public class CameraPivot : MonoBehaviour
     [SerializeField] private float maxVerticalAngle;
     private bool isActive = true;
 
+    float mouseX;
+    float mouseY;
+
     private void OnEnable()
     {
         EventManager.OpenMenuEvent += toggleActive;
@@ -22,15 +25,23 @@ public class CameraPivot : MonoBehaviour
         EventManager.CloseMenuEvent -= toggleActive;
     }
 
-    void LateUpdate()
+
+    private void Update()
     {
-        if (isActive) { HandleRotation(); }
+        mouseX = Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
+        mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
+        if (isActive) { HandleRotation(mouseX, mouseY); }
     }
 
-    private void HandleRotation()
+    void LateUpdate()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
+        //mouseX = Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
+        //mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
+        if (isActive) { HandleRotation(mouseX, mouseY); }
+    }
+
+    private void HandleRotation(float mouseX, float mouseY)
+    {
 
         yRotation += mouseX;
         xRotation -= mouseY;

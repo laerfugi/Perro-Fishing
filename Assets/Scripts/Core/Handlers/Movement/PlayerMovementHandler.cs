@@ -7,7 +7,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
 {
     protected CharacterController characterController;
     protected Vector3 move;
-    protected Transform cameraTransform; // Reference to main camera
+    public Transform cameraPivot; // Reference to main camera
     [SerializeField] protected float yVelocity;
 
     // Speed
@@ -15,6 +15,9 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
     [SerializeField] protected float sprintSpeed;
     [SerializeField] protected float gravityValue;
     [SerializeField] protected float jumpHeight;
+
+    public bool moving;
+    public bool fishing;
 
     // States
     public bool IsGrounded { get; private set; }
@@ -24,7 +27,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
     protected virtual void Start()
     {
         characterController = GetComponent<CharacterController>();
-        cameraTransform = Camera.main.transform;
+        cameraPivot = GetComponentInChildren<CameraPivot>().gameObject.transform;
     }
 
     public void HandleMovement(IInputHandler inputHandler)
@@ -35,12 +38,14 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
             Move(inputHandler);
             ApplyGravity();
             Jump(inputHandler);
+            RotateCheck();
         }
         else
         {
             //to be used while player's inactive (disable input but still have gravity)
             GroundCheck();
             ApplyGravity();
+            RotateCheck();
         }
     }
 
@@ -52,8 +57,8 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
     protected void Move(IInputHandler inputHandler)
     {
         // Calculate inputs relative to camera
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
+        Vector3 forward = cameraPivot.forward;
+        Vector3 right = cameraPivot.right;
 
         forward.y = 0;
         right.y = 0;
@@ -65,13 +70,19 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
         if (move.magnitude > 1) move.Normalize();
 
         // Handle player models rotation
-        bool moving = inputHandler.Vertical != 0 || inputHandler.Horizontal != 0;
+        moving = inputHandler.Vertical != 0 || inputHandler.Horizontal != 0;
 
-        if (moving)
+        if (fishing)
         {
-           Vector3 newDirection = Vector3.RotateTowards(transform.forward, move, 15 * Time.deltaTime, 0.0f);
-           transform.rotation = Quaternion.LookRotation(newDirection);
+            Vector3 temp = cameraPivot.forward;
+            temp.y = 0;
+            transform.forward = Vector3.Slerp(transform.forward, temp, 10 * Time.deltaTime);
         }
+        else if (moving)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, move, 10 * Time.deltaTime);
+        }
+        
 
         float currentSpeed = inputHandler.IsSprinting ? sprintSpeed : speed;
         characterController.Move(move * currentSpeed * Time.deltaTime);
@@ -94,6 +105,20 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
         {
             yVelocity = jumpHeight;
             characterController.Move(new Vector3(0, yVelocity, 0));
+        }
+    }
+
+    protected void RotateCheck()
+    {
+        if (fishing)
+        {
+            Vector3 temp = cameraPivot.forward;
+            temp.y = 0;
+            transform.forward = Vector3.Slerp(transform.forward, temp, 10 * Time.deltaTime);
+        }
+        else if (moving)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, move, 10 * Time.deltaTime);
         }
     }
 }

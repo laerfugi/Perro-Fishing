@@ -11,6 +11,7 @@ public enum FishingState {Inactive,Casting,Catching,Cooldown}    //Inactive: You
 
 public class FishingPole : MonoBehaviour
 {
+    public Transform cameraPivot;
     public LittleGuy_ItemDataWrapper littleGuy_ItemDataWrapper;
     private GameObject littleGuy;
 
@@ -46,6 +47,11 @@ public class FishingPole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerInventory.Instance.littleGuyInventoryList.Count > 1)
+        {
+            littleGuy_ItemDataWrapper = PlayerInventory.Instance.littleGuyInventoryList[0];
+        }
+
         if (!UIManager.Instance.menuIsOpen)     //need to change how to disable inputs 
         {
             //start fishing
@@ -70,6 +76,8 @@ public class FishingPole : MonoBehaviour
             //what happens during Catching
             else if (state == FishingState.Catching)
             {
+                UnfacePlayerToCamera();
+
                 if (Input.GetMouseButtonDown(1))
                 {
                     StartCoroutine(Cooldown());
@@ -204,13 +212,11 @@ public class FishingPole : MonoBehaviour
 
     void FacePlayerToCamera()
     {
-        Transform playerTransform = GameObject.FindWithTag("Player").transform;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovementHandler>().fishing = true;
+    }
 
-        Vector3 cameraForward = Camera.main.transform.forward;
-
-        cameraForward.y = 0;
-        cameraForward.Normalize();
-
-        playerTransform.rotation = Quaternion.LookRotation(cameraForward);
+    void UnfacePlayerToCamera()
+    {
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovementHandler>().fishing = false;
     }
 }
