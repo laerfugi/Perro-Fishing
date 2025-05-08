@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fish : ItemInteractable
+public class Fish : MonoBehaviour, IInteractable
 {
+    [Header("Item Data")]
+    public Fish_ItemData itemData;
+
+    [Header("Where to Spawn")]
     public List<Fish_ItemData> fish_ItemDataList;
     public Lake lake;
 
@@ -16,7 +20,7 @@ public class Fish : ItemInteractable
     }
 
     //instead of adding fish to inventory, initiates a minigame
-    public override void Interact()
+    public void Interact()
     {
         if (skipMinigame) 
         {
@@ -28,9 +32,13 @@ public class Fish : ItemInteractable
         StartCoroutine(Minigame());
     }
 
-    public override void Use()
+    public void Use()
     {
         Debug.Log("I am a fish");
+    }
+    public string GetInteractionPrompt()
+    {
+        return $"[E] {itemData.name}";
     }
 
     IEnumerator Minigame()

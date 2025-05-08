@@ -30,13 +30,10 @@ public class CameraPivot : MonoBehaviour
     {
         mouseX = Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
         mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
-        if (isActive) { HandleRotation(mouseX, mouseY); }
     }
 
     void LateUpdate()
     {
-        //mouseX = Input.GetAxisRaw("Mouse X") * sensitivity * Time.deltaTime;
-        //mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
         if (isActive) { HandleRotation(mouseX, mouseY); }
     }
 

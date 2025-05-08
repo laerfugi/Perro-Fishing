@@ -16,13 +16,14 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
     [SerializeField] protected float gravityValue;
     [SerializeField] protected float jumpHeight;
 
-    public bool moving;
-    public bool fishing;
-
     // States
+    [field: SerializeField]
     public bool IsGrounded { get; private set; }
+    [field: SerializeField]
     public bool IsMoving { get; private set; }
+    [field: SerializeField]
     public bool IsSprinting { get; private set; }
+    public bool IsFishing;  //needed for player to rotate with camera while fishing
 
     protected virtual void Start()
     {
@@ -32,21 +33,23 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
 
     public void HandleMovement(IInputHandler inputHandler)
     {
+        StateCheck(inputHandler);
+
         if (inputHandler != null)
         {
             GroundCheck();
             Move(inputHandler);
             ApplyGravity();
             Jump(inputHandler);
-            RotateCheck();
         }
         else
         {
             //to be used while player's inactive (disable input but still have gravity)
             GroundCheck();
             ApplyGravity();
-            RotateCheck();
         }
+
+        RotateCheck();
     }
 
     protected void GroundCheck()
@@ -69,26 +72,8 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
         move = inputHandler.Vertical * forward + inputHandler.Horizontal * right;
         if (move.magnitude > 1) move.Normalize();
 
-        // Handle player models rotation
-        moving = inputHandler.Vertical != 0 || inputHandler.Horizontal != 0;
-
-        if (fishing)
-        {
-            Vector3 temp = cameraPivot.forward;
-            temp.y = 0;
-            transform.forward = Vector3.Slerp(transform.forward, temp, 10 * Time.deltaTime);
-        }
-        else if (moving)
-        {
-            transform.forward = Vector3.Slerp(transform.forward, move, 10 * Time.deltaTime);
-        }
-        
-
         float currentSpeed = inputHandler.IsSprinting ? sprintSpeed : speed;
         characterController.Move(move * currentSpeed * Time.deltaTime);
-
-        IsMoving = moving;
-        IsSprinting = inputHandler.IsSprinting;
     }
 
     protected void ApplyGravity()
@@ -108,17 +93,24 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
         }
     }
 
+    // Handle player models rotation
     protected void RotateCheck()
     {
-        if (fishing)
+        if (IsFishing)
         {
             Vector3 temp = cameraPivot.forward;
             temp.y = 0;
             transform.forward = Vector3.Slerp(transform.forward, temp, 10 * Time.deltaTime);
         }
-        else if (moving)
+        else if (IsMoving)
         {
             transform.forward = Vector3.Slerp(transform.forward, move, 10 * Time.deltaTime);
         }
+    }
+
+    protected void StateCheck(IInputHandler inputHandler)
+    {
+        if (inputHandler != null) { IsMoving = inputHandler.Vertical != 0 || inputHandler.Horizontal != 0; } else { IsMoving = false; }
+        if (inputHandler != null) { IsSprinting = inputHandler.IsSprinting; } else { IsSprinting = false; }
     }
 }

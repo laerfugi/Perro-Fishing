@@ -212,11 +212,11 @@ public class FishingPole : MonoBehaviour
 
     void FacePlayerToCamera()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovementHandler>().fishing = true;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovementHandler>().IsFishing = true;
     }
 
     void UnfacePlayerToCamera()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerMovementHandler>().fishing = false;
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovementHandler>().IsFishing = false;
     }
 }
