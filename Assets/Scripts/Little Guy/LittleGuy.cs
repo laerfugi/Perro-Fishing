@@ -105,9 +105,10 @@ public class LittleGuy : MonoBehaviour
 
         if (state == LittleGuyState.AI)                     //Little Guy is AI controlled
         {
+            SnapToNav();
             //state stuff
-            controller.enabled = false;
-            nav.enabled = true;
+            //controller.enabled = false;
+            //nav.enabled = true;
         }
         else if (state == LittleGuyState.Active)            //Little Guy is player controlled
         {
@@ -140,6 +141,33 @@ public class LittleGuy : MonoBehaviour
     }
 
     #endregion
+
+    private void SnapToNav()
+    {
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit temp, 0.1f, NavMesh.AllAreas))
+        {
+            // Already on surface
+            controller.enabled = false;
+            nav.enabled = true;
+            return;
+        }
+
+        StartCoroutine(SnapAfterDelay());
+    }
+
+    private IEnumerator SnapAfterDelay()
+    {
+        yield return new WaitForSeconds(2f); // Equal to the camera blend setting
+
+        float maxDistance = 30f;
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, maxDistance, NavMesh.AllAreas))
+        {
+            transform.position = hit.position + new Vector3(0, 0.5f, 0);
+        }
+
+        controller.enabled = false;
+        nav.enabled = true;
+    }
 
     private bool IsGrounded()
     {
