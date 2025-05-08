@@ -29,7 +29,7 @@ public class LittleGuyNav : MonoBehaviour
 
     public void HandleAI()
     {
-        if (target == null) return;
+        if (target == null || !navMeshAgent.isActiveAndEnabled) return;
 
         float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
