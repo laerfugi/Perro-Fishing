@@ -10,6 +10,12 @@ public class InteractHitbox : MonoBehaviour
     [SerializeReference]
     public List<GameObject> interactablesInHitbox = new List<GameObject>();
 
+    //remove null references
+    private void Update()
+    {
+        CheckNull();
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         IInteractable interactable = collider.GetComponent<IInteractable>();
@@ -38,6 +44,7 @@ public class InteractHitbox : MonoBehaviour
 
     public void InteractWithClosest()
     {
+        CheckNull();
         if (interactablesInHitbox.Count > 0)
         {
             EventManager.OnCannotInteractEvent();
@@ -49,5 +56,11 @@ public class InteractHitbox : MonoBehaviour
 
             interactablesInHitbox.Remove(interactablesInHitbox[0]);
         }
+    }
+
+    //scuffed but it works
+    void CheckNull()
+    {
+        if (interactablesInHitbox.Count > 0 && interactablesInHitbox[0] == null) { interactablesInHitbox.Remove(interactablesInHitbox[0]); }
     }
 }
