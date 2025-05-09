@@ -89,7 +89,7 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
         if (inputHandler.IsJumping && IsGrounded)
         {
             yVelocity = jumpHeight;
-            characterController.Move(new Vector3(0, yVelocity, 0));
+            characterController.Move(new Vector3(0, yVelocity * Time.deltaTime, 0));
         }
     }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Database : ScriptableObject
 {
     public List<ItemData> itemList;
+    public Fish_ItemData genericFish;
     public List<Fish_ItemData> fishList;
     public List<LittleGuy_ItemData> littleGuyList;
     public List<MinigameData> minigameList;

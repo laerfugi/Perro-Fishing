@@ -16,5 +16,5 @@ MonoBehaviour:
   itemType: 2
   description: A purple fish
   icon: {fileID: 21300000, guid: c8743410d2f89b545a60da66c3d4397b, type: 3}
-  item: {fileID: 1419022890915657522, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
+  item: {fileID: 4562124081905242461, guid: 85434b5300d5bdc4abd573c650b9c7ca, type: 3}
   price: 60

@@ -8,7 +8,7 @@ public class Fish : MonoBehaviour, IInteractable
     public Fish_ItemData itemData;
 
     [Header("Where to Spawn")]
-    public List<Fish_ItemData> fish_ItemDataList;
+    public Database database;
     public Lake lake;
 
     [Header("Debug")]
@@ -24,7 +24,7 @@ public class Fish : MonoBehaviour, IInteractable
     {
         if (skipMinigame) 
         {
-            itemData = fish_ItemDataList[Random.Range(0, fish_ItemDataList.Count)];
+            itemData = database.fishList[Random.Range(0, database.fishList.Count)];
             PlayerInventory.Instance.AddItem(itemData);
             Destroy(gameObject);
             return;
@@ -60,7 +60,7 @@ public class Fish : MonoBehaviour, IInteractable
             Debug.Log("you won! i should despawn and go to inventory");
 
             //choose random fish from list
-            itemData = fish_ItemDataList[Random.Range(0, fish_ItemDataList.Count)];
+            itemData = database.fishList[Random.Range(0, database.fishList.Count)];
 
             PlayerInventory.Instance.AddItem(itemData);
             Destroy(gameObject);

@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //An area that fish spawn in
 public class Lake : MonoBehaviour
 {
+    public Database database;
+
     [Header("Fish List")]
     public List<GameObject> fishList;
     public int maxFish;
 
-    public GameObject fish;
+    private GameObject fish;
 
     [Header("Spawn Areas")]
     public List<Transform> spawnAreaList;
@@ -35,6 +38,7 @@ public class Lake : MonoBehaviour
 
     void SpawnFish()
     {
+        fish = database.genericFish.item;
         GameObject newFish = Instantiate(fish, spawnAreaList[Random.Range(0, spawnAreaList.Count)].position, fish.transform.rotation);
         newFish.transform.SetParent(this.transform);
         newFish.GetComponent<Fish>().lake = this;

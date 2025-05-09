@@ -611,7 +611,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.45, z: 0.45}
 --- !u!143 &1074828017269713687
 CharacterController:
   m_ObjectHideFlags: 0
@@ -704,7 +704,7 @@ MonoBehaviour:
   speed: 8
   sprintSpeed: 15
   gravityValue: -1
-  jumpHeight: 0.12
+  jumpHeight: 0.25
   <IsGrounded>k__BackingField: 0
   <IsMoving>k__BackingField: 0
   <IsSprinting>k__BackingField: 0
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0, y: 0, z: 0}
-  ShoulderOffset: {x: 0, y: 0, z: 0}
+  ShoulderOffset: {x: 0, y: 0.45, z: -0.45}
   VerticalArmLength: 0
   CameraSide: 0
   CameraDistance: 1.1
