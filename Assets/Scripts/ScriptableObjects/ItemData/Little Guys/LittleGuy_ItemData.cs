@@ -11,4 +11,6 @@ public class LittleGuy_ItemData : ItemData
     {
         this.itemType = ItemType.LittleGuy;
     }
+    [Header("LittleGuy_ItemData")]
+    public CombinationType type;
 }
