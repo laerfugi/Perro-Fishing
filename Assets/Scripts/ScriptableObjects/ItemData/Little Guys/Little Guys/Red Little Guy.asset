@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Red Little Guy
   itemType: 3
-  description: 
+  description: B
   icon: {fileID: 21300000, guid: 0ab3e491b8dbc51489b4a82190812f74, type: 3}
   item: {fileID: 7401661647964773774, guid: 56eb8d6cb4df0034dbacd5c1397a4e24, type: 3}
   type: 1

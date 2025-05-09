@@ -5,10 +5,26 @@ public class MaterialRecipe
 {
     public MaterialType MaterialOne { get; }
     public MaterialType MaterialTwo { get; }
+    public CombinationType Result { get; }
+    public string FishColor { get; }
+
+    public MaterialRecipe(MaterialType materialOne, MaterialType materialTwo, CombinationType result, string fColor)
+    {
+        MaterialOne = materialOne;
+        MaterialTwo = materialTwo;
+        Result = result;
+        FishColor = fColor;
+    }
+}
+
+public class ItemDataRecipe
+{
+    public Material_ItemData MaterialOne { get; }
+    public Material_ItemData MaterialTwo { get; }
     public LittleGuy_ItemData Result { get; }
     public string FishColor { get; }
 
-    public MaterialRecipe(MaterialType materialOne, MaterialType materialTwo, LittleGuy_ItemData result, string fColor)
+    public ItemDataRecipe(Material_ItemData materialOne, Material_ItemData materialTwo, LittleGuy_ItemData result, string fColor)
     {
         MaterialOne = materialOne;
         MaterialTwo = materialTwo;
@@ -20,50 +36,48 @@ public class MaterialRecipe
 public static class RecipeBook
 {
     private static List<MaterialRecipe> recipes;
-    private static Database database;
+    private static List<ItemDataRecipe> itemDataRecipes;
+    private static DatabaseWrapper databaseWrapper;
 
-    public static void Initialize(Database db)// holds all of the recipes to be used in the crafting thus far
+    public static void Initialize(DatabaseWrapper dbWrapper)// holds all of the recipes to be used in the crafting thus far
     {
-        database = db;
+        databaseWrapper = dbWrapper;
         recipes = new List<MaterialRecipe>
         {
-            new MaterialRecipe(MaterialType.Cobweb, MaterialType.Twig, GetLittleGuyData(CombinationType.BaitA), "Brown Lure"),
-            new MaterialRecipe(MaterialType.Feather, MaterialType.Cobweb, GetLittleGuyData(CombinationType.BaitB), "Red Lure"),
-            new MaterialRecipe(MaterialType.Flower, MaterialType.Stones, GetLittleGuyData(CombinationType.BaitC), "Orange Lure"),
-            new MaterialRecipe(MaterialType.Flower, MaterialType.Twig, GetLittleGuyData(CombinationType.BaitD), "Yellow Lure"),
-            new MaterialRecipe(MaterialType.Stones, MaterialType.Feather, GetLittleGuyData(CombinationType.BaitE), "Blue Lure"),
-            new MaterialRecipe(MaterialType.Cobweb, MaterialType.Stones, GetLittleGuyData(CombinationType.BaitF), "Green Lure"),
-            new MaterialRecipe(MaterialType.Feather, MaterialType.Flower, GetLittleGuyData(CombinationType.BaitG), "Purple Lure"),
+            new MaterialRecipe(MaterialType.Cobweb, MaterialType.Twig, CombinationType.BaitA, "Brown Lure"),
+            new MaterialRecipe(MaterialType.Feather, MaterialType.Cobweb, CombinationType.BaitB, "Red Lure"),
+            new MaterialRecipe(MaterialType.Flower, MaterialType.Stones, CombinationType.BaitC, "Orange Lure"),
+            new MaterialRecipe(MaterialType.Flower, MaterialType.Twig, CombinationType.BaitD, "Yellow Lure"),
+            new MaterialRecipe(MaterialType.Stones, MaterialType.Feather, CombinationType.BaitE, "Blue Lure"),
+            new MaterialRecipe(MaterialType.Cobweb, MaterialType.Stones, CombinationType.BaitF, "Green Lure"),
+            new MaterialRecipe(MaterialType.Feather, MaterialType.Flower, CombinationType.BaitG, "Purple Lure"),
         };
-    }
 
-    private static LittleGuy_ItemData GetLittleGuyData(CombinationType combinationType)
-    {
-        if (database == null)
+        itemDataRecipes = new List<ItemDataRecipe>();
+        foreach (var recipe in recipes)
         {
-            Debug.LogError("Database is not initialized in RecipeBook");
-            return null;
-        }
-        // Iterate through all matching item data
-        foreach (var littleGuy in database.littleGuyList)
-        {
-            if (littleGuy.type == combinationType)
+            Material_ItemData materialOne = databaseWrapper.GetMaterialData(recipe.MaterialOne);
+            Material_ItemData materialTwo = databaseWrapper.GetMaterialData(recipe.MaterialTwo);
+            LittleGuy_ItemData result = databaseWrapper.GetLittleGuyData(recipe.Result);
+
+            if (materialOne != null && materialTwo != null && result != null)
             {
-                return littleGuy;
+                itemDataRecipes.Add(new ItemDataRecipe(materialOne, materialTwo, result, result.description));
+                Debug.Log($"adding new recipe of {recipe}");
+            }
+            else
+            {
+                Debug.LogError($"Failed to convert recipe: {recipe.MaterialOne} + {recipe.MaterialTwo}");
             }
         }
-
-        Debug.LogError($"No LittleGuy_ItemData found for type {combinationType}");
-        return null;
     }
-
     // check if valid recipe
     public static LittleGuy_ItemData UseRecipe(Material_ItemData first, Material_ItemData second)
     {
-        foreach (var recipe in recipes)
+        foreach (var recipe in itemDataRecipes)
         {
-            if ((recipe.MaterialOne == first.type && recipe.MaterialTwo == second.type) ||
-                (recipe.MaterialOne == second.type && recipe.MaterialTwo == first.type))
+            if ((recipe.MaterialOne == first && recipe.MaterialTwo == second) ||
+                (recipe.MaterialOne == second && recipe.MaterialTwo == first))
             {
                 return recipe.Result;
             }
@@ -73,14 +87,14 @@ public static class RecipeBook
         return null;
     }
 
-    public static List<MaterialRecipe> GetAllRecipes()
+    public static List<ItemDataRecipe> GetAllRecipes()
     {
-        return new List<MaterialRecipe>(recipes);
+        return new List<ItemDataRecipe>(itemDataRecipes);
     }
 
-    public static MaterialRecipe GetRecipeFor(LittleGuy_ItemData littleGuyData)
+    public static ItemDataRecipe GetRecipeFor(LittleGuy_ItemData littleGuyData)
     {
-        foreach (var recipe in recipes)
+        foreach (var recipe in itemDataRecipes)
         {
             if (recipe.Result == littleGuyData)
             {
@@ -89,9 +103,9 @@ public static class RecipeBook
         }
         return null;
     }
-    public static (MaterialType, MaterialType)? GetRecipeIngredients(LittleGuy_ItemData littleGuyData)
+    public static (Material_ItemData, Material_ItemData)? GetRecipeIngredients(LittleGuy_ItemData littleGuyData)
     {
-        foreach (var recipe in recipes)
+        foreach (var recipe in itemDataRecipes)
         {
             if (recipe.Result == littleGuyData)
             {
@@ -101,9 +115,9 @@ public static class RecipeBook
         return null;
     }
 
-    public static bool IsValidRecipe(MaterialType one, MaterialType two) // Check if both materials create a valid recipe
+    public static bool IsValidRecipe(Material_ItemData one, Material_ItemData two)
     {
-        foreach (var recipe in recipes)
+        foreach (var recipe in itemDataRecipes)
         {
             if ((recipe.MaterialOne == one && recipe.MaterialTwo == two) ||
                 (recipe.MaterialOne == two && recipe.MaterialTwo == one))
@@ -113,20 +127,16 @@ public static class RecipeBook
         }
         return false;
     }
-    public static List<string> GetFormattedValidRecipes() // Get all recipes in a string format
-    {
-        List<string> validRecipes = new List<string>();
+    //public static List<string> GetFormattedValidRecipes() // Get all recipes in a string format
+    //{
+    //    List<string> validRecipes = new List<string>();
 
-        foreach (var recipe in recipes)
-        {
-            string formattedRecipe = $"{recipe.MaterialOne} + {recipe.MaterialTwo} = {recipe.FishColor}";
-            validRecipes.Add(formattedRecipe);
-        }
+    //    foreach (var recipe in recipes)
+    //    {
+    //        string formattedRecipe = $"{recipe.MaterialOne} + {recipe.MaterialTwo} = {recipe.FishColor}";
+    //        validRecipes.Add(formattedRecipe);
+    //    }
 
-        return validRecipes;
-    }
+    //    return validRecipes;
+    //}
 }
-
-/// example usage:
-///  public RecipeManager recipeManager;
-///  recipeManager.GetCombination(firstMaterial, secondMaterial);

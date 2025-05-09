@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 public class CraftingUIManager : MenuClass
 {
-    private RawImage[] craftIngredients;
-    private GameObject canCatchArea;
+    public Image[] craftIngredients;
+    public GameObject canCatchArea;
     private Image canCatchPicture;
 
     private Vector2 originalSize;
 
     void Start()
     {
-        originalSize = craftIngredients[0].GetComponent<RawImage>().rectTransform.sizeDelta;
         ResetCraftingUI();
     }
 
@@ -27,20 +26,20 @@ public class CraftingUIManager : MenuClass
         menu.SetActive(false);
     }
 
-    public void UpdateIngredientSlot(int slotIndex, MaterialType materialType, Sprite materialSprite)
+    public void UpdateIngredientSlot(int slotIndex, Sprite materialSprite)
     {
-        RawImage rawImage = craftIngredients[slotIndex];
-        rawImage.texture = materialSprite.texture;
-        rawImage.gameObject.SetActive(true);
+        Image image = craftIngredients[slotIndex];
+        image.sprite = materialSprite;
+        image.gameObject.SetActive(true);
     }
 
     public void ResetCraftingUI()
     {
-        foreach (RawImage ingredientSlot in craftIngredients)
+        foreach (Image ingredientSlot in craftIngredients)
         {
-            ingredientSlot.texture = null;
-            ingredientSlot.gameObject.SetActive(false);
-            ingredientSlot.rectTransform.sizeDelta = originalSize;
+            ingredientSlot.sprite = null;
+            //ingredientSlot.gameObject.SetActive(false);
+            //ingredientSlot.rectTransform.sizeDelta = originalSize;
         }
 
         canCatchArea.SetActive(false);

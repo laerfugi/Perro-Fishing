@@ -5,9 +5,11 @@ using UnityEngine;
 public class CraftingSystem : MonoBehaviour
 {
     [SerializeField] private Database database;
-    void Start()
+    private DatabaseWrapper databaseWrapper;
+    void Awake()
     {
-        RecipeBook.Initialize(database);
+        databaseWrapper = new DatabaseWrapper(database);
+        RecipeBook.Initialize(databaseWrapper);
     }
 
     public GameObject Craft(Material_ItemData material1, Material_ItemData material2, Vector3 spawnPosition)
