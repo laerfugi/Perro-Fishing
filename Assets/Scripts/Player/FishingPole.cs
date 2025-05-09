@@ -55,12 +55,14 @@ public class FishingPole : MonoBehaviour
         if (!UIManager.Instance.menuIsOpen)     //need to change how to disable inputs 
         {
             //start fishing
-            if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active)
+            if (GameObject.FindWithTag("Player").GetComponent<Player>().state != PlayerState.Inactive)
             {
                 if (state == FishingState.Inactive)
                 {
+
                     if (Input.GetMouseButton(0))
                     {
+                        GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Fishing);
                         FacePlayerToCamera();
                         ShowPath();
                     }
@@ -97,8 +99,7 @@ public class FishingPole : MonoBehaviour
         state = FishingState.Casting;
 
         elapsedCooldownTime = 0;
-
-        GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Fishing);
+        GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Inactive);
         littleGuy.GetComponent<LittleGuy>().ChangeState(LittleGuyState.Inactive);
 
         littleGuy.transform.position = startLocation.transform.position;

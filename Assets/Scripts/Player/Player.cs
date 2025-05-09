@@ -66,7 +66,8 @@ public class Player : MonoBehaviour
         }
         else if (state == PlayerState.Fishing)     //special form of Inactive
         {
-            movementHandler.HandleMovement(null);
+            inputHandler.HandleInput();
+            movementHandler.HandleMovement(inputHandler);
         }
     }
     /*---State Change methods---*/
