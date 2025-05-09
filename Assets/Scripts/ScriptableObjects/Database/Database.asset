@@ -34,3 +34,9 @@ MonoBehaviour:
   minigameList:
   - {fileID: 11400000, guid: 7b04e004bc799414f8a61db9a7965840, type: 2}
   - {fileID: 11400000, guid: 08bce52dbea674f448f716e70c6869b9, type: 2}
+  materialList:
+  - {fileID: 11400000, guid: 703e1b993c9cb8c4fb8e02b341061212, type: 2}
+  - {fileID: 11400000, guid: f0795267c33955c4daea2102c8f99278, type: 2}
+  - {fileID: 11400000, guid: 204952552c97c8444b4e94ff247784ce, type: 2}
+  - {fileID: 11400000, guid: aef8d04be16b1414fb1f64fa93b9de8c, type: 2}
+  - {fileID: 11400000, guid: f5067842bf3b63a4b8f031887e6b9c9a, type: 2}

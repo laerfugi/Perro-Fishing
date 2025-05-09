@@ -144,7 +144,7 @@ public class LittleGuy : MonoBehaviour
 
     private void SnapToNav()
     {
-        if (NavMesh.SamplePosition(transform.position, out NavMeshHit temp, 0.1f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit temp, 0.5f, NavMesh.AllAreas))
         {
             // Already on surface
             controller.enabled = false;
@@ -158,6 +158,7 @@ public class LittleGuy : MonoBehaviour
     private IEnumerator SnapAfterDelay()
     {
         yield return new WaitForSeconds(2f); // Equal to the camera blend setting
+        if (state == LittleGuyState.Active) yield break;
 
         float maxDistance = 30f;
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, maxDistance, NavMesh.AllAreas))

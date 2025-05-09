@@ -9,4 +9,5 @@ public class Database : ScriptableObject
     public List<Fish_ItemData> fishList;
     public List<LittleGuy_ItemData> littleGuyList;
     public List<MinigameData> minigameList;
+    public List<Material_ItemData> materialList;
 }
