@@ -50,6 +50,11 @@ public class LittleGuy : MonoBehaviour
         PlayerInventory.Instance.RemoveLittleGuy(this);
     }
 
+    private void Awake()
+    {
+        //Add to player inventory
+        PlayerInventory.Instance.AddLittleGuy(this);
+    }
 
     void Start()
     {
@@ -68,10 +73,6 @@ public class LittleGuy : MonoBehaviour
 
         //Change State to AI
         ChangeState(LittleGuyState.AI);
-
-
-        //Add to player inventory
-        PlayerInventory.Instance.AddLittleGuy(this);
     }
 
     void Update()

@@ -16,12 +16,8 @@ public class PlayerInventory : MonoBehaviour
     [Header("Little Guy Inventory")]
     [SerializeField] public List<LittleGuy_ItemDataWrapper> littleGuyInventoryList;
 
-    [Header("Inventory Settings")]
-    //[SerializeField] private int INVENTORY_SIZE = 3;      //we can use this later to limit inventory space but it's making an error in unity since its unused lol
-
     [Header("Money")]
     public int money;
-
 
     private void Awake()
     {

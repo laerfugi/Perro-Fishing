@@ -11,13 +11,21 @@ public enum FishingState {Inactive,Casting,Catching,Cooldown}    //Inactive: You
 
 public class FishingPole : MonoBehaviour
 {
-    public Transform cameraPivot;
+
+    [Header("Equipped Little Guy")]
     public LittleGuy_ItemDataWrapper littleGuy_ItemDataWrapper;
     private GameObject littleGuy;
+
+    [Header("Player Camera Pivot")]
+    public Transform cameraPivot;
 
     [Header("Locations")]
     public GameObject startLocation;
     public GameObject targetLocation;
+
+    [Header("Model")]
+    public GameObject model;
+    public Transform playerHandTransform;
 
     [Header("Fishing Variables")]
     public float castTime;  //how long it takes to cast the bait
@@ -42,16 +50,14 @@ public class FishingPole : MonoBehaviour
 
         elapsedCooldownTime = cooldownTime;
         targetLocation.SetActive(false);
+
+        //make player hold fishing pole
+        model.transform.SetParent(playerHandTransform,true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerInventory.Instance.littleGuyInventoryList.Count > 1)
-        {
-            littleGuy_ItemDataWrapper = PlayerInventory.Instance.littleGuyInventoryList[0];
-        }
-
         if (!UIManager.Instance.menuIsOpen)     //need to change how to disable inputs 
         {
             //start fishing
