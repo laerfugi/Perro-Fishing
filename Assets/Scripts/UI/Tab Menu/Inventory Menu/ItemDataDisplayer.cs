@@ -40,7 +40,7 @@ public class ItemDataDisplayer : MonoBehaviour
         name.text = itemData.name;
         description.text = itemData.description;
         
-        if (itemData.icon != null) { icon.sprite = itemData.icon; }
+        if (itemData.icon != null) { icon.sprite = itemData.icon; icon.enabled = true; }
         if (itemData.item != null) { item = itemData.item; }
 
         //fish_itemData
@@ -65,7 +65,7 @@ public class ItemDataDisplayer : MonoBehaviour
     {
         name.text = "";
         description.text = "";
-        icon.sprite = null;
+        icon.sprite = null; icon.enabled = false;
         item = null;
 
         extraText.text = "";
