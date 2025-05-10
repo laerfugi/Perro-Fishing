@@ -39,10 +39,10 @@ public class InteractHitbox : MonoBehaviour
         IInteractable interactable = collider.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            EventManager.OnCannotInteractEvent();
             if (interactablesInHitbox.Count > 1) { EventManager.OnCanInteractEvent(interactablesInHitbox[1].GetComponent<IInteractable>().GetInteractionPrompt()); }    //update ui with next interactable in list
 
             interactablesInHitbox.Remove(collider.gameObject);
+            EventManager.OnCannotInteractEvent();
         }
     }
 
@@ -51,14 +51,12 @@ public class InteractHitbox : MonoBehaviour
         CheckNull();
         if (interactablesInHitbox.Count > 0)
         {
-            EventManager.OnCannotInteractEvent();
             if (interactablesInHitbox.Count >1) { EventManager.OnCanInteractEvent(interactablesInHitbox[1].GetComponent<IInteractable>().GetInteractionPrompt()); }    //update ui with next interactable in list
 
 
             IInteractable closestInteractable = interactablesInHitbox[0].GetComponent<IInteractable>();
             closestInteractable.Interact();
-
-            //interactablesInHitbox.Remove(interactablesInHitbox[0]);
+            EventManager.OnCannotInteractEvent();
         }
     }
 

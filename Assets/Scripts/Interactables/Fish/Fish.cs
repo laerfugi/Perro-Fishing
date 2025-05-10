@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class Fish : MonoBehaviour, IInteractable
@@ -7,9 +8,12 @@ public class Fish : MonoBehaviour, IInteractable
     [Header("Item Data")]
     public Fish_ItemData itemData;
 
-    [Header("Where to Spawn")]
+    [Header("Info")]
     public Database database;
     public Lake lake;
+
+    [Header("Animator")]
+    public Animator animator;
 
     [Header("Debug")]
     public bool skipMinigame;
@@ -80,7 +84,11 @@ public class Fish : MonoBehaviour, IInteractable
 
     IEnumerator Animate()
     {
-        yield return null;
+        this.GetComponent<Rigidbody>().isKinematic = true;
+        this.transform.rotation = Quaternion.Euler(0, 0, 90);   //need to change this 
+        animator.SetBool("Catch", true);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Animation finished"));
+        //yield return null;
         Destroy(gameObject);
     }
 
