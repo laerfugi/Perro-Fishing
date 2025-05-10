@@ -5,39 +5,54 @@ using UnityEngine;
 public class CraftingSystem : MonoBehaviour
 {
     private DatabaseWrapper databaseWrapper;
+    private RecipeDisplayManager recipeDisplayManager;
+    private CraftingUIManager craftingUIManager;
+    public Transform spawnPoint;
     void Awake()
     {
         databaseWrapper = GetComponent<DatabaseWrapper>();
         RecipeBook.Initialize(databaseWrapper);
     }
 
-    public GameObject Craft(Material_ItemData material1, Material_ItemData material2, Vector3 spawnPosition)
+    void Start()
     {
-        if (!HasRequiredMaterials(material1, material2))
+        recipeDisplayManager = GetComponent<RecipeDisplayManager>();
+        craftingUIManager = GetComponent<CraftingUIManager>();
+    }
+
+    public void Craft()
+    {
+        //(Material_ItemData mat1, Material_ItemData mat2) = (recipeDisplayManager.currentCraft[0], recipeDisplayManager.currentCraft[1]);
+        //Debug.Log($"{recipeDisplayManager.currentCraft}");
+        if (!HasRequiredMaterials(recipeDisplayManager.currentCraft[0], recipeDisplayManager.currentCraft[1]))
         {
             Debug.LogWarning("Missing materials.");
-            return null;
+            //return null;
+            return;
         }
 
-        LittleGuy_ItemData littleGuyData = RecipeBook.UseRecipe(material1, material2);
+        LittleGuy_ItemData littleGuyData = RecipeBook.UseRecipe(recipeDisplayManager.currentCraft[0], recipeDisplayManager.currentCraft[1]);
         // Failed recipe
         if (littleGuyData == null)
         {
             Debug.LogWarning("Invalid recipe");
-            return null;
+            //return null;
+            return;
         }
 
         // Recipe success
-        ConsumeMaterials(material1, material2);
+        ConsumeMaterials(recipeDisplayManager.currentCraft[0], recipeDisplayManager.currentCraft[1]);
+        recipeDisplayManager.OnOpen(); // refresh the UI
+        craftingUIManager.ResetCraftingUI();
         // Spawn little guy through giving data
-        GameObject craftedItem = LittleGuySpawner.Instance.CreateLittleGuy(spawnPosition, littleGuyData);
+        GameObject craftedItem = LittleGuySpawner.Instance.CreateLittleGuy(spawnPoint.localPosition, littleGuyData);
 
         if (craftedItem.TryGetComponent(out LittleGuy littleGuy))
         {
             PlayerInventory.Instance.AddLittleGuy(littleGuy);
         }
 
-        return craftedItem; // Unsure if needed
+        //return craftedItem; // Unsure if needed
     }
 
     private bool HasRequiredMaterials(ItemData material1, ItemData material2)

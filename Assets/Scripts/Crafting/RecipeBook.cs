@@ -63,7 +63,7 @@ public static class RecipeBook
             if (materialOne != null && materialTwo != null && result != null)
             {
                 itemDataRecipes.Add(new ItemDataRecipe(materialOne, materialTwo, result, result.description));
-                Debug.Log($"adding new recipe of {recipe}");
+                //Debug.Log($"adding new recipe of {recipe}");
             }
             else
             {

@@ -9,19 +9,19 @@ public class CraftingUIManager : MenuClass
     public GameObject canCatchArea;
     private Image canCatchPicture;
     public Sprite originalTransparent;
+    private RecipeDisplayManager recipeDisplayManager;
 
     private Vector2 originalSize;
 
     void Start()
     {
-        //originalTransparent = craftIngredients[0];
+        recipeDisplayManager = GetComponent<RecipeDisplayManager>();
         ResetCraftingUI();
     }
 
     public void ReloadCraftingUI()
     {
-        RecipeDisplayManager temp = GetComponent<RecipeDisplayManager>();
-        temp.OnOpen();
+        recipeDisplayManager.OnOpen();
         ToggleMenu();
     }
 
@@ -36,14 +36,9 @@ public class CraftingUIManager : MenuClass
     {
         craftIngredients[0].sprite = originalTransparent;
         craftIngredients[1].sprite = originalTransparent;
-        //foreach (Image ingredientSlot in craftIngredients)
-        //{
-        //    ingredientSlot.sprite = originalTransparent.sprite;
-        //    //ingredientSlot.gameObject.SetActive(false);
-        //    //ingredientSlot.rectTransform.sizeDelta = originalSize;
-        //}
-
-        //canCatchArea.SetActive(false);
+        craftIngredients[0].color = new Color(1f, 1f, 1f, 1f);
+        craftIngredients[1].color = new Color(1f, 1f, 1f, 1f);
+        recipeDisplayManager.ResetCraft();
     }
 
     public void ShowCraftingResult(Sprite resultSprite)

@@ -10,6 +10,7 @@ public class RecipeDisplayManager : MonoBehaviour
     public GameObject inventoryButtonPrefab;
     public Transform recipeGridView;
     public GameObject recipeButtonPrefab;
+    public Button craftButton;
 
     [Header("Dependencies")]
     private PlayerInventory playerInventory;
@@ -22,27 +23,26 @@ public class RecipeDisplayManager : MonoBehaviour
     private Dictionary<MaterialType, int> originalCounts = new Dictionary<MaterialType, int>();
     private Dictionary<MaterialType, int> currentCounts = new Dictionary<MaterialType, int>();
 
+    public List<Material_ItemData> currentCraft;
+
     void Start()
     {
         playerInventory = PlayerInventory.Instance;
         dbWrapper = GetComponent<DatabaseWrapper>();
-        UpdateInventoryDisplay();
-        CreateRecipeButtons();
+        OnOpen();
     }
 
     public void OnOpen()
     {
+        ResetCraft();
         UpdateInventoryDisplay();
         CreateRecipeButtons();
     }
 
-    public void UpdateInventoryDisplay()
+    // Dynamically create materials based off of mats in database
+    private void UpdateInventoryDisplay()
     {
-        foreach (var button in inventoryButtons)
-        {
-            Destroy(button);
-        }
-        inventoryButtons.Clear();
+        ClearButtons(inventoryButtons);
 
         foreach (MaterialType materialType in System.Enum.GetValues(typeof(MaterialType)))
         {
@@ -50,15 +50,11 @@ public class RecipeDisplayManager : MonoBehaviour
 
             if (materialData != null)
             {
-                int count = 0;
-
-                ItemDataWrapper item = playerInventory.InInventory(materialData);
-                if (item != null) count = item.count;
-
+                int count = GetMaterialCount(materialData);
                 originalCounts[materialType] = count;
                 currentCounts[materialType] = count;
 
-                CreateInventoryEntry(materialData, count);
+                CreateMaterialButton(materialData, count);
             }
             else
             {
@@ -67,7 +63,7 @@ public class RecipeDisplayManager : MonoBehaviour
         }
     }
 
-    private void CreateInventoryEntry(Material_ItemData materialData, int count)
+    private void CreateMaterialButton(Material_ItemData materialData, int count)
     {
         GameObject newButton = Instantiate(inventoryButtonPrefab, inventoryGridView, false);
         Image buttonImage = newButton.GetComponentInChildren<Image>();
@@ -80,83 +76,30 @@ public class RecipeDisplayManager : MonoBehaviour
 
         if (count <= 0)
         {
-            buttonImage.color = new Color(1f, 1f, 1f, 0.5f);
-            newButton.GetComponent<Button>().interactable = false;
+            SetButtonState(newButton, buttonImage, false);
         }
         else
         {
-            buttonImage.color = Color.white;
-            newButton.GetComponent<Button>().interactable = true;
+            SetButtonState(newButton, buttonImage, true);
 
             newButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                if (currentCounts[materialData.type] > 0)
+                if (currentCounts[materialData.type] > 0 && currentCraft.Count < 2)
                 {
-                    craftingUIManager.UpdateIngredientSlot(0, buttonImage.sprite);
-                    DecrementMaterialCount(materialData.type, countText);
+                    AddMaterialToCraft(materialData);
+                    CheckAndUpdateCraftingState();
                 }
             });
         }
 
+        // Add the button to the inventory buttons list
         inventoryButtons.Add(newButton);
-    }
-
-    private void DecrementMaterialCount(MaterialType materialType, TMP_Text countText)
-    {
-        if (currentCounts[materialType] > 0)
-        {
-            currentCounts[materialType]--;
-            countText.text = currentCounts[materialType].ToString();
-
-            // Disable the button if the count reaches 0
-            if (currentCounts[materialType] <= 0)
-            {
-                GameObject button = inventoryButtons.Find(b =>
-                    b.GetComponentInChildren<Image>().sprite == dbWrapper.GetMaterialData(materialType).icon);
-                if (button != null)
-                {
-                    button.GetComponent<Button>().interactable = false;
-                    button.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, 0.5f);
-                }
-            }
-        }
-    }
-
-    public void ResetMaterialCounts()
-    {
-        foreach (var materialType in originalCounts.Keys)
-        {
-            currentCounts[materialType] = originalCounts[materialType];
-
-            GameObject button = inventoryButtons.Find(b =>
-                b.GetComponentInChildren<Image>().sprite == dbWrapper.GetMaterialData(materialType).icon);
-            if (button != null)
-            {
-                TMP_Text countText = button.transform.Find("Count").GetComponent<TMP_Text>();
-                countText.text = currentCounts[materialType].ToString();
-
-                if (currentCounts[materialType] > 0)
-                {
-                    button.GetComponent<Button>().interactable = true;
-                    button.GetComponentInChildren<Image>().color = Color.white;
-                }
-                else
-                {
-                    button.GetComponent<Button>().interactable = false;
-                    button.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, 0.5f);
-                }
-            }
-        }
     }
 
     // Dynamically create recipes
     private void CreateRecipeButtons()
     {
-        foreach (var button in recipeButtons)
-        {
-            Destroy(button);
-        }
-        recipeButtons.Clear();
+        ClearButtons(recipeButtons);
 
         List<ItemDataRecipe> recipes = RecipeBook.GetAllRecipes();
         foreach (var recipe in recipes)
@@ -174,14 +117,131 @@ public class RecipeDisplayManager : MonoBehaviour
         buttonImage.sprite = recipe.Result.icon;
         buttonText.text = recipe.Result.name;
 
-        // Add click listener to set the crafting slots to the recipe's materials
         newButton.GetComponent<Button>().onClick.AddListener(() =>
         {
             craftingUIManager.ResetCraftingUI();
-            craftingUIManager.UpdateIngredientSlot(0, recipe.MaterialOne.icon);
-            craftingUIManager.UpdateIngredientSlot(1, recipe.MaterialTwo.icon);
+
+            currentCraft.Clear();
+            //currentCraft.Add(recipe.MaterialOne);
+            //currentCraft.Add(recipe.MaterialTwo);
+            AddMaterialToCraft(recipe.MaterialOne);
+            AddMaterialToCraft(recipe.MaterialTwo);
+
+            CheckAndUpdateCraftingState();
         });
 
         recipeButtons.Add(newButton);
     }
+
+    #region Recipe Helpers
+    private void AddMaterialToCraft(Material_ItemData materialData)
+    {
+        if (currentCraft.Count >= 2) return;
+
+        int slot = currentCraft.Count;
+        craftingUIManager.UpdateIngredientSlot(slot, materialData.icon);
+
+        // Decrement material count and update the UI
+        DecrementMaterialCount(materialData.type);
+
+        currentCraft.Add(materialData);
+
+        // Check if the current craft forms a valid recipe
+        if (currentCraft.Count == 2)
+        {
+            CheckAndUpdateCraftingState();
+        }
+    }
+
+    private void CheckAndUpdateCraftingState()
+    {
+        if (currentCraft.Count < 2) return;
+
+        bool hasMaterialOne = originalCounts[currentCraft[0].type] > 0;
+        bool hasMaterialTwo = originalCounts[currentCraft[1].type] > 0;
+
+        craftingUIManager.craftIngredients[0].color = hasMaterialOne ? Color.white : new Color(1f, 1f, 1f, 0.5f);
+        craftingUIManager.craftIngredients[1].color = hasMaterialTwo ? Color.white : new Color(1f, 1f, 1f, 0.5f);
+
+        if (RecipeBook.IsValidRecipe(currentCraft[0], currentCraft[1]) && hasMaterialOne && hasMaterialTwo)
+        {
+            craftButton.image.color = Color.green; // Can craft
+            craftButton.interactable = true;
+        }
+        else
+        {
+            craftButton.image.color = Color.red; // Can not craft
+            craftButton.interactable = false;
+        }
+    }
+
+    private void DecrementMaterialCount(MaterialType materialType)
+    {
+        if (currentCounts[materialType] > 0)
+        {
+            currentCounts[materialType]--;
+
+            // Update the count text in the inventory button
+            GameObject button = inventoryButtons.Find(b =>
+                b.GetComponentInChildren<Image>().sprite == dbWrapper.GetMaterialData(materialType).icon);
+            if (button != null)
+            {
+                TMP_Text countText = button.transform.Find("Count").GetComponent<TMP_Text>();
+                countText.text = currentCounts[materialType].ToString();
+
+                // Disable button if count is 0
+                if (currentCounts[materialType] <= 0)
+                {
+                    SetButtonState(button, button.GetComponentInChildren<Image>(), false);
+                }
+            }
+        }
+    }
+    #endregion
+
+    #region UI Helpers
+    public void ResetCraft()
+    {
+        // Clear curr recipe
+        currentCraft.Clear();
+        //craftingUIManager.ResetCraftingUI();
+        foreach (var materialType in originalCounts.Keys)
+        {
+            currentCounts[materialType] = originalCounts[materialType];
+
+            GameObject button = inventoryButtons.Find(b =>
+                b.GetComponentInChildren<Image>().sprite == dbWrapper.GetMaterialData(materialType).icon);
+            if (button != null)
+            {
+                TMP_Text countText = button.transform.Find("Count").GetComponent<TMP_Text>();
+                countText.text = currentCounts[materialType].ToString();
+
+                SetButtonState(button, button.GetComponentInChildren<Image>(), currentCounts[materialType] > 0);
+            }
+        }
+        // Reset craft button color
+        craftButton.image.color = Color.gray; 
+        craftButton.interactable = false;
+    }
+
+    private void ClearButtons(List<GameObject> buttons)
+    {
+        foreach (var button in buttons)
+        {
+            Destroy(button);
+        }
+        buttons.Clear();
+    }
+    private void SetButtonState(GameObject button, Image buttonImage, bool isEnabled)
+    {
+        // Make a button slightly transparent if not enabled
+        button.GetComponent<Button>().interactable = isEnabled;
+        buttonImage.color = isEnabled ? Color.white : new Color(1f, 1f, 1f, 0.5f);
+    }
+    private int GetMaterialCount(Material_ItemData materialData)
+    {
+        ItemDataWrapper item = playerInventory.InInventory(materialData);
+        return item != null ? item.count : 0;
+    }
+    #endregion
 }

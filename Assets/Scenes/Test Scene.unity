@@ -127,6 +127,51 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3690787676130682454, guid: e8dee088b87fdae40a3e9de46f0ccc3c, type: 3}
   m_PrefabInstance: {fileID: 3922393712418228331}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &121761554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121761556}
+  - component: {fileID: 121761555}
+  m_Layer: 0
+  m_Name: LittleGuySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &121761555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121761554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e45b35057cb12a458080087b5d7ab2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  littleGuyPrefab: {fileID: 8531474145895555203, guid: f1f55714db2a0a04c904b57022cc295d, type: 3}
+--- !u!4 &121761556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121761554}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.3024178, y: 8.136921, z: 2.5771737}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &129730589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,53 +2004,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904494245}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2049339298
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2049339300}
-  - component: {fileID: 2049339299}
-  m_Layer: 0
-  m_Name: SpriteManager maybe not needed?
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2049339299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049339298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 141d90d189186e04da169022d41f3c8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materialSprites: []
-  littleGuySprites: []
-  fishSprites: []
---- !u!4 &2049339300
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049339298}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.742754, y: 11.524194, z: -9.053528}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2079491863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2759,6 +2757,6 @@ SceneRoots:
   - {fileID: 2765034433223185108}
   - {fileID: 1906803942474973806}
   - {fileID: 553741386}
-  - {fileID: 2049339300}
+  - {fileID: 121761556}
   - {fileID: 3922393712418228331}
   - {fileID: 1605845421}
