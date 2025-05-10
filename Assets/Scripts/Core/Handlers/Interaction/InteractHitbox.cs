@@ -7,13 +7,24 @@ using UnityEngine;
 
 public class InteractHitbox : MonoBehaviour
 {
+    public List<GameObject> interactablesInHitbox;
     [SerializeReference]
-    public List<GameObject> interactablesInHitbox = new List<GameObject>();
+    public List<IInteractable> IInteractables = new List<IInteractable>();
+
 
     //remove null references
     private void Update()
     {
         CheckNull();
+
+        if (interactablesInHitbox.Count >= 1)
+        {
+            EventManager.OnCanInteractEvent(IInteractables[0].GetInteractionPrompt());
+        }
+        else
+        {
+            EventManager.OnCannotInteractEvent();
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -22,11 +33,8 @@ public class InteractHitbox : MonoBehaviour
         if (interactable != null)
         {
             interactablesInHitbox.Add(collider.gameObject);
-
-            if (interactablesInHitbox.Count >= 1)
-            {
-                EventManager.OnCanInteractEvent(interactable.GetInteractionPrompt());
-            }
+            IInteractables.Add(interactable);
+            Debug.Log("thing added");
         }
     }
 
@@ -35,10 +43,8 @@ public class InteractHitbox : MonoBehaviour
         IInteractable interactable = collider.GetComponent<IInteractable>();
         if (interactable != null)
         {
-            EventManager.OnCannotInteractEvent();
-            if (interactablesInHitbox.Count > 1) { EventManager.OnCanInteractEvent(interactablesInHitbox[1].GetComponent<IInteractable>().GetInteractionPrompt()); }    //update ui with next interactable in list
-
             interactablesInHitbox.Remove(collider.gameObject);
+            IInteractables.Remove(interactable);
         }
     }
 
@@ -48,19 +54,15 @@ public class InteractHitbox : MonoBehaviour
         if (interactablesInHitbox.Count > 0)
         {
             EventManager.OnCannotInteractEvent();
-            if (interactablesInHitbox.Count >1) { EventManager.OnCanInteractEvent(interactablesInHitbox[1].GetComponent<IInteractable>().GetInteractionPrompt()); }    //update ui with next interactable in list
 
-
-            IInteractable closestInteractable = interactablesInHitbox[0].GetComponent<IInteractable>();
+            IInteractable closestInteractable = IInteractables[0];
             closestInteractable.Interact();
-
-            interactablesInHitbox.Remove(interactablesInHitbox[0]);
         }
     }
 
     //scuffed but it works
     void CheckNull()
     {
-        if (interactablesInHitbox.Count > 0 && interactablesInHitbox[0] == null) { interactablesInHitbox.Remove(interactablesInHitbox[0]); }
+        if (interactablesInHitbox.Count > 0 && interactablesInHitbox[0] == null) { interactablesInHitbox.Remove(interactablesInHitbox[0]); IInteractables.Remove(IInteractables[0]); }
     }
 }
