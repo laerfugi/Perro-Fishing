@@ -60,8 +60,6 @@ public class FishingPole : MonoBehaviour
             {
                 SetAsBait(PlayerInventory.Instance.littleGuyInventoryList[0]);
             }
-
-            Debug.Log("ough");
         }
 
 

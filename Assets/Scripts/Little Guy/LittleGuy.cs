@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum LittleGuyState { AI, Active, Inactive}
+public enum LittleGuyState { AI, Active, Inactive,InMenu}
 
 [RequireComponent(typeof(LittleGuyNav))]
 [RequireComponent(typeof(CharacterController))]
@@ -93,6 +93,10 @@ public class LittleGuy : MonoBehaviour
         {
 
         }
+        else if (state == LittleGuyState.InMenu)          
+        {
+
+        }
     }
 
     /*---State Change methods---*/
@@ -130,12 +134,12 @@ public class LittleGuy : MonoBehaviour
     //used by menu events
     void OpenMenuEventCheck()
     {
-        if (state == LittleGuyState.Active) { previousState = state; ChangeState(LittleGuyState.Inactive); }
+        if (state == LittleGuyState.Active) { previousState = state; ChangeState(LittleGuyState.InMenu); }
     }
 
     void CloseMenuEventCheck()
     {
-        if (state == LittleGuyState.Inactive) { ChangeState(previousState); }
+        if (state == LittleGuyState.InMenu) { ChangeState(previousState); }
     }
 
     #endregion

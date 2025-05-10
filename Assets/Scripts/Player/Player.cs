@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState {Active,Inactive,Fishing}
+public enum PlayerState {Active,Inactive,InMenu,Fishing}
 
 public class Player : MonoBehaviour
 {
@@ -64,7 +64,11 @@ public class Player : MonoBehaviour
         {
             movementHandler.HandleMovement(null);   //gravity
         }
-        else if (state == PlayerState.Fishing)     //special form of Inactive
+        else if (state == PlayerState.InMenu)
+        {
+
+        }
+        else if (state == PlayerState.Fishing)     
         {
             inputHandler.HandleInput();
             movementHandler.HandleMovement(inputHandler);
@@ -74,6 +78,7 @@ public class Player : MonoBehaviour
     #region State Change Methods
     public void ChangeState(PlayerState playerState)
     {
+        Debug.Log("i am being called");
         state = playerState;
 
         //execute code on entering a new state
@@ -83,6 +88,10 @@ public class Player : MonoBehaviour
             EventManager.OnSwitchVCamEvent(vCam);
         }
         else if (state == PlayerState.Inactive)     //player can't move
+        {
+
+        }
+        else if (state == PlayerState.InMenu)
         {
 
         }
@@ -97,12 +106,12 @@ public class Player : MonoBehaviour
     //used by menu event
     void OpenMenuEventCheck()
     {
-        if (state == PlayerState.Active) { previousState = state; ChangeState(PlayerState.Inactive); }
+        if (state == PlayerState.Active) { previousState = state; ChangeState(PlayerState.InMenu); }
     }
 
     void CloseMenuEventCheck()
     {
-        if (state == PlayerState.Inactive) { ChangeState(previousState); }
+        if (state == PlayerState.InMenu) { ChangeState(previousState); }
     }
     #endregion
 }

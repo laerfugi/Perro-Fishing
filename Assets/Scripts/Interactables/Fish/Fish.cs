@@ -14,9 +14,19 @@ public class Fish : MonoBehaviour, IInteractable
     [Header("Debug")]
     public bool skipMinigame;
 
+    private void Awake()
+    {
+
+    }
+
     private void OnDestroy()
     {
         if (lake) { lake.fishList.Remove(this.gameObject); }
+    }
+
+    void Update()
+    {
+
     }
 
     //instead of adding fish to inventory, initiates a minigame
@@ -24,12 +34,14 @@ public class Fish : MonoBehaviour, IInteractable
     {
         if (skipMinigame) 
         {
-            itemData = database.fishList[Random.Range(0, database.fishList.Count)];
-            PlayerInventory.Instance.AddItem(itemData);
-            Destroy(gameObject);
-            return;
+            List<Result> temp = new List<Result>();
+            temp.Add(Result.Win);
+            ProcessMinigameResults(temp);
         }
-        StartCoroutine(Minigame());
+        else 
+        {
+            StartCoroutine(Minigame());
+        }
     }
 
     public void Use()
@@ -50,20 +62,27 @@ public class Fish : MonoBehaviour, IInteractable
     void ProcessMinigameResults(List<Result> results)
     {
         if (results.Contains(Result.Lose)) 
-        { 
+        {
             Debug.Log("you lost... i should despawn and run away");
-            Destroy(gameObject);
+            StartCoroutine(Animate());
 
         }
         else 
-        { 
+        {
             Debug.Log("you won! i should despawn and go to inventory");
-
             //choose random fish from list
             itemData = database.fishList[Random.Range(0, database.fishList.Count)];
 
             PlayerInventory.Instance.AddItem(itemData);
-            Destroy(gameObject);
+            StartCoroutine(Animate());
         }
     }
+
+    IEnumerator Animate()
+    {
+        yield return null;
+        Destroy(gameObject);
+    }
+
+
 }
