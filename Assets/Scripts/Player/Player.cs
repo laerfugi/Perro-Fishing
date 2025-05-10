@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     public GameObject vCam;     //idk how to make this private
     public FishingPole fishingPole;
+    public GameObject interactHitbox;
 
     [field: Header("State")]
     [field: SerializeField]
@@ -85,18 +86,20 @@ public class Player : MonoBehaviour
         {
             //camera stuff
             EventManager.OnSwitchVCamEvent(vCam);
+
+            interactHitbox.SetActive(true);
         }
         else if (state == PlayerState.Inactive)     //player can't move
         {
-
+            interactHitbox.SetActive(false);
         }
         else if (state == PlayerState.InMenu)
         {
-
+            interactHitbox.SetActive(false);
         }
         else if (state == PlayerState.Fishing)     //special form of Inactive
         {
-
+            interactHitbox.SetActive(false);
         }
 
         EventManager.OnPlayerStateEvent(state);

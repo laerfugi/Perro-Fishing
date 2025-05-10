@@ -22,6 +22,7 @@ public class LittleGuy : MonoBehaviour
     public GameObject vCam;     //idk how to make this private
     private CameraPivot cameraPivot;
     private SpriteRenderer spriteRenderer;
+    public GameObject interactHitbox;
 
     [field: Header("State")]
     [field: SerializeField]
@@ -111,6 +112,8 @@ public class LittleGuy : MonoBehaviour
             //state stuff
             //controller.enabled = false;
             //nav.enabled = true;
+
+            interactHitbox.SetActive(false);
         }
         else if (state == LittleGuyState.Active)            //Little Guy is player controlled
         {
@@ -120,11 +123,15 @@ public class LittleGuy : MonoBehaviour
             //state stuff
             nav.enabled = false;
             controller.enabled = true;
+
+            interactHitbox.SetActive(true);
         }
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
             // turn off nav early to fix position snapping bug
             nav.enabled = false;
+
+            interactHitbox.SetActive(false);
         }
 
         //EventManager.OnPlayerStateEvent(PlayerState.Active);

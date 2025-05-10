@@ -673,6 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCam: {fileID: 465556714112148319}
+  interactHitbox: {fileID: 3039487952508235416}
   <state>k__BackingField: 0
   itemData: {fileID: 11400000, guid: baec9e6fb2390054eba145b6bfa2ef4a, type: 2}
 --- !u!114 &6519658412424455794

@@ -1849,6 +1849,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1761431638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8910498213066542758, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+  m_PrefabInstance: {fileID: 4636526538414739899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1904494245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,6 +2652,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 482986584831618549, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: interactHitbox
+      value: 
+      objectReference: {fileID: 1761431638}
     - target: {fileID: 697539776683780537, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: fart.Array.size
       value: 1
