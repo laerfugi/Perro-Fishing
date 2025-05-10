@@ -78,7 +78,6 @@ public class Player : MonoBehaviour
     #region State Change Methods
     public void ChangeState(PlayerState playerState)
     {
-        Debug.Log("i am being called");
         state = playerState;
 
         //execute code on entering a new state

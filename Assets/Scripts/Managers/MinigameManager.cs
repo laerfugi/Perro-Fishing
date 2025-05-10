@@ -46,7 +46,7 @@ public class MinigameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(StartMinigame(null));
+        //StartCoroutine(LaunchMinigame("Flappy Bird"));
         //StartCoroutine(LaunchMinigames(3));
     }
 
@@ -159,7 +159,6 @@ public class MinigameManager : MonoBehaviour
         yield return minigameTransition.StartCoroutine(minigameTransition.CloseCurtains());
         for (int i = 0; i < count; i++)
         {
-            Debug.Log("minigame " + i);
 
             //choose random minigame
             string sceneName;
@@ -173,7 +172,6 @@ public class MinigameManager : MonoBehaviour
 
             if (results.Contains(Result.Lose)) { break; }
         }
-
         yield return CloseMinigameCoroutine();
     }
     #endregion

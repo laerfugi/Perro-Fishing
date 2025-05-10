@@ -104,7 +104,7 @@ public class Minigame : MonoBehaviour
 
         minigameTime = maxMinigameTime;
         float temp = maxMinigameTime;
-        while (minigameTime > 0)
+        while (minigameTime > 0 && minigameState == MinigameState.Play)
         {
             //call tick event
             if (temp != Mathf.Round(minigameTime))

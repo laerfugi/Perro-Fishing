@@ -26,7 +26,7 @@ public class MinigameTransition : MonoBehaviour
     [Header("Minigame Manager Results")]
     public List<Result> results;
 
-    void Awake()
+    void Start()
     {
         canvas = GetComponent<Canvas>();
         results = MinigameManager.Instance.results;

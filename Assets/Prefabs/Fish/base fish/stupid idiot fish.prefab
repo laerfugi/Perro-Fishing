@@ -154,8 +154,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 67f09e55359561341bff361a1caadfeb, type: 2}
   database: {fileID: 11400000, guid: 97f4a22b81541d649bdf666ed7a6d9ab, type: 2}
   lake: {fileID: 0}
-  animatorIsPlaying: 0
-  skipMinigame: 1
+  skipMinigame: 0
 --- !u!1 &4981329482049179529
 GameObject:
   m_ObjectHideFlags: 0
