@@ -24,9 +24,12 @@ public class FNAF : MonoBehaviour
                 started = true;
             }
         }
-        if (Minigame.Instance.minigameTime == 0)
+        else
         {
-            jumpscareAnimator .SetTrigger("lose");
+            if (Minigame.Instance.minigameTime == 0)
+            {
+                jumpscareAnimator.SetTrigger("lose");
+            }
         }
         
     }
