@@ -76,8 +76,7 @@ public class ItemDataDisplayer : MonoBehaviour
 
     public void SetAsBait(LittleGuy_ItemDataWrapper littleGuy_ItemDataWrapper)
     {
-        Debug.Log("thingy added");
-        player.fishingPole.littleGuy_ItemDataWrapper = littleGuy_ItemDataWrapper;
+        player.fishingPole.SetAsBait(littleGuy_ItemDataWrapper);
 
         DisplayInfo(littleGuy_ItemDataWrapper);
         EventManager.OnInventoryAddEvent(null);

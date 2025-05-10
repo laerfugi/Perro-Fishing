@@ -18,8 +18,6 @@ public class EquippedLittleGuyDisplayer : MonoBehaviour
     private void OnEnable()
     {
         EventManager.InventoryAddEvent += Display;
-
-        Display(null);
     }
 
     private void OnDisable()
@@ -27,14 +25,19 @@ public class EquippedLittleGuyDisplayer : MonoBehaviour
         EventManager.InventoryAddEvent -= Display;
     }
 
+    private void Start()
+    {
+        Display(null);
+    }
+
     void Display(ItemData itemData)
     {
-        if (fishingPole.littleGuy_ItemDataWrapper != null)
+        if (fishingPole.baitLittleGuy_ItemDataWrapper != null)
         {
-            inventoryButton.image.sprite = fishingPole.littleGuy_ItemDataWrapper.itemData.icon;
+            inventoryButton.image.sprite = fishingPole.baitLittleGuy_ItemDataWrapper.itemData.icon;
             inventoryButton.countText.gameObject.SetActive(false);
             inventoryButton.border.color = Color.yellow;
-            inventoryButton.button.onClick.AddListener(() => itemDataDisplayer.DisplayInfo(fishingPole.littleGuy_ItemDataWrapper));
+            inventoryButton.button.onClick.AddListener(() => itemDataDisplayer.DisplayInfo(fishingPole.baitLittleGuy_ItemDataWrapper));
         }
     }
 }

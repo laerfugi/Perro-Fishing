@@ -124,7 +124,7 @@ public class InventoryMenu : MonoBehaviour
             newButton.GetComponent<InventoryButton>().button.onClick.AddListener(() => { SetSelectedButton(newButton.GetComponent<InventoryButton>()); });
             newButton.GetComponent<InventoryButton>().itemDataWrapper = itemDataWrapper;
 
-            if ((itemDataWrapper as LittleGuy_ItemDataWrapper) == GameObject.FindWithTag("Player").GetComponentInChildren<FishingPole>().littleGuy_ItemDataWrapper)
+            if ((itemDataWrapper as LittleGuy_ItemDataWrapper) == GameObject.FindWithTag("Player").GetComponentInChildren<FishingPole>().baitLittleGuy_ItemDataWrapper)
             {
                 markedButton = newButton.GetComponent<InventoryButton>();
             }

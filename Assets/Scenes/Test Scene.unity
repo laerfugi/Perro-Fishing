@@ -10431,7 +10431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23806fc61219d72469d071cb15527c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  littleGuy_ItemDataWrapper:
+  equippedLittleGuy_ItemDataWrapper:
     itemData: {fileID: 0}
     count: 0
     littleGuy: {fileID: 0}

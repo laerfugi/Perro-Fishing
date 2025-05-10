@@ -12,9 +12,9 @@ public enum FishingState {Inactive,Casting,Catching,Cooldown}    //Inactive: You
 public class FishingPole : MonoBehaviour
 {
 
-    [Header("Equipped Little Guy")]
-    public LittleGuy_ItemDataWrapper littleGuy_ItemDataWrapper;
-    private GameObject littleGuy;
+    [Header("Bait")]
+    public LittleGuy_ItemDataWrapper baitLittleGuy_ItemDataWrapper; 
+    private GameObject bait;
 
     [Header("Player Camera Pivot")]
     public Transform cameraPivot;
@@ -43,11 +43,6 @@ public class FishingPole : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //this is so bad
-        if (PlayerInventory.Instance.littleGuyInventoryList.Count > 1) {
-            littleGuy_ItemDataWrapper = PlayerInventory.Instance.littleGuyInventoryList[0];
-        }
-
         elapsedCooldownTime = cooldownTime;
         targetLocation.SetActive(false);
 
@@ -58,6 +53,18 @@ public class FishingPole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //automatically equip little guy
+        if (bait == null)
+        {
+            if (PlayerInventory.Instance.littleGuyInventoryList.Count > 0)
+            {
+                SetAsBait(PlayerInventory.Instance.littleGuyInventoryList[0]);
+            }
+
+            Debug.Log("ough");
+        }
+
+
         if (!UIManager.Instance.menuIsOpen)     //need to change how to disable inputs 
         {
             //start fishing
@@ -96,9 +103,7 @@ public class FishingPole : MonoBehaviour
 
     IEnumerator Fishing()
     {
-        if (littleGuy_ItemDataWrapper == null) { Debug.Log("need to equip little guy!"); yield break; }
-
-        littleGuy = littleGuy_ItemDataWrapper.littleGuy;
+        if (baitLittleGuy_ItemDataWrapper == null) { Debug.Log("need to equip little guy!"); yield break; }
 
         //set up 
         elapsedCastTime = 0;
@@ -106,9 +111,9 @@ public class FishingPole : MonoBehaviour
 
         elapsedCooldownTime = 0;
         GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Inactive);
-        littleGuy.GetComponent<LittleGuy>().ChangeState(LittleGuyState.Inactive);
+        bait.GetComponent<LittleGuy>().ChangeState(LittleGuyState.Inactive);
 
-        littleGuy.transform.position = startLocation.transform.position;
+        bait.transform.position = startLocation.transform.position;
 
         Vector3 previousPosition = startLocation.transform.position;
 
@@ -122,12 +127,12 @@ public class FishingPole : MonoBehaviour
             if (Physics.Linecast(previousPosition, nextPosition, out RaycastHit hit))
             {
                 Debug.Log($"Collision detected at {hit.point}");
-                littleGuy.transform.position = previousPosition; // Place little guy before hit
+                bait.transform.position = previousPosition; // Place little guy before hit
                 elapsedCastTime += 1; // Forcibly break
                 break;
             }
 
-            littleGuy.transform.position = nextPosition;
+            bait.transform.position = nextPosition;
             previousPosition = nextPosition;
 
             elapsedCastTime += Time.deltaTime;
@@ -137,7 +142,7 @@ public class FishingPole : MonoBehaviour
 
         //post cast
 
-        littleGuy.GetComponent<LittleGuy>().ChangeState(LittleGuyState.Active);
+        bait.GetComponent<LittleGuy>().ChangeState(LittleGuyState.Active);
         state = FishingState.Catching;
     }
 
@@ -145,7 +150,7 @@ public class FishingPole : MonoBehaviour
     {
         state = FishingState.Cooldown;
         GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Active);
-        littleGuy.GetComponent<LittleGuy>().ChangeState(LittleGuyState.AI);
+        bait.GetComponent<LittleGuy>().ChangeState(LittleGuyState.AI);
         //yield return new WaitForSeconds(cooldownTime);
         elapsedCooldownTime = 0;
         while (elapsedCooldownTime < cooldownTime) 
@@ -225,5 +230,11 @@ public class FishingPole : MonoBehaviour
     void UnfacePlayerToCamera()
     {
         GameObject.FindWithTag("Player").GetComponent<PlayerMovementHandler>().IsFishing = false;
+    }
+
+    public void SetAsBait(LittleGuy_ItemDataWrapper littleGuy_ItemDataWrapper)
+    {
+        baitLittleGuy_ItemDataWrapper = littleGuy_ItemDataWrapper;
+        bait = littleGuy_ItemDataWrapper.littleGuy;
     }
 }
