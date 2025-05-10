@@ -86,20 +86,15 @@ public class Player : MonoBehaviour
         {
             //camera stuff
             EventManager.OnSwitchVCamEvent(vCam);
-
-            interactHitbox.SetActive(true);
         }
         else if (state == PlayerState.Inactive)     //player can't move
         {
-            interactHitbox.SetActive(false);
         }
         else if (state == PlayerState.InMenu)
         {
-            interactHitbox.SetActive(false);
         }
         else if (state == PlayerState.Fishing)     //special form of Inactive
         {
-            interactHitbox.SetActive(false);
         }
 
         EventManager.OnPlayerStateEvent(state);
@@ -108,12 +103,12 @@ public class Player : MonoBehaviour
     //used by menu event
     void OpenMenuEventCheck()
     {
-        if (state == PlayerState.Active) { previousState = state; ChangeState(PlayerState.InMenu); }
+        if (state == PlayerState.Active) { previousState = state; ChangeState(PlayerState.InMenu); interactHitbox.SetActive(interactHitbox.activeSelf); }
     }
 
     void CloseMenuEventCheck()
     {
-        if (state == PlayerState.InMenu) { ChangeState(previousState); }
+        if (state == PlayerState.InMenu) { ChangeState(previousState); interactHitbox.SetActive(interactHitbox.activeSelf); }
     }
     #endregion
 }

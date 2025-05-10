@@ -112,8 +112,6 @@ public class LittleGuy : MonoBehaviour
             //state stuff
             //controller.enabled = false;
             //nav.enabled = true;
-
-            interactHitbox.SetActive(false);
         }
         else if (state == LittleGuyState.Active)            //Little Guy is player controlled
         {
@@ -123,15 +121,11 @@ public class LittleGuy : MonoBehaviour
             //state stuff
             nav.enabled = false;
             controller.enabled = true;
-
-            interactHitbox.SetActive(true);
         }
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
             // turn off nav early to fix position snapping bug
             nav.enabled = false;
-
-            interactHitbox.SetActive(false);
         }
 
         //EventManager.OnPlayerStateEvent(PlayerState.Active);
@@ -141,12 +135,12 @@ public class LittleGuy : MonoBehaviour
     //used by menu events
     void OpenMenuEventCheck()
     {
-        if (state == LittleGuyState.Active) { previousState = state; ChangeState(LittleGuyState.InMenu); }
+        if (state == LittleGuyState.Active) { previousState = state; ChangeState(LittleGuyState.InMenu); interactHitbox.SetActive(interactHitbox.activeSelf); }
     }
 
     void CloseMenuEventCheck()
     {
-        if (state == LittleGuyState.InMenu) { ChangeState(previousState); }
+        if (state == LittleGuyState.InMenu) { ChangeState(previousState); interactHitbox.SetActive(interactHitbox.activeSelf); }
     }
 
     #endregion
