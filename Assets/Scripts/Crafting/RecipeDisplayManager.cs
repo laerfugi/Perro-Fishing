@@ -14,13 +14,24 @@ public class RecipeDisplayManager : MonoBehaviour
     [Header("Dependencies")]
     private PlayerInventory playerInventory;
     public CraftingUIManager craftingUIManager;
+    private DatabaseWrapper dbWrapper;
 
     private List<GameObject> inventoryButtons = new List<GameObject>();
     private List<GameObject> recipeButtons = new List<GameObject>();
 
+    private Dictionary<MaterialType, int> originalCounts = new Dictionary<MaterialType, int>();
+    private Dictionary<MaterialType, int> currentCounts = new Dictionary<MaterialType, int>();
+
     void Start()
     {
         playerInventory = PlayerInventory.Instance;
+        dbWrapper = GetComponent<DatabaseWrapper>();
+        UpdateInventoryDisplay();
+        CreateRecipeButtons();
+    }
+
+    public void OnOpen()
+    {
         UpdateInventoryDisplay();
         CreateRecipeButtons();
     }
@@ -33,28 +44,39 @@ public class RecipeDisplayManager : MonoBehaviour
         }
         inventoryButtons.Clear();
 
-        //foreach (var wrapper in playerInventory.itemInventoryList)
-        //{
-        //    Material_ItemData materialData = wrapper.itemData as Material_ItemData;
-        //    if (materialData != null)
-        //    {
-        //        CreateInventoryEntry(materialData, wrapper.count);
-        //    }
-        //}
+        foreach (MaterialType materialType in System.Enum.GetValues(typeof(MaterialType)))
+        {
+            Material_ItemData materialData = dbWrapper.GetMaterialData(materialType);
 
-        //foreach (MaterialType materialType in MaterialTypeHelper.Count)
-        //{
-        //}
+            if (materialData != null)
+            {
+                int count = 0;
+
+                ItemDataWrapper item = playerInventory.InInventory(materialData);
+                if (item != null) count = item.count;
+
+                originalCounts[materialType] = count;
+                currentCounts[materialType] = count;
+
+                CreateInventoryEntry(materialData, count);
+            }
+            else
+            {
+                Debug.LogWarning($"Material_ItemData not found for MaterialType: {materialType}");
+            }
+        }
     }
 
     private void CreateInventoryEntry(Material_ItemData materialData, int count)
     {
-        GameObject newButton = Instantiate(inventoryButtonPrefab, inventoryGridView);
+        GameObject newButton = Instantiate(inventoryButtonPrefab, inventoryGridView, false);
         Image buttonImage = newButton.GetComponentInChildren<Image>();
-        Text countText = newButton.GetComponentInChildren<Text>();
+        TMP_Text countText = newButton.transform.Find("Count").GetComponent<TMP_Text>();
+        TMP_Text nameText = newButton.transform.Find("Name").GetComponent<TMP_Text>();
 
         buttonImage.sprite = materialData.icon;
         countText.text = count.ToString();
+        nameText.text = materialData.name;
 
         if (count <= 0)
         {
@@ -68,11 +90,63 @@ public class RecipeDisplayManager : MonoBehaviour
 
             newButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                craftingUIManager.UpdateIngredientSlot(0, buttonImage.sprite);
+                if (currentCounts[materialData.type] > 0)
+                {
+                    craftingUIManager.UpdateIngredientSlot(0, buttonImage.sprite);
+                    DecrementMaterialCount(materialData.type, countText);
+                }
             });
         }
 
         inventoryButtons.Add(newButton);
+    }
+
+    private void DecrementMaterialCount(MaterialType materialType, TMP_Text countText)
+    {
+        if (currentCounts[materialType] > 0)
+        {
+            currentCounts[materialType]--;
+            countText.text = currentCounts[materialType].ToString();
+
+            // Disable the button if the count reaches 0
+            if (currentCounts[materialType] <= 0)
+            {
+                GameObject button = inventoryButtons.Find(b =>
+                    b.GetComponentInChildren<Image>().sprite == dbWrapper.GetMaterialData(materialType).icon);
+                if (button != null)
+                {
+                    button.GetComponent<Button>().interactable = false;
+                    button.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, 0.5f);
+                }
+            }
+        }
+    }
+
+    public void ResetMaterialCounts()
+    {
+        foreach (var materialType in originalCounts.Keys)
+        {
+            currentCounts[materialType] = originalCounts[materialType];
+
+            GameObject button = inventoryButtons.Find(b =>
+                b.GetComponentInChildren<Image>().sprite == dbWrapper.GetMaterialData(materialType).icon);
+            if (button != null)
+            {
+                TMP_Text countText = button.transform.Find("Count").GetComponent<TMP_Text>();
+                countText.text = currentCounts[materialType].ToString();
+
+                if (currentCounts[materialType] > 0)
+                {
+                    button.GetComponent<Button>().interactable = true;
+                    button.GetComponentInChildren<Image>().color = Color.white;
+                }
+                else
+                {
+                    button.GetComponent<Button>().interactable = false;
+                    button.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, 0.5f);
+                }
+            }
+        }
     }
 
     // Dynamically create recipes

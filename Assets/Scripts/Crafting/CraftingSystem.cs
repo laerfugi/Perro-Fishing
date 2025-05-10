@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class CraftingSystem : MonoBehaviour
 {
-    [SerializeField] private Database database;
     private DatabaseWrapper databaseWrapper;
     void Awake()
     {
-        databaseWrapper = new DatabaseWrapper(database);
+        databaseWrapper = GetComponent<DatabaseWrapper>();
         RecipeBook.Initialize(databaseWrapper);
     }
 

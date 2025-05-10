@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DatabaseWrapper
+public class DatabaseWrapper : MonoBehaviour
 {
-    private Database database;
+    public Database database;
 
     public DatabaseWrapper(Database db)
     {
         database = db;
     }
+
+    //private void InitializeWrapper()
+    //{
+    //    if (database == null) return;
+    //    // implement dictionary
+    //}
 
     public LittleGuy_ItemData GetLittleGuyData(CombinationType combinationType)
     {
@@ -36,4 +42,5 @@ public class DatabaseWrapper
 
         return null;
     }
+
 }
