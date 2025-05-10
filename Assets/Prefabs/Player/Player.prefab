@@ -757,7 +757,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7171905249681197208}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -883,6 +883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vCam: {fileID: 6215637665508232130}
   fishingPole: {fileID: 1700728578961957419}
+  interactHitbox: {fileID: 8910498213066542758}
   <state>k__BackingField: 0
 --- !u!114 &5985491321691947288
 MonoBehaviour:
