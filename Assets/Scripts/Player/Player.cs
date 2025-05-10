@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         }
         else if (state == PlayerState.InMenu)
         {
-
+            movementHandler.HandleMovement(null);   //gravity
         }
         else if (state == PlayerState.Fishing)     
         {

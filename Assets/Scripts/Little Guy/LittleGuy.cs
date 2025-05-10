@@ -92,11 +92,11 @@ public class LittleGuy : MonoBehaviour
         }
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
-
+            movementHandler.HandleMovement(null);
         }
         else if (state == LittleGuyState.InMenu)          
         {
-
+            movementHandler.HandleMovement(null);
         }
     }
 
