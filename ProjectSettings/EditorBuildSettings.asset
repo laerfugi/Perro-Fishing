@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Minigames/FNAFish.unity
     guid: d322ae35dfdb6c14b963244c7668f734
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Minigames/Aimlabs.unity
+    guid: ea4941857a65fae4990c8ab177001ea2
   m_configObjects: {}
