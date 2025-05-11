@@ -65,7 +65,7 @@ MonoBehaviour:
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 1
-  IgnoreTag: Player
+  IgnoreTag: 
   CameraRadius: 0.5
   DampingIntoCollision: 0
   DampingFromCollision: 2
