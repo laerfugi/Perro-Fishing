@@ -2125,6 +2125,18 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1216105960}
+    - target: {fileID: 3552161489432791028, guid: 379ad557a5f668a489164a080640069d, type: 3}
+      propertyPath: m_Name
+      value: Dialog Cursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3616506262852119510, guid: 379ad557a5f668a489164a080640069d, type: 3}
+      propertyPath: lines2.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3616506262852119510, guid: 379ad557a5f668a489164a080640069d, type: 3}
+      propertyPath: lines2.Array.data[0]
+      value: what would you like to do?
+      objectReference: {fileID: 0}
     - target: {fileID: 3738137134231932357, guid: 379ad557a5f668a489164a080640069d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000051178362

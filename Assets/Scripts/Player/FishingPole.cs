@@ -39,6 +39,7 @@ public class FishingPole : MonoBehaviour
     [Header("Path Indicator")]
     public LineRenderer lineRenderer;
     public int pathResolution = 20;
+    private bool showPath;
 
     // Start is called before the first frame update
     void Start()
@@ -75,7 +76,7 @@ public class FishingPole : MonoBehaviour
                     {
                         GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Fishing);
                         FacePlayerToCamera();
-                        ShowPath();
+                        showPath = true;
                     }
 
                     if (Input.GetMouseButtonUp(0))
@@ -97,6 +98,11 @@ public class FishingPole : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (showPath) ShowPath();
     }
 
     IEnumerator Fishing()
@@ -176,6 +182,7 @@ public class FishingPole : MonoBehaviour
 
     void ClearPath()
     {
+        showPath = false;
         //line renderer
         lineRenderer.positionCount = 0;
 

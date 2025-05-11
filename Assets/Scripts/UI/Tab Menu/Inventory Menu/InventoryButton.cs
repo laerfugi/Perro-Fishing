@@ -15,4 +15,9 @@ public class InventoryButton : MonoBehaviour
 
     //content
     public ItemDataWrapper itemDataWrapper;
+
+    private void Update()
+    {
+        image.preserveAspect = true;
+    }
 }
