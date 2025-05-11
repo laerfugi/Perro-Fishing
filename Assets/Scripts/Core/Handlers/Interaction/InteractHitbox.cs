@@ -30,6 +30,7 @@ public class InteractHitbox : MonoBehaviour
             if (interactablesInHitbox.Count >= 1)
             {
                 EventManager.OnCanInteractEvent(interactable.GetInteractionPrompt());
+                Debug.Log("First thing called");
             }
         }
     }
@@ -56,6 +57,7 @@ public class InteractHitbox : MonoBehaviour
 
             IInteractable closestInteractable = interactablesInHitbox[0].GetComponent<IInteractable>();
             closestInteractable.Interact();
+            Debug.Log("thing called");
             EventManager.OnCannotInteractEvent();
         }
     }
@@ -63,6 +65,7 @@ public class InteractHitbox : MonoBehaviour
     //scuffed but it works
     void CheckNull()
     {
-        if (interactablesInHitbox.Count > 0 && interactablesInHitbox[0] == null) { interactablesInHitbox.Remove(interactablesInHitbox[0]); }
+        if (interactablesInHitbox.Count > 0 && interactablesInHitbox[0] == null) { interactablesInHitbox.Remove(interactablesInHitbox[0]); EventManager.OnCannotInteractEvent(); }
+        //if (interactablesInHitbox.Count == 0) { EventManager.OnCannotInteractEvent(); }     //clears notif in case if it hasn't been cleared
     }
 }

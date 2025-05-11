@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
 
+        CheckCursor();
+
         //set ui's active if you want to disable them in scene
         gameObject.SetActive(true);
         PlayerHUD.SetActive(true);
@@ -50,11 +52,6 @@ public class UIManager : MonoBehaviour
         EventManager.LittleGuyStateEvent -= UpdateLittleGuyHUD;
     }
 
-    private void Update()
-    {
-        CheckCursor();
-    }
-
     void CheckCursor()
     {
         if (menuIsOpen)
@@ -73,11 +70,13 @@ public class UIManager : MonoBehaviour
     void MenuOpen()
     {
         menuIsOpen = true;
+        CheckCursor();
     }
 
     void MenuClose()
     {
         menuIsOpen = false;
+        CheckCursor();
     }
 
     //Update HUD calls

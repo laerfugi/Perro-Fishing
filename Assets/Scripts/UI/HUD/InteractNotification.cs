@@ -12,16 +12,15 @@ public class InteractNotification : MonoBehaviour
     {
         EventManager.CanInteractEvent += DisplayNotification;
         EventManager.CannotInteractEvent += HideNotification;
+
+        HideNotification();
     }
     private void OnDisable()
     {
         EventManager.CanInteractEvent -= DisplayNotification;
         EventManager.CannotInteractEvent -= HideNotification;
-    }
 
-    private void Start()
-    {
-        notificationPanel.SetActive(false);
+        HideNotification();
     }
 
     public void DisplayNotification(string message)

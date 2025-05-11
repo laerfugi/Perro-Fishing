@@ -154,6 +154,7 @@ MonoBehaviour:
   lake: {fileID: 0}
   animator: {fileID: 3682084566756647079}
   skipMinigame: 0
+  canCatch: 0
 --- !u!1 &2615232883929565098
 GameObject:
   m_ObjectHideFlags: 0

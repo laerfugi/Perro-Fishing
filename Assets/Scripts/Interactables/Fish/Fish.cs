@@ -59,8 +59,9 @@ public class Fish : MonoBehaviour, IInteractable
 
     IEnumerator Minigame()
     {
-            yield return MinigameManager.Instance.StartCoroutine(MinigameManager.Instance.LaunchMinigames(1));
-            ProcessMinigameResults(MinigameManager.Instance.results);
+        this.gameObject.layer = 0;
+        yield return MinigameManager.Instance.StartCoroutine(MinigameManager.Instance.LaunchMinigames(1));
+        ProcessMinigameResults(MinigameManager.Instance.results);
     }
 
     void ProcessMinigameResults(List<Result> results)
@@ -88,7 +89,6 @@ public class Fish : MonoBehaviour, IInteractable
         this.transform.rotation = Quaternion.Euler(0, 0, 90);   //need to change this 
         animator.SetBool("Catch", true);
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("Animation finished"));
-        //yield return null;
         Destroy(gameObject);
     }
 
