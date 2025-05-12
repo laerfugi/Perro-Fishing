@@ -21,5 +21,12 @@ public class MMplayerAnim : MonoBehaviour
     public void setIdle()
     {
         anim.SetBool("walk", false);
+        anim.SetBool("run", false);
+    }
+
+    public void setRun()
+    {
+        anim.SetBool("walk", true);
+        anim.SetBool("run", true);
     }
 }
