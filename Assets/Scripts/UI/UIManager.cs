@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
         //set ui's active if you want to disable them in scene
         gameObject.SetActive(true);
         PlayerHUD.SetActive(true);
-        LittleGuyHUD.SetActive(true);
+        LittleGuyHUD.SetActive(false);
     }
 
     private void OnEnable()

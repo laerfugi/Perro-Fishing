@@ -14,7 +14,7 @@ public class FishingPole : MonoBehaviour
 
     [Header("Bait")]
     public LittleGuy_ItemDataWrapper baitLittleGuy_ItemDataWrapper; 
-    private GameObject bait;
+    public GameObject bait;
 
     [Header("Player Camera Pivot")]
     public Transform cameraPivot;
