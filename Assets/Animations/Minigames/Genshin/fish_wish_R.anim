@@ -707,7 +707,7 @@ AnimationClip:
     - time: 0.41666666
       value: {fileID: 2800000, guid: d90d1a2816be00240a7b238493c0b333, type: 3}
     - time: 1
-      value: {fileID: 2800000, guid: f2b127c425f42ea4a8ba43487d9e3a5e, type: 3}
+      value: {fileID: 2800000, guid: 2d91c82f5fb2d2e4ea6c7c0eaa5b1f68, type: 3}
     attribute: m_Texture
     path: fishSilhouette
     classID: 114
@@ -890,7 +890,7 @@ AnimationClip:
     - {fileID: 183938963, guid: 0fef398a42b3c4e48bcb9d1b17e5e655, type: 3}
     - {fileID: -126209055, guid: 0fef398a42b3c4e48bcb9d1b17e5e655, type: 3}
     - {fileID: 2800000, guid: d90d1a2816be00240a7b238493c0b333, type: 3}
-    - {fileID: 2800000, guid: f2b127c425f42ea4a8ba43487d9e3a5e, type: 3}
+    - {fileID: 2800000, guid: 2d91c82f5fb2d2e4ea6c7c0eaa5b1f68, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FishenImpact : MonoBehaviour
 {
     public GameObject pullAnimation;
+    public int winrate;
     private Animator fishPull;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class FishenImpact : MonoBehaviour
 
     public void SinglePull()
     {
-        if (Random.Range(1, 100) <= 75)
+        if (Random.Range(1, 100) <= winrate)
         {
             fishPull.SetTrigger("win");
             gameObject.SetActive(false);
