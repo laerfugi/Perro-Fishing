@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MM_UI : MonoBehaviour
+public class pauseMenu : MenuClass
 {
-    public string mainScene;
-    [SerializeField]
-    private GameObject mainScreen, settingsScreen;
     [SerializeField]
     private Slider sfxSlider, musicSlider;
     // Start is called before the first frame update
@@ -21,40 +17,36 @@ public class MM_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {   
+            if (!isActive)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+            ToggleMenu();
+            
+        }
     }
 
-    public void StartGame()
-    {
-        SceneManager.LoadScene(mainScene, LoadSceneMode.Single);
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-    public void setSFX()
+    public void SetSFX()
     {
         AudioManager.Instance.soundVolume = sfxSlider.value;
         AudioManager.Instance.SetSoundVolume(AudioManager.Instance.soundVolume);
     }
 
-    public void setMusic()
+    public void SetMusic()
     {
         AudioManager.Instance.musicVolume = musicSlider.value;
         AudioManager.Instance.SetMusicVolume(AudioManager.Instance.musicVolume);
     }
 
-    public void openSettings()
+    public void returnToGame()
     {
-        settingsScreen.SetActive(true);
-        mainScreen.SetActive(false);
-    }
-
-    public void closeSettings()
-    {
-        mainScreen.SetActive(true);
-        settingsScreen.SetActive(false);
+        Time.timeScale = 1;
+        ToggleMenu();
     }
 }

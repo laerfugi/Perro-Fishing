@@ -2297,8 +2297,8 @@ MonoBehaviour:
   mainScene: Test Scene
   mainScreen: {fileID: 1789662290}
   settingsScreen: {fileID: 256615398}
-  sfxSlider: {fileID: 1875395472}
-  musicSlider: {fileID: 1049558015}
+  sfxSlider: {fileID: 1875395474}
+  musicSlider: {fileID: 1049558017}
 --- !u!1 &1282388835
 GameObject:
   m_ObjectHideFlags: 0
