@@ -354,6 +354,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   database: {fileID: 11400000, guid: 97f4a22b81541d649bdf666ed7a6d9ab, type: 2}
   fishSprite: {fileID: 8214948706851378891}
+  rateUp: 0.6
   animator: {fileID: 6741216573246956824}
   skipMinigame: 1
 --- !u!1001 &7968267034320831935

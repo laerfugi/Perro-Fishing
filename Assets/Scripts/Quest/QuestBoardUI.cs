@@ -1,18 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
-public class QuestBoardUI : MonoBehaviour
+public class QuestBoardUI : MenuClass
 {
-    // Start is called before the first frame update
-    void Start()
+    public static QuestBoardUI Instance { get; private set; }
+
+    [Header("UI Elements")]
+    public Transform questContainer;
+    public GameObject questUIPrefab;
+
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void UpdateQuestBoard(List<Quest> quests)
+    {
+        // Clear existing quests
+        foreach (Transform child in questContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Add new quests
+        foreach (Quest quest in quests)
+        {
+            GameObject questUIObject = Instantiate(questUIPrefab, questContainer);
+            QuestUI questUI = questUIObject.GetComponent<QuestUI>();
+            questUI.Initialize(quest);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleUI()
     {
-        
+        ToggleMenu();
+        QuestManager.Instance.ValidateAllQuests();
+        UpdateQuestBoard(QuestManager.Instance.GetActiveQuests());
     }
 }

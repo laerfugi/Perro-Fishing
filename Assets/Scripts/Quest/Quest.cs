@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Quest : MonoBehaviour
+[System.Serializable]
+public class Quest
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string name;
+    public Fish_ItemData fishRequest;     //what to fetch
+    public int amount;
+    public int reward;
+    public bool complete;
+    public bool claimed;        //if reward has been claimed yet
 }

@@ -79,7 +79,7 @@ public class WanderingContainer : MonoBehaviour
 
     public void StopWandering()
     {
-        Debug.Log("Stop wandering has been called!!");
+        //Debug.Log("Stop wandering has been called!!");
         StopCoroutine("Wander");
         isWandering = false;
         navMeshAgent.isStopped = true;

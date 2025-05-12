@@ -50,7 +50,7 @@ public class WanderingFishSpawner : MonoBehaviour
             // Tell each fish it's item data, sprite, and spawner
             Fish_ItemData randomFishData = GetRandomFishData();
             wanderingFishInteraction.fishData = randomFishData;
-            Debug.Log($"{randomFishData.name} spawnedNPCs");
+            //Debug.Log($"{randomFishData.name} spawnedNPCs");
 
             WanderingFishInteraction fishInteract = newNPC.GetComponentInChildren<WanderingFishInteraction>();
             if (fishInteract != null)
