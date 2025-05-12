@@ -7,13 +7,18 @@ public class MaterialSpawner : MonoBehaviour
     [Header("Spawner Settings")]
     public GameObject materialPrefab;
     public List<Material_ItemData> materialDataList;
+    public Transform materialsParent;
     public int spawnCountPerMaterial = 5;
     public float respawnDelay = 10f;
     public float spawnYOffset = 1f;
+    public float spawnCheckRadius = 0.5f;
 
     private Transform spawnerArea;
     private Dictionary<Vector3, Material_ItemData> spawnPointData = new Dictionary<Vector3, Material_ItemData>();
     private Dictionary<Vector3, GameObject> activeMaterials = new Dictionary<Vector3, GameObject>();
+
+    public Transform exclusionZoneParent;
+    private List<Collider> exclusionZones = new List<Collider>();
 
     void Start()
     {
@@ -23,10 +28,28 @@ public class MaterialSpawner : MonoBehaviour
             Debug.LogError("SpawnerArea child transform not found!");
             return;
         }
+        InitializeExclusionZones();
 
         PrecomputeSpawnPoints();
 
         SpawnMaterials();
+    }
+
+    void InitializeExclusionZones()
+    {
+        exclusionZones.Clear();
+
+        if (exclusionZoneParent != null)
+        {
+            foreach (Transform child in exclusionZoneParent)
+            {
+                Collider collider = child.GetComponent<Collider>();
+                if (collider != null)
+                {
+                    exclusionZones.Add(collider);
+                }
+            }
+        }
     }
 
     void PrecomputeSpawnPoints()
@@ -52,7 +75,7 @@ public class MaterialSpawner : MonoBehaviour
 
     Vector3 GetValidSpawnPoint(Vector3 areaSize)
     {
-        for (int attempts = 0; attempts < 10; attempts++)
+        for (int attempts = 0; attempts < 70; attempts++)
         {
             Vector3 randomPosition = GetRandomPositionWithinArea(areaSize);
 
@@ -60,11 +83,26 @@ public class MaterialSpawner : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
-                    return hit.point + Vector3.up * spawnYOffset;
+                    float spawnY = hit.point.y + spawnYOffset;
+                    // If the spawned material is too far from the original transform
+                    if (Mathf.Abs(spawnY - spawnerArea.position.y) <= 3f)
+                    {
+                        Vector3 potentialSpawnPoint = hit.point + Vector3.up * spawnYOffset;
+
+                        // Check if it is trying to spawn inside a collider
+                        if (!Physics.CheckSphere(potentialSpawnPoint, spawnCheckRadius) && !IsInsideExclusionZone(potentialSpawnPoint))
+                        {
+                            return potentialSpawnPoint;
+                        } else
+                        {
+                            //Debug.Log("spawned inside a collider!");
+                        }
+                    }
                 }
             }
         }
 
+        Debug.LogError("Failed to find a valid spawn point within 70 attempts.");
         return Vector3.zero;
     }
 
@@ -91,7 +129,7 @@ public class MaterialSpawner : MonoBehaviour
 
     void SpawnMaterial(Material_ItemData materialData, Vector3 spawnPoint)
     {
-        GameObject materialInstance = Instantiate(materialPrefab, spawnPoint, Quaternion.identity, transform);
+        GameObject materialInstance = Instantiate(materialPrefab, spawnPoint, Quaternion.identity, materialsParent);
 
         RespawnableItem respawnableItem = materialInstance.GetComponent<RespawnableItem>();
         if (respawnableItem != null)
@@ -108,6 +146,18 @@ public class MaterialSpawner : MonoBehaviour
         }
 
         activeMaterials[spawnPoint] = materialInstance;
+    }
+
+    bool IsInsideExclusionZone(Vector3 position)
+    {
+        foreach (var zone in exclusionZones)
+        {
+            if (zone.bounds.Contains(position))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void NotifyMaterialCollected(Vector3 spawnPoint, Material_ItemData materialData)
