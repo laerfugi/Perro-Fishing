@@ -71,7 +71,11 @@ public class FishingPole : MonoBehaviour
             {
                 if (state == FishingState.Inactive)
                 {
-
+                    // BANDAID: IF THE PLAYER HAS NO LITTLE GUYS DO NOT LET THEM FISH
+                    if (PlayerInventory.Instance.littleGuyInventoryList.Count <= 0)
+                    {
+                        return;
+                    }
                     if (Input.GetMouseButton(0))
                     {
                         GameObject.FindWithTag("Player").GetComponent<Player>().ChangeState(PlayerState.Fishing);
