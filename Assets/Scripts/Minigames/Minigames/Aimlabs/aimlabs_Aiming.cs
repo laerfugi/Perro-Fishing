@@ -11,7 +11,8 @@ public class aimlabs_Aiming : MonoBehaviour
     void Start()
     {
         tr = GetComponent<Transform>();
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         cam = GetComponent<Camera>();
         tr.rotation = new Quaternion(0, 0, 0, 0);
         started = false;

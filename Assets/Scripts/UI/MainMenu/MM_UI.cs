@@ -23,4 +23,9 @@ public class MM_UI : MonoBehaviour
     {
         SceneManager.LoadScene(mainScene, LoadSceneMode.Single);
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
