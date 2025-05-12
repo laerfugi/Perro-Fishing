@@ -22,14 +22,14 @@ public class MoneyDisplay : MonoBehaviour
 
     private void Start()
     {
-        countText.text = "$" + PlayerInventory.Instance.money.ToString();
+        countText.text = PlayerInventory.Instance.money.ToString();
         differenceText.alpha = 0;
         defaultDifferenceTextPosition = differenceText.rectTransform.localPosition;
     }
 
     void UpdateDisplay(int amount)
     {
-        countText.text = "$" + PlayerInventory.Instance.money.ToString();
+        countText.text = PlayerInventory.Instance.money.ToString();
 
         StopAllCoroutines();
         StartCoroutine(Animate(amount));
@@ -44,13 +44,13 @@ public class MoneyDisplay : MonoBehaviour
         if (amount > 0)
         {
             differenceText.color = Color.green;
-            differenceText.text = "+$" + amount.ToString();
+            differenceText.text = "+" + amount.ToString();
             endPos = new Vector3(defaultDifferenceTextPosition.x, defaultDifferenceTextPosition.y + 10);
         }
         else if (amount < 0)
         {
             differenceText.color = Color.red;
-            differenceText.text = "-$" + amount.ToString();
+            differenceText.text = "-" + amount.ToString();
             startPos = new Vector3(defaultDifferenceTextPosition.x, defaultDifferenceTextPosition.y + 10);
         }
 

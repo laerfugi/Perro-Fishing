@@ -5,14 +5,14 @@ using UnityEngine.UIElements;
 
 public class EquippedLittleGuyDisplayer : MonoBehaviour
 {
-    FishingPole fishingPole;
+    public FishingPole fishingPole;
 
     public ItemDataDisplayer itemDataDisplayer;
     public InventoryButton inventoryButton;
 
     private void Awake()
     {
-        fishingPole = GameObject.FindWithTag("Player").GetComponentInChildren<FishingPole>();
+        //fishingPole = GameObject.FindWithTag("Player").GetComponentInChildren<FishingPole>();
     }
 
     private void OnEnable()
@@ -32,8 +32,9 @@ public class EquippedLittleGuyDisplayer : MonoBehaviour
 
     void Display(ItemData itemData)
     {
-        if (fishingPole.baitLittleGuy_ItemDataWrapper != null)
+        if (fishingPole.baitLittleGuy_ItemDataWrapper.itemData != null)
         {
+            Debug.Log("frog");
             inventoryButton.image.sprite = fishingPole.baitLittleGuy_ItemDataWrapper.itemData.icon;
             inventoryButton.countText.gameObject.SetActive(false);
             inventoryButton.border.color = Color.yellow;

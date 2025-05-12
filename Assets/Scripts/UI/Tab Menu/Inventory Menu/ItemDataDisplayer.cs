@@ -24,6 +24,11 @@ public class ItemDataDisplayer : MonoBehaviour
     public Button leftButton;
     public Button rightButton;
 
+    private void Awake()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+    }
+
     private void OnEnable()
     {
         ResetInfo();
