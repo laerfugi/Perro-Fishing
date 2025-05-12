@@ -9,7 +9,7 @@ public class CameraPivot : MonoBehaviour
     private float yRotation = 0f;
     [SerializeField] private float minVerticalAngle;
     [SerializeField] private float maxVerticalAngle;
-    private bool isActive = true;
+    [SerializeField] private bool isActive = true;
 
     float mouseX;
     float mouseY;
@@ -52,5 +52,12 @@ public class CameraPivot : MonoBehaviour
     private void toggleActive()
     {
         isActive = !isActive;
+    }
+    // REPLACE LATER
+    // when crafting a little guy and then closing the craft menu, it turns
+    // isActive to true, so when deploying the little guy it turns isActive to false
+    public void bandaid()
+    {
+        isActive = true;
     }
 }

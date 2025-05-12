@@ -118,6 +118,9 @@ public class LittleGuy : MonoBehaviour
             //camera stuff
             EventManager.OnSwitchVCamEvent(vCam);
 
+            // REMOVE LATER
+            cameraPivot.bandaid();
+
             //state stuff
             nav.enabled = false;
             controller.enabled = true;

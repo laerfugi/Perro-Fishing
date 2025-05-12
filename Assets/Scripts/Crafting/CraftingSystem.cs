@@ -49,7 +49,9 @@ public class CraftingSystem : MonoBehaviour
 
         if (craftedItem.TryGetComponent(out LittleGuy littleGuy))
         {
-            PlayerInventory.Instance.AddLittleGuy(littleGuy);
+            //littleGuy.GetComponentInChildren<CameraPivot>().bandaid();
+            //Debug.Log("Little guy craft completed should be spawned and added to inv!");
+            //PlayerInventory.Instance.AddLittleGuy(littleGuy);
         }
 
         //return craftedItem; // Unsure if needed

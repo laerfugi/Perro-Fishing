@@ -3508,7 +3508,7 @@ Transform:
   m_GameObject: {fileID: 2087130933}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.015149999, y: 0.0032, z: -0.38805}
+  m_LocalPosition: {x: -0.015149999, y: 0.0032, z: -0.3788}
   m_LocalScale: {x: 0.0266745, y: 0.15771972, z: 0.005}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4175,6 +4175,46 @@ PrefabInstance:
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: itemInventoryList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: littleGuyInventoryList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: itemInventoryList.Array.data[0].count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: itemInventoryList.Array.data[1].count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: itemInventoryList.Array.data[2].count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: itemInventoryList.Array.data[0].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: aef8d04be16b1414fb1f64fa93b9de8c, type: 2}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: itemInventoryList.Array.data[1].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: f5067842bf3b63a4b8f031887e6b9c9a, type: 2}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: itemInventoryList.Array.data[2].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 204952552c97c8444b4e94ff247784ce, type: 2}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: littleGuyInventoryList.Array.data[0].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 59c912a05b1d8ef449c5302ea604daff, type: 2}
+    - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: littleGuyInventoryList.Array.data[0].littleGuy
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5582615907098200838, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalPosition.y
