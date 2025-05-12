@@ -689,6 +689,10 @@ PrefabInstance:
       propertyPath: vCam
       value: 
       objectReference: {fileID: 1755475280}
+    - target: {fileID: 6465134281163726014, guid: 56eb8d6cb4df0034dbacd5c1397a4e24, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7401661647964773774, guid: 56eb8d6cb4df0034dbacd5c1397a4e24, type: 3}
       propertyPath: m_Name
       value: Red Little Guy
@@ -697,6 +701,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8669553499761348139, guid: 56eb8d6cb4df0034dbacd5c1397a4e24, type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 765353828}
     - target: {fileID: 8704153694298594728, guid: 56eb8d6cb4df0034dbacd5c1397a4e24, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -709,6 +717,11 @@ PrefabInstance:
 --- !u!4 &765353820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1282642750990083474, guid: 56eb8d6cb4df0034dbacd5c1397a4e24, type: 3}
+  m_PrefabInstance: {fileID: 765353819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &765353828 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 2451713818107900348, guid: 56eb8d6cb4df0034dbacd5c1397a4e24, type: 3}
   m_PrefabInstance: {fileID: 765353819}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &811574465
@@ -893,6 +906,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6280520834163945515, guid: 160d3b1dae45d7e49890f0ed4031eea0, type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 1020940823}
+    - target: {fileID: 8556929221031355070, guid: 160d3b1dae45d7e49890f0ed4031eea0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -903,6 +924,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4518315888485817234, guid: 160d3b1dae45d7e49890f0ed4031eea0, type: 3}
   m_PrefabInstance: {fileID: 1020940814}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &1020940823 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 972399491882799036, guid: 160d3b1dae45d7e49890f0ed4031eea0, type: 3}
+  m_PrefabInstance: {fileID: 1020940814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1073643155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -911,10 +937,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 639387405}
     m_Modifications:
+    - target: {fileID: 1002702571016597107, guid: b763766a19b33fb47b504860c7049243, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3171348925036854502, guid: b763766a19b33fb47b504860c7049243, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3171348925036854502, guid: b763766a19b33fb47b504860c7049243, type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 1553249635}
     - target: {fileID: 3667454017240624963, guid: b763766a19b33fb47b504860c7049243, type: 3}
       propertyPath: m_Name
       value: Green Little Guy
@@ -1187,6 +1221,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
+--- !u!195 &1553249635 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 8526626124142904177, guid: b763766a19b33fb47b504860c7049243, type: 3}
+  m_PrefabInstance: {fileID: 1073643155}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1585585033
 GameObject:
   m_ObjectHideFlags: 0
