@@ -15,24 +15,35 @@ Material:
   - _DISABLE_OUTLINE
   - _EMISSIVE_SIMPLE
   - _IS_ANGELRING_OFF
-  - _IS_CLIPPING_OFF
-  - _IS_OUTLINE_CLIPPING_NO
+  - _IS_CLIPPING_TRANSMODE
+  - _IS_OUTLINE_CLIPPING_YES
   - _OUTLINE_POS
   m_InvalidKeywords:
   - _ALPHABLEND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    IgnoreProjection: False
-    RenderType: Opaque
-  disabledShaderPasses:
-  - ALWAYS
+    IgnoreProjection: true
+    RenderType: Transparent
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_28de85506601443d82b6148f21ccc69c:
+        m_Texture: {fileID: 2800000, guid: 766a7edc5f25e3b4daafb5554da17927, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_6d0f902902b04ba687ee00a51db7ba6d:
+        m_Texture: {fileID: 2800000, guid: 766a7edc5f25e3b4daafb5554da17927, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_786b67b3efe14204b2f06f9afb9d8cf1:
+        m_Texture: {fileID: 2800000, guid: 766a7edc5f25e3b4daafb5554da17927, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _1st_ShadeMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -223,6 +234,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Boolean_d3c978b0d14a4f66be175a9b89855be0: 0
+    - Vector1_55003dfa023448c3bffa42f3ca4a99a4: 1
+    - Vector1_6269b1025b26473ca8bc61634f34b537: 0.95
+    - Vector1_687f54e8c371429f86b9eaab0e7dfe3e: 0.071
+    - Vector1_6c82dffdd68049bcb019d3a9c64c92a0: 0.2
+    - Vector1_6f56a0970372485390c6587863c2374e: -3.5
+    - Vector1_7273530c27a34c9f8ee5723b84f96baa: 0.2
+    - Vector1_dada42ebfac44076897b6de67441ba32: 0.3
     - _1st2nd_Shades_Feather: 0.0001
     - _1st_ShadeColor_Feather: 0.0001
     - _1st_ShadeColor_Step: 0.5
@@ -265,7 +284,7 @@ Material:
     - _BumpScaleMatcap: 1
     - _CameraRolling_Stabilizer: 0
     - _ClippingMatteMode: 0
-    - _ClippingMode: 0
+    - _ClippingMode: 2
     - _Clipping_Level: 0
     - _CoatMask: 0
     - _ColorShift_Speed: 0
@@ -400,8 +419,8 @@ Material:
     - _Rotate_EmissiveUV: 0
     - _Rotate_MatCapUV: 0
     - _Rotate_NormalMapForMatCapUV: 0
-    - _SPRDefaultUnlitColorMask: 15
-    - _SRPDefaultUnlitColMode: 1
+    - _SPRDefaultUnlitColorMask: 0
+    - _SRPDefaultUnlitColMode: 2
     - _SSRefractionProjectionModel: 0
     - _Scroll_EmissiveU: 0
     - _Scroll_EmissiveV: 0
@@ -420,7 +439,7 @@ Material:
     - _SrcBlend: 5
     - _StencilComp: 0
     - _StencilMode: 0
-    - _StencilNo: 1
+    - _StencilNo: 4
     - _StencilOpFail: 0
     - _StencilOpPass: 0
     - _StencilRef: 2
@@ -447,7 +466,7 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
-    - _TransparentEnabled: 0
+    - _TransparentEnabled: 1
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
@@ -460,7 +479,7 @@ Material:
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
     - _Tweak_SystemShadowsLevel: 0
-    - _Tweak_transparency: 0
+    - _Tweak_transparency: -0.29
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
@@ -470,13 +489,13 @@ Material:
     - _UseShadowThreshold: 0
     - _Use_1stAs2nd: 0
     - _Use_BaseAs1st: 1
-    - _ZOverDrawMode: 0
+    - _ZOverDrawMode: 1
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 8
     - _ZTestTransparent: 4
     - _ZWrite: 0
-    - _ZWriteMode: 1
+    - _ZWriteMode: 0
     - _isUnityToonshader: 1
     - _simpleUI: 0
     - _utsTechnique: 0
@@ -484,6 +503,9 @@ Material:
     - _utsVersionY: 11
     - _utsVersionZ: 0
     m_Colors:
+    - Color_36218622185947c6a5ae36366d8e21d8: {r: 0.03921569, g: 0.09803919, b: 0.27450976, a: 0.7058824}
+    - Color_93e06cd551a5449091bcde90b46765a0: {r: 0.03804734, g: 0.5490196, b: 0.5490196, a: 0.1960784}
+    - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 10, g: 10, b: 0, a: 0}
     - _1st_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
