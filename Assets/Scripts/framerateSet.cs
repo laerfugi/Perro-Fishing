@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class framerateSet : MonoBehaviour
 {
-    [Range(10, 300)]
+    [Range(-1, 300)]
     public int framerate;
     // Start is called before the first frame update
     void Start()
