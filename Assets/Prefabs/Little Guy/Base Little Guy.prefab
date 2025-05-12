@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 1326212450589970261}
   - component: {fileID: 7501100520099569829}
   - component: {fileID: 1907572416428395580}
+  - component: {fileID: 6255080435141917458}
   m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
@@ -492,6 +493,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870bf2afccc048d48a7f0ede2147e822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &6255080435141917458
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546432211839300330}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4be829a64c494fe49a8569e44e130454, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8531474145895555203
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,6 +534,7 @@ GameObject:
   - component: {fileID: 4303833183213451657}
   - component: {fileID: 7530703008533787430}
   - component: {fileID: 5586521096704017118}
+  - component: {fileID: 5290282445204939187}
   m_Layer: 3
   m_Name: Base Little Guy
   m_TagString: Untagged
@@ -734,6 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290d813ce6ac4374b868afd985550689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 0}
   target: {fileID: 0}
   followDistance: 3
   fleeDistance: 8
@@ -764,6 +788,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &5290282445204939187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8531474145895555203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77d3a30d187a26489502b8daba0610a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6255080435141917458}
+  littleGuy: {fileID: 2874929202974194712}
+  littleGuyNav: {fileID: 7530703008533787430}
+  playerMovementHandler: {fileID: 1799533779662920139}
 --- !u!1 &8770797087577075670
 GameObject:
   m_ObjectHideFlags: 0

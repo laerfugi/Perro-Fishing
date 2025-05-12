@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class LittleGuyNav : MonoBehaviour
 {
-    private NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;       //i made this public for LittleGuyAnimationHandler to read it
     [SerializeField] private Transform target;
 
     [SerializeField] private float followDistance = 3f;
