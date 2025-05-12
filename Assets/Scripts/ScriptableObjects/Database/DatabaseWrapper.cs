@@ -17,6 +17,19 @@ public class DatabaseWrapper : MonoBehaviour
     //    // implement dictionary
     //}
 
+    public Fish_ItemData GetFishData(CombinationType combinationType)
+    {
+        foreach (var fish in database.fishList)
+        {
+            if (fish.type == combinationType)
+            {
+                return fish;
+            }
+        }
+
+        return null;
+    }
+
     public LittleGuy_ItemData GetLittleGuyData(CombinationType combinationType)
     {
         foreach (var littleGuy in database.littleGuyList)

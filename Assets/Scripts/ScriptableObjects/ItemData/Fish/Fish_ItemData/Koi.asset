@@ -18,3 +18,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: aeeb7d788f08c01429c44114d03c44b4, type: 3}
   item: {fileID: 4562124081905242461, guid: 95d3f85637ff34d4b99bd634531aff08, type: 3}
   price: 70
+  type: 5

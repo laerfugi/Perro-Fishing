@@ -49,7 +49,7 @@ public class WanderingFishInteraction : MonoBehaviour, IInteractable
 
     public string GetInteractionPrompt()
     {
-        return $"[E] {fishData.name}";
+        return $"[E] Catch fish"; // {fishData.name}
     }
     private void OnDestroy()
     {

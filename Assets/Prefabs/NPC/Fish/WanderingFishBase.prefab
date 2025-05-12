@@ -132,7 +132,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.086, z: -0.123}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.14944, y: 0.14944, z: 0.14944}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4402940477433646497}
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2126f1000e3a64c44af6429fdeabc0b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 278bda0641c6a714b8f8cea62cfd6ee2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseWaitTime: 2
   wanderArea: {fileID: 0}
+  isPlayerInteracting: 0
 --- !u!65 &2179756143302997894
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -350,6 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishData: {fileID: 0}
   wanderingContainer: {fileID: 0}
+  spawner: {fileID: 0}
   database: {fileID: 11400000, guid: 97f4a22b81541d649bdf666ed7a6d9ab, type: 2}
   fishSprite: {fileID: 8214948706851378891}
   animator: {fileID: 6741216573246956824}
@@ -408,7 +410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1419022890915657522, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7149830616054729350, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
       propertyPath: m_Enabled

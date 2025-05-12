@@ -11,6 +11,7 @@ public class RecipeDisplayManager : MonoBehaviour
     public Transform recipeGridView;
     public GameObject recipeButtonPrefab;
     public Button craftButton;
+    public GameObject rateUpArea;
 
     [Header("Dependencies")]
     private PlayerInventory playerInventory;
@@ -173,6 +174,19 @@ public class RecipeDisplayManager : MonoBehaviour
             craftButton.image.color = Color.red; // Can not craft
             craftButton.interactable = false;
         }
+        // Show rate up area with according fish
+        LittleGuy_ItemData result = RecipeBook.UseRecipe(currentCraft[0], currentCraft[1]);
+        if (result != null)
+        {
+            rateUpArea.SetActive(true);
+            rateUpArea.GetComponentInChildren<Image>().sprite = dbWrapper.GetFishData(result.type).icon;
+            //rateUpIcon = newIcon;
+        }
+        else
+        {
+            rateUpArea.SetActive(false);
+        }
+
     }
 
     private void DecrementMaterialCount(MaterialType materialType)
@@ -222,6 +236,8 @@ public class RecipeDisplayManager : MonoBehaviour
         // Reset craft button color
         craftButton.image.color = Color.gray; 
         craftButton.interactable = false;
+
+        rateUpArea.SetActive(false);
     }
 
     private void ClearButtons(List<GameObject> buttons)

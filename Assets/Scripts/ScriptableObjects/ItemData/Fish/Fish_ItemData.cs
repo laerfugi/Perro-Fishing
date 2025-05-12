@@ -8,4 +8,5 @@ public class Fish_ItemData : ItemData
 {
     [Header("Fish_ItemData")]
     public int price;
+    public CombinationType type;
 }
