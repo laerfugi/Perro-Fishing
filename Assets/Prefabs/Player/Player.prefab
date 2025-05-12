@@ -742,6 +742,7 @@ GameObject:
   - component: {fileID: 8582550542402711236}
   - component: {fileID: 5847079679149033868}
   - component: {fileID: 2081293288948513198}
+  - component: {fileID: 3705358640664401891}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -963,6 +964,18 @@ MonoBehaviour:
     count: 5
   littleGuyInventoryList: []
   money: 0
+--- !u!114 &3705358640664401891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7171905249681197208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a76db1793fd3c4bb6d7d5c687e7869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8104616378941323599
 GameObject:
   m_ObjectHideFlags: 0
