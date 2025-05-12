@@ -96,7 +96,7 @@ public class FishingPole : MonoBehaviour
             {
                 UnfacePlayerToCamera();
 
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(0))
                 {
                     StartCoroutine(Cooldown());
                 }

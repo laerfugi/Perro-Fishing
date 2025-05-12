@@ -29,7 +29,7 @@ public class TabMenuContainer : MenuClass
     void Update()
     {
         //when can we press tab to open menu?
-        if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active || isActive) {      
+        if (GameObject.FindWithTag("Player").GetComponent<Player>().state == PlayerState.Active) {      
             if (Input.GetKeyDown(KeyCode.Tab)) {
                 ToggleMenu();
             }
