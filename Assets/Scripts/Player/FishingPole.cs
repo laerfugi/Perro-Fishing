@@ -107,7 +107,7 @@ public class FishingPole : MonoBehaviour
 
     IEnumerator Fishing()
     {
-        if (bait == null) { Debug.Log("need to equip little guy!"); yield break; }
+        if (bait == null) { Debug.Log("need to equip little guy!"); yield return Cooldown(); yield break; }
 
         //set up 
         elapsedCastTime = 0;
