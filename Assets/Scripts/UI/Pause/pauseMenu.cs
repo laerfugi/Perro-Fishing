@@ -17,18 +17,24 @@ public class pauseMenu : MenuClass
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {   
-            if (!isActive)
+        if (UIManager.Instance.player.GetComponent<Player>().state == PlayerState.Active ||
+            UIManager.Instance.player.GetComponent<Player>().state == PlayerState.InMenu)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Time.timeScale = 0;
+                if (!UIManager.Instance.menuIsOpen)
+                {
+                    if (!isActive)
+                    {
+                        Time.timeScale = 0;
+                    }
+                    else
+                    {
+                        Time.timeScale = 1;
+                    }
+                }
+                ToggleMenu();
             }
-            else
-            {
-                Time.timeScale = 1;
-            }
-            ToggleMenu();
-            
         }
     }
 
