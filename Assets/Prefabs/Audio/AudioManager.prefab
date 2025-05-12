@@ -65,6 +65,9 @@ MonoBehaviour:
   - name: Jump
     clip: {fileID: 8300000, guid: 0d949439f198b184199c1ea27b5e6328, type: 3}
     modifiers: []
+  - name: MinigameStart
+    clip: {fileID: 8300000, guid: f4348a2f7bd57a740a81bf1b07b6a20c, type: 3}
+    modifiers: []
   isSoundEnabled: 0
   isMusicEnabled: 0
   soundVolume: 0.5
