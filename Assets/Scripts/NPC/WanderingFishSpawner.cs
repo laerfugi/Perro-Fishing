@@ -36,7 +36,7 @@ public class WanderingFishSpawner : MonoBehaviour
     {
         Vector3 spawnPosition = GetRandomPositionWithinBounds();
 
-        GameObject newNPC = Instantiate(wanderingNPCPrefab, spawnPosition, Quaternion.identity);
+        GameObject newNPC = Instantiate(wanderingNPCPrefab, spawnPosition, Quaternion.identity, transform);
 
         WanderingContainer wanderingContainer = newNPC.GetComponent<WanderingContainer>();
         if (wanderingContainer != null)
