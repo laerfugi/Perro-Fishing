@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62049c703d5fbf6419cea031553551fa, type: 3}
-  m_Name: Yellow Fish
+  m_Name: Koi
   m_EditorClassIdentifier: 
-  name: Yellow Fish
+  name: Koi
   itemType: 2
-  description: A yellow fish
-  icon: {fileID: 21300000, guid: 232294a70d726fd499664f22f57a0f6f, type: 3}
-  item: {fileID: 4562124081905242461, guid: 44172bd7834c2984fa06dc7635ae7ef5, type: 3}
-  price: 80
+  description: a koi
+  icon: {fileID: 21300000, guid: aeeb7d788f08c01429c44114d03c44b4, type: 3}
+  item: {fileID: 4562124081905242461, guid: 95d3f85637ff34d4b99bd634531aff08, type: 3}
+  price: 70

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: map_v2_map_v2_mat_BaseColor.1001
+  m_Name: map_v2_map_v2_mat_BaseColor.1001 1
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -23,11 +23,12 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2450
   stringTagMap:
-    IgnoreProjection: true
-    RenderType: Transparent
-  disabledShaderPasses: []
+    IgnoreProjection: False
+    RenderType: TransparentCutout
+  disabledShaderPasses:
+  - ALWAYS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -156,10 +157,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NoiseTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -269,7 +266,6 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
-    - _Amount: 1
     - _AngelRing: 0
     - _AngelRingOverridden: 0
     - _AngelRingVisible: 1
@@ -336,12 +332,10 @@ Material:
     - _Farthest_Distance: 100
     - _FirstShadeOverridden: 0
     - _FirstShadeVisible: 1
-    - _Foam: 0.5
     - _GI_Intensity: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Height: 0.262
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -426,8 +420,8 @@ Material:
     - _Rotate_EmissiveUV: 0
     - _Rotate_MatCapUV: 0
     - _Rotate_NormalMapForMatCapUV: 0
-    - _SPRDefaultUnlitColorMask: 0
-    - _SRPDefaultUnlitColMode: 2
+    - _SPRDefaultUnlitColorMask: 15
+    - _SRPDefaultUnlitColMode: 1
     - _SSRefractionProjectionModel: 0
     - _Scroll_EmissiveU: 0
     - _Scroll_EmissiveV: 0
@@ -443,7 +437,6 @@ Material:
     - _SpecularAAThreshold: 0.2
     - _SpecularHighlights: 1
     - _SpecularOcclusionMode: 1
-    - _Speed: 1
     - _SrcBlend: 5
     - _StencilComp: 0
     - _StencilMode: 0
@@ -474,7 +467,7 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
-    - _TransparentEnabled: 1
+    - _TransparentEnabled: 0
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
@@ -487,7 +480,7 @@ Material:
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
     - _Tweak_SystemShadowsLevel: 0
-    - _Tweak_transparency: -0.27
+    - _Tweak_transparency: 1
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
@@ -497,13 +490,13 @@ Material:
     - _UseShadowThreshold: 0
     - _Use_1stAs2nd: 0
     - _Use_BaseAs1st: 1
-    - _ZOverDrawMode: 1
+    - _ZOverDrawMode: 0
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 8
     - _ZTestTransparent: 4
     - _ZWrite: 0
-    - _ZWriteMode: 0
+    - _ZWriteMode: 1
     - _isUnityToonshader: 1
     - _simpleUI: 0
     - _utsTechnique: 0
@@ -514,7 +507,7 @@ Material:
     - Color_36218622185947c6a5ae36366d8e21d8: {r: 0.03921569, g: 0.09803919, b: 0.27450976, a: 0.7058824}
     - Color_93e06cd551a5449091bcde90b46765a0: {r: 0.03804734, g: 0.5490196, b: 0.5490196, a: 0.1960784}
     - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 10, g: 10, b: 0, a: 0}
-    - _1st_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _1st_ShadeColor: {r: 0.9137255, g: 0.9137255, b: 0.9137255, a: 1}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -543,7 +536,6 @@ Material:
     - _SecondShadeMaskColor: {r: 0, g: 0, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Tint: {r: 1, g: 1, b: 1, a: 0.5}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}

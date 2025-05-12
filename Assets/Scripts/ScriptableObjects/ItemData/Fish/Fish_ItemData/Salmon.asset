@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62049c703d5fbf6419cea031553551fa, type: 3}
-  m_Name: Purple Fish
+  m_Name: Salmon
   m_EditorClassIdentifier: 
-  name: Purple Fish
+  name: Salmon
   itemType: 2
-  description: A purple fish
-  icon: {fileID: 21300000, guid: c8743410d2f89b545a60da66c3d4397b, type: 3}
-  item: {fileID: 4562124081905242461, guid: 85434b5300d5bdc4abd573c650b9c7ca, type: 3}
-  price: 60
+  description: a salmon
+  icon: {fileID: 21300000, guid: 6af8a336da4c6a242a4374b80a8507d1, type: 3}
+  item: {fileID: 4562124081905242461, guid: 44172bd7834c2984fa06dc7635ae7ef5, type: 3}
+  price: 80

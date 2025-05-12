@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62049c703d5fbf6419cea031553551fa, type: 3}
-  m_Name: Blue Fish
+  m_Name: Crab
   m_EditorClassIdentifier: 
-  name: Blue Fish
+  name: Crab
   itemType: 2
-  description: A blue fish
-  icon: {fileID: 21300000, guid: 2126f1000e3a64c44af6429fdeabc0b5, type: 3}
-  item: {fileID: 2216793023484659699, guid: 259ba11d8a9570f439a377446623b011, type: 3}
-  price: 10
+  description: A crab
+  icon: {fileID: 21300000, guid: dceb4388d309c0d45909a2d6194863d2, type: 3}
+  item: {fileID: 4562124081905242461, guid: de417ff6989bdcb41bff97c1569a5ec9, type: 3}
+  price: 50

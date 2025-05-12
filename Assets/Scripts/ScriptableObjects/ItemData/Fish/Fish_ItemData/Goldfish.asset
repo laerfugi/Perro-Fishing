@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62049c703d5fbf6419cea031553551fa, type: 3}
-  m_Name: Red Fish
+  m_Name: Goldfish
   m_EditorClassIdentifier: 
-  name: Red Fish
+  name: Goldfish
   itemType: 2
-  description: A red fish
-  icon: {fileID: 21300000, guid: 68936f732210dec4fa14813dd80460ee, type: 3}
-  item: {fileID: 4562124081905242461, guid: 95d3f85637ff34d4b99bd634531aff08, type: 3}
-  price: 70
+  description: A goldfish
+  icon: {fileID: 21300000, guid: b60a6299c0db3d448bdf428cedb6d085, type: 3}
+  item: {fileID: 4562124081905242461, guid: 85434b5300d5bdc4abd573c650b9c7ca, type: 3}
+  price: 60

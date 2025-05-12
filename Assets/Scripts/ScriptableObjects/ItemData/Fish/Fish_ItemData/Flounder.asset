@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62049c703d5fbf6419cea031553551fa, type: 3}
-  m_Name: Brown Fish
+  m_Name: Flounder
   m_EditorClassIdentifier: 
-  name: Brown Fish
+  name: Flounder
   itemType: 2
-  description: A brown fish
-  icon: {fileID: 21300000, guid: f2b127c425f42ea4a8ba43487d9e3a5e, type: 3}
-  item: {fileID: 4562124081905242461, guid: c443be20a2e740c4185127bb4e278525, type: 3}
-  price: 20
+  description: A flounder
+  icon: {fileID: 21300000, guid: df4d8a2a0d85d9848a81fca374f93505, type: 3}
+  item: {fileID: 4562124081905242461, guid: 7728f1c6cead0cd438a1dc0d75c0564f, type: 3}
+  price: 40

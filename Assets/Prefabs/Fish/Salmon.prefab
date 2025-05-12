@@ -50,12 +50,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1419022890915657522, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
       propertyPath: m_Name
-      value: yellow fish 1
+      value: Salmon
       objectReference: {fileID: 0}
     - target: {fileID: 7149830616054729350, guid: d06ef823bca8f974ab5cff567d51fff0, type: 3}
       propertyPath: itemData
       value: 
-      objectReference: {fileID: 11400000, guid: 22e0231fe4e721047bfca52da9796ba3, type: 2}
+      objectReference: {fileID: 11400000, guid: fcfced3a40a77e74d8c68563c4d49a55, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
