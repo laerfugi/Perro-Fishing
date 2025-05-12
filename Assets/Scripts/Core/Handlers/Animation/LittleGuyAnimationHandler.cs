@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class LittleGuyAnimationHandler : MonoBehaviour, IAnimationHandler
 {
+    [Header("Cutscene Mode")]
+    public bool cutsceneMode;
+
     public Animator animator;
 
     public LittleGuy littleGuy;
@@ -31,6 +34,9 @@ public class LittleGuyAnimationHandler : MonoBehaviour, IAnimationHandler
 
         animator.SetBool("walk", walk);
         animator.SetBool("run", playerMovementHandler.IsSprinting && playerMovementHandler.IsMoving);
+
+
+        if (cutsceneMode) animator.SetBool("walk", true);
     }
 
 
