@@ -681,7 +681,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1.9999999
   m_BaseOffset: 0.99999994
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 7
   m_ObstacleAvoidanceType: 4
 --- !u!114 &2874929202974194712
 MonoBehaviour:
@@ -800,6 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e77d3a30d187a26489502b8daba0610a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutsceneMode: 0
   animator: {fileID: 6255080435141917458}
   littleGuy: {fileID: 2874929202974194712}
   littleGuyNav: {fileID: 7530703008533787430}
