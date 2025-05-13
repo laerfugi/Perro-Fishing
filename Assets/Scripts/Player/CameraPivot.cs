@@ -16,12 +16,12 @@ public class CameraPivot : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OpenMenuEvent += toggleActive;
+        EventManager.OpenMenuEvent += toggleInactive;
         EventManager.CloseMenuEvent += toggleActive;
     }
     private void OnDisable()
     {
-        EventManager.OpenMenuEvent -= toggleActive;
+        EventManager.OpenMenuEvent -= toggleInactive;
         EventManager.CloseMenuEvent -= toggleActive;
     }
 
@@ -51,8 +51,14 @@ public class CameraPivot : MonoBehaviour
     //for menus
     private void toggleActive()
     {
-        isActive = !isActive;
+        isActive = true;
     }
+
+    private void toggleInactive()
+    {
+        isActive = false;
+    }
+
     // REPLACE LATER
     // when crafting a little guy and then closing the craft menu, it turns
     // isActive to true, so when deploying the little guy it turns isActive to false

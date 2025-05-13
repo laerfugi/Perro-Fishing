@@ -38,7 +38,7 @@ public class FishingPole : MonoBehaviour
 
     [Header("Path Indicator")]
     public LineRenderer lineRenderer;
-    public int pathResolution = 20;
+    public int pathResolution = 40;
     private bool showPath;
 
     // Start is called before the first frame update

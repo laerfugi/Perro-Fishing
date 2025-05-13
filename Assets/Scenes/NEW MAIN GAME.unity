@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 04ba65ff2ac87724fa80fabad2b1d000, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 4658412b4b1ae514d8dcd2835b993f8d, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: a887f0ec2a33d0142ad074aedff347f3, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -7576,7 +7576,7 @@ GameObject:
   - component: {fileID: 334853508}
   - component: {fileID: 334853507}
   - component: {fileID: 334853506}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: main lake bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15799,6 +15799,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5cd0ed0cc19c359428a96c1457a4f259, type: 2}
+    - target: {fileID: 3419969339229725814, guid: 1710c927d51bcd142acb5b227ce884b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b1eb4ea6cdfc574cbdc2fc56e44bc0f, type: 2}
     - target: {fileID: 3895042085585603410, guid: 1710c927d51bcd142acb5b227ce884b6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -21462,7 +21466,7 @@ GameObject:
   - component: {fileID: 905210756}
   - component: {fileID: 905210755}
   - component: {fileID: 905210754}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: lake river bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49940,7 +49944,7 @@ GameObject:
   - component: {fileID: 1971051509}
   - component: {fileID: 1971051508}
   - component: {fileID: 1971051507}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: hidden lake bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50422,6 +50426,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4289339133186617151, guid: a457a5c6cf0cbc641b3eb9431e82a613, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4398794883937701301, guid: a457a5c6cf0cbc641b3eb9431e82a613, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4876816710691119058, guid: a457a5c6cf0cbc641b3eb9431e82a613, type: 3}
@@ -54717,7 +54725,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1430992249503786630, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748025160992586362, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2243533092400874419, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -54725,15 +54737,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c7680249f64d23d428cd8a5649a95a9c, type: 2}
     - target: {fileID: 2610918248489904175, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3045693647082696897, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4027312577663503110, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6445684439273558299, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
       propertyPath: m_Enabled
@@ -54741,7 +54753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7512822798429642585, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7742946694989696655, guid: 2cf59c33a3c83284489763805ce69a4d, type: 3}
       propertyPath: m_Enabled

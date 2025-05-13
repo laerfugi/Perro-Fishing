@@ -487,6 +487,7 @@ MonoBehaviour:
   sensitivity: 400
   minVerticalAngle: -60
   maxVerticalAngle: 60
+  isActive: 1
 --- !u!1 &6215637665508232130
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +612,7 @@ MonoBehaviour:
     itemData: {fileID: 0}
     count: 0
     littleGuy: {fileID: 0}
+  bait: {fileID: 0}
   cameraPivot: {fileID: 2077651474448923044}
   startLocation: {fileID: 4053196788596866158}
   targetLocation: {fileID: 4989621304989953001}
@@ -620,7 +622,7 @@ MonoBehaviour:
   cooldownTime: 2
   state: 0
   lineRenderer: {fileID: 8603856788054984060}
-  pathResolution: 20
+  pathResolution: 40
 --- !u!120 &8603856788054984060
 LineRenderer:
   serializedVersion: 2
