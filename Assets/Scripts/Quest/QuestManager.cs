@@ -64,6 +64,10 @@ public class QuestManager : MonoBehaviour
     public void ValidateQuest(Quest quest)
     {
         int playerFishCount = PlayerInventory.Instance.InInventory(quest.fishRequest)?.count ?? 0;
+        //if (quest.claimed)
+        //{
+        //    return;
+        //}
         quest.complete = playerFishCount >= quest.amount;
     }
 
@@ -79,6 +83,7 @@ public class QuestManager : MonoBehaviour
             PlayerInventory.Instance.AddMoney(quest.reward);
             quest.claimed = true;
 
+            ValidateAllQuests();
             QuestBoardUI.Instance.UpdateQuestBoard(activeQuests);
         }
     }

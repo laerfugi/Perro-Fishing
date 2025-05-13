@@ -32,7 +32,7 @@ public class QuestUI : MonoBehaviour
     public void UpdateClaimButton()
     {
         claimButton.interactable = quest.complete && !quest.claimed;
-        claimButton.image.color = quest.complete ? Color.green : Color.gray;
+        claimButton.image.color = quest.complete || quest.claimed ? Color.green : Color.gray;
     }
 
     public void OnClaimButtonClicked()
