@@ -11,13 +11,20 @@ public class MoneyDisplay : MonoBehaviour
     public float fadeOutTime;
     private Vector3 defaultDifferenceTextPosition;
 
+    int oldAmount;
+
     private void OnEnable()
     {
         EventManager.MoneyEvent += UpdateDisplay;
+
+        UpdateDisplay(PlayerInventory.Instance.money - oldAmount);
+        oldAmount = 0;
     }
     private void OnDisable()
     {
         EventManager.MoneyEvent -= UpdateDisplay;
+
+        oldAmount = PlayerInventory.Instance.money;
     }
 
     private void Start()
