@@ -13,11 +13,11 @@ public class MMplayerAnim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.Find("mainMenuPlayer");
         anim = player.GetComponentInChildren<Animator>();
         redAnim = GameObject.Find("Red Little Guy").GetComponentInChildren<Animator>();
         lgSprite = GameObject.Find("Red Little Guy").GetComponentInChildren<SpriteRenderer>();
-        fishSprite = GameObject.Find("fuckassgoldfish").GetComponent<SpriteRenderer>();
+        fishSprite = GameObject.Find("mainMenuGoldfish").GetComponent<SpriteRenderer>();
         GameObject.Find("Green Little Guy").GetComponentInChildren<Animator>().SetBool("walk", true);
         GameObject.Find("Blue Little Guy").GetComponentInChildren<Animator>().SetBool("walk", true);
     }

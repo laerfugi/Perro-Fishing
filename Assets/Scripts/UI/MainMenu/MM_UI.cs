@@ -16,6 +16,7 @@ public class MM_UI : MonoBehaviour
     {
         sfxSlider.value = AudioManager.Instance.soundVolume;
         musicSlider.value = AudioManager.Instance.musicVolume;
+        
     }
 
     // Update is called once per frame

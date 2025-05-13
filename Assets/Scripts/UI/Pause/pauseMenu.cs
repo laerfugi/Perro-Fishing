@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class pauseMenu : MenuClass
 {
@@ -22,17 +23,6 @@ public class pauseMenu : MenuClass
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!UIManager.Instance.menuIsOpen)
-                {
-                    if (!isActive)
-                    {
-                        Time.timeScale = 0;
-                    }
-                    else
-                    {
-                        Time.timeScale = 1;
-                    }
-                }
                 ToggleMenu();
             }
         }
@@ -54,5 +44,11 @@ public class pauseMenu : MenuClass
     {
         Time.timeScale = 1;
         ToggleMenu();
+    }
+
+    public void quitToMainMenu()
+    {
+        ToggleMenu();
+        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
 }
