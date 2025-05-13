@@ -8,6 +8,7 @@ public class AL_fish_behavior : MonoBehaviour
     private bool started;
     [SerializeField]
     private int hp;
+    int randSize;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,8 +41,13 @@ public class AL_fish_behavior : MonoBehaviour
 
     void changePosition()
     {
-        tr.localPosition = new Vector3(Random.Range(-30, 30), Random.Range(9, 30), Random.Range(32, 36));
-        tr.localScale = new Vector3(Random.Range(4, 20), Random.Range(4, 20), 1);
+        randSize = Random.Range(5, 17);
+        if (randSize % 2 == 1)
+        {
+            randSize *= -1;
+        }
+        tr.localPosition = new Vector3(Random.Range(-30, 30), Random.Range(8, 30), Random.Range(32, 36));
+        tr.localScale = new Vector3(randSize * 2, Mathf.Abs(randSize), 1);
 
     }
 

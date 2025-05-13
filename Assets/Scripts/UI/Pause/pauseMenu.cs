@@ -51,4 +51,9 @@ public class pauseMenu : MenuClass
         ToggleMenu();
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
+
+    public void saveGame()
+    {
+        EventManager.OnSaveEvent();
+    }
 }

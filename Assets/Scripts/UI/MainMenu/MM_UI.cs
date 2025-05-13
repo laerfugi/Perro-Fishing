@@ -8,7 +8,7 @@ public class MM_UI : MonoBehaviour
 {
     public string mainScene;
     [SerializeField]
-    private GameObject mainScreen, settingsScreen;
+    private GameObject mainScreen, settingsScreen, resetMenu;
     [SerializeField]
     private Slider sfxSlider, musicSlider;
     // Start is called before the first frame update
@@ -25,9 +25,28 @@ public class MM_UI : MonoBehaviour
         
     }
 
+    /*private void OnEnable()
+    {
+        SceneManager.sceneLoaded += LoadGame;
+        SceneManager.LoadScene(mainScene, LoadSceneMode.Single);
+    }*/
+
     public void StartGame()
     {
+        //EventManager.OnLoadEvent();
+        //LoadGame(SceneManager.GetSceneByName("mainGame"), LoadSceneMode.Single);
+        SceneManager.sceneLoaded += LoadGame;
         SceneManager.LoadScene(mainScene, LoadSceneMode.Single);
+    }
+
+    public void LoadGame(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == mainScene)
+        {
+            Debug.Log("goon goon fruit the sequel");
+            SceneManager.sceneLoaded -= LoadGame;
+            EventManager.OnLoadEvent();
+        }
     }
 
     public void ExitGame()
@@ -57,5 +76,21 @@ public class MM_UI : MonoBehaviour
     {
         mainScreen.SetActive(true);
         settingsScreen.SetActive(false);
+    }
+
+    public void openResetMenu()
+    {
+        resetMenu.SetActive(true);
+    }
+
+    public void closeResetMenu()
+    {
+        resetMenu.SetActive(false);
+    }
+
+    public void resetData()
+    {
+        EventManager.OnResetEvent();
+        resetMenu.SetActive(false);
     }
 }

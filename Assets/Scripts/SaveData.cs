@@ -5,18 +5,30 @@ using UnityEngine;
 
 public class SaveData : MonoBehaviour
 {
+    public static SaveData Instance;
     private const string SaveFileName = "/save.json";
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     private void OnEnable()
     {
         EventManager.SaveEvent += Save;
         EventManager.LoadEvent += Load;
+        EventManager.ResetEvent += ResetData;
     }
 
     private void OnDisable()
     {
         EventManager.SaveEvent -= Save;
         EventManager.LoadEvent -= Load;
+        EventManager.ResetEvent -= ResetData;
     }
 
     public void Save()
@@ -67,10 +79,26 @@ public class SaveData : MonoBehaviour
         foreach (var littleGuyWrapper in saveData.littleGuyInventoryList)
         {
             GameObject littleGuy = LittleGuySpawner.Instance.CreateLittleGuy(spawnPoint.position, littleGuyWrapper.itemData as LittleGuy_ItemData);
-            playerInventory.littleGuyInventoryList.Add(new LittleGuy_ItemDataWrapper(littleGuyWrapper.itemData, littleGuy));
+            //playerInventory.littleGuyInventoryList.Add(new LittleGuy_ItemDataWrapper(littleGuyWrapper.itemData, littleGuy));
         }
 
         Debug.Log("Game loaded from save file.");
+    }
+
+    public void ResetData()
+    {
+
+        SaveDataModel saveData = new SaveDataModel
+        {
+            money = 0,
+            itemInventoryList = new List<ItemDataWrapper>(),
+            fishInventoryList = new List<ItemDataWrapper>(),
+            littleGuyInventoryList = new List<LittleGuy_ItemDataWrapper>()
+        };
+
+        string json = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(Application.persistentDataPath + SaveFileName, json);
+        Debug.Log($"Save data at {Application.persistentDataPath + SaveFileName} reset");
     }
 }
 

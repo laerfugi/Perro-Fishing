@@ -16,5 +16,9 @@ public class framerateSet : MonoBehaviour
     void Update()
     {
         Application.targetFrameRate = framerate;
+        /*if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EventManager.OnLoadEvent();
+        }*/
     }
 }

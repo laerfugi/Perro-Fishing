@@ -41,6 +41,7 @@ public static class EventManager
 
     public static event UnityAction SaveEvent;
     public static event UnityAction LoadEvent;
+    public static event UnityAction ResetEvent;
 
     #endregion
 
@@ -61,5 +62,7 @@ public static class EventManager
 
     public static void OnSaveEvent() => SaveEvent?.Invoke();
     public static void OnLoadEvent() => LoadEvent?.Invoke();
+
+    public static void OnResetEvent() => ResetEvent?.Invoke();
     #endregion
 }
