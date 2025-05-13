@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Brown Little Guy
   itemType: 3
-  description: A
+  description: Likes crabs!
   icon: {fileID: 21300000, guid: 045e424fb38e709438b5838e3b5169bf, type: 3}
   item: {fileID: 3243568094770283588, guid: be1117b79b8eda04492b906428f4879e, type: 3}
   type: 0

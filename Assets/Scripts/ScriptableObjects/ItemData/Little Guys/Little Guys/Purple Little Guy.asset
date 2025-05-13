@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Purple  Little Guy
   itemType: 3
-  description: G
+  description: Likes flounder!
   icon: {fileID: 21300000, guid: c457138289235f64a9ffaea4a765dee4, type: 3}
   item: {fileID: 402830032348785150, guid: 22ce5e60b9cd3a342a3e7abf4deee98d, type: 3}
   type: 6

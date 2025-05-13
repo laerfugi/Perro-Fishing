@@ -17,7 +17,7 @@ public class MoneyDisplay : MonoBehaviour
     {
         EventManager.MoneyEvent += UpdateDisplay;
 
-        UpdateDisplay(PlayerInventory.Instance.money - oldAmount);
+        if (oldAmount != 0) UpdateDisplay(PlayerInventory.Instance.money - oldAmount);
         oldAmount = 0;
     }
     private void OnDisable()

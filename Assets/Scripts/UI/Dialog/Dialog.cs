@@ -79,6 +79,7 @@ public class Dialog : MonoBehaviour
         StartCoroutine(coroutine);
 
         yield return new WaitUntil(() => !isSpeaking);
+        EventManager.OnCloseMenuEvent();
     }
 
     IEnumerator TypeLine()

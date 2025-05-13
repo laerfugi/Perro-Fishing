@@ -961,9 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemInventoryList: []
-  fishInventoryList:
-  - itemData: {fileID: 11400000, guid: e31032a2aa95e4c49905c2e1d7595b08, type: 2}
-    count: 5
+  fishInventoryList: []
   littleGuyInventoryList: []
   money: 0
 --- !u!114 &3705358640664401891
