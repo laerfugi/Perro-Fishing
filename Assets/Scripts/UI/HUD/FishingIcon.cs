@@ -14,6 +14,7 @@ public class FishingIcon : MonoBehaviour
     void Start()
     {
         fishingPole = UIManager.Instance.player.GetComponentInChildren<FishingPole>();
+        UpdateIcon(fishingPole.elapsedCooldownTime / fishingPole.cooldownTime);
     }
 
     // Update is called once per frame
