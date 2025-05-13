@@ -52,8 +52,8 @@ public class MinigameTransition : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             //need to change this
-            leftPanel.position = Vector3.Lerp(new Vector3(-canvas.pixelRect.size.x * .25f, leftPanel.position.y), new Vector3(canvas.pixelRect.size.x * .25f, leftPanel.position.y), elapsedTime / transitionTime);
-            rightPanel.position = Vector3.Lerp(new Vector3(canvas.pixelRect.size.x * 1.25f, leftPanel.position.y), new Vector3(canvas.pixelRect.size.x * .75f, leftPanel.position.y), elapsedTime / transitionTime);
+            leftPanel.position = Vector3.Lerp(new Vector3(-canvas.pixelRect.size.x * 1f, leftPanel.position.y), new Vector3(canvas.pixelRect.size.x * .25f, leftPanel.position.y), elapsedTime / transitionTime);
+            rightPanel.position = Vector3.Lerp(new Vector3(canvas.pixelRect.size.x * 2f, leftPanel.position.y), new Vector3(canvas.pixelRect.size.x * .75f, leftPanel.position.y), elapsedTime / transitionTime);
 
             yield return null;
         }
@@ -106,8 +106,8 @@ public class MinigameTransition : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             //need to change this
-            leftPanel.position = Vector3.Lerp(new Vector3(canvas.pixelRect.size.x * .25f, leftPanel.position.y), new Vector3(-canvas.pixelRect.size.x * .25f, leftPanel.position.y), elapsedTime / transitionTime);
-            rightPanel.position = Vector3.Lerp(new Vector3(canvas.pixelRect.size.x * .75f, leftPanel.position.y), new Vector3(canvas.pixelRect.size.x * 1.25f, leftPanel.position.y), elapsedTime / transitionTime);
+            leftPanel.position = Vector3.Lerp(new Vector3(canvas.pixelRect.size.x * .25f, leftPanel.position.y), new Vector3(-canvas.pixelRect.size.x * 1f, leftPanel.position.y), elapsedTime / transitionTime);
+            rightPanel.position = Vector3.Lerp(new Vector3(canvas.pixelRect.size.x * .75f, leftPanel.position.y), new Vector3(canvas.pixelRect.size.x * 2f, leftPanel.position.y), elapsedTime / transitionTime);
             yield return null;
         }
 
