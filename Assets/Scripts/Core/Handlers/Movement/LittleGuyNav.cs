@@ -12,6 +12,8 @@ public class LittleGuyNav : MonoBehaviour
     [SerializeField] private float followDistance = 3f;
     [SerializeField] private float fleeDistance = 8f;
 
+    private bool isFleeing = true;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -33,7 +35,11 @@ public class LittleGuyNav : MonoBehaviour
 
         float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-        if (distanceToTarget > followDistance)
+        if (isFleeing)
+        {
+            HandleFleeing(distanceToTarget);
+        }
+        else if (distanceToTarget > followDistance)
         {
             FollowTarget();
         }
@@ -59,6 +65,30 @@ public class LittleGuyNav : MonoBehaviour
     private void FleeFromTarget()
     {
         navMeshAgent.isStopped = false;
+        Vector3 fleeDirection = (transform.position - target.position).normalized;
+        Vector3 fleePosition = transform.position + fleeDirection * fleeDistance;
+        navMeshAgent.SetDestination(fleePosition);
+    }
+
+    private void HandleFleeing(float distanceToTarget)
+    {
+        if (distanceToTarget > fleeDistance)
+        {
+            return;
+        }
+        else if (distanceToTarget < followDistance) { // if caught
+
+            isFleeing = false;
+            navMeshAgent.speed = 8f;
+            navMeshAgent.acceleration = 8f;
+            return;
+        }
+
+        navMeshAgent.isStopped = false;
+
+        navMeshAgent.speed = 4f;
+        navMeshAgent.acceleration = 4f;
+
         Vector3 fleeDirection = (transform.position - target.position).normalized;
         Vector3 fleePosition = transform.position + fleeDirection * fleeDistance;
         navMeshAgent.SetDestination(fleePosition);
