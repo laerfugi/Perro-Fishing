@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 2ca3836ebde717341b82fa3bdae0a606
   - enabled: 1
-    path: Assets/Scenes/Test Scene.unity
-    guid: 39cbd33b651dfb6439c3976e950a9e4b
-  - enabled: 1
-    path: Assets/Scenes/Minigames/Minigames/Minigame.unity
-    guid: b9c339d22498dbe49b30a332bc748261
+    path: Assets/Scenes/NEW MAIN GAME.unity
+    guid: 54cc30153b52a914e8d3af7a4164c603
   - enabled: 1
     path: Assets/Scenes/Minigames/Minigames/Flappy Bird.unity
     guid: ed731c66260ddca46a0b46e0e8a73209
