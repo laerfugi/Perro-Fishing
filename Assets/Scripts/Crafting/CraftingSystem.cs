@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CraftingSystem : MonoBehaviour
 {
@@ -44,8 +45,10 @@ public class CraftingSystem : MonoBehaviour
         ConsumeMaterials(recipeDisplayManager.currentCraft[0], recipeDisplayManager.currentCraft[1]);
         recipeDisplayManager.OnOpen(); // refresh the UI
         craftingUIManager.ResetCraftingUI();
+        Vector3 spawnPosition = GetNearestNavMeshPosition(spawnPoint.position);
+        Debug.Log($"attempting to spawn little guy at {spawnPosition}");
         // Spawn little guy through giving data
-        GameObject craftedItem = LittleGuySpawner.Instance.CreateLittleGuy(spawnPoint.localPosition, littleGuyData);
+        GameObject craftedItem = LittleGuySpawner.Instance.CreateLittleGuy(spawnPosition, littleGuyData);
 
         if (craftedItem.TryGetComponent(out LittleGuy littleGuy))
         {
@@ -70,6 +73,15 @@ public class CraftingSystem : MonoBehaviour
     {
         PlayerInventory.Instance.RemoveItem(material1);
         PlayerInventory.Instance.RemoveItem(material2);
+    }
+
+    private Vector3 GetNearestNavMeshPosition(Vector3 origin)
+    {
+        if (NavMesh.SamplePosition(origin, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        return Vector3.zero;
     }
 
 }
