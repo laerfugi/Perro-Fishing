@@ -3020,6 +3020,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 282256530840173716, guid: db2a82e4a735fab478093a3cfa5ea72b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163541581289732701, guid: db2a82e4a735fab478093a3cfa5ea72b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430823155791707128, guid: db2a82e4a735fab478093a3cfa5ea72b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3536521162634129358, guid: db2a82e4a735fab478093a3cfa5ea72b, type: 3}
       propertyPath: m_Name
       value: Minigame UI
@@ -3114,19 +3126,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6734390547716260758, guid: db2a82e4a735fab478093a3cfa5ea72b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 6734390547716260758, guid: db2a82e4a735fab478093a3cfa5ea72b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -70
+      value: -69
       objectReference: {fileID: 0}
     - target: {fileID: 7642352849054662951, guid: db2a82e4a735fab478093a3cfa5ea72b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -621
+      value: -724
       objectReference: {fileID: 0}
     - target: {fileID: 7642352849054662951, guid: db2a82e4a735fab478093a3cfa5ea72b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417
+      value: 441.31006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
