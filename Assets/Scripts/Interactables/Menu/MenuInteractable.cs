@@ -9,7 +9,7 @@ public class MenuInteractable : MonoBehaviour, IInteractable
     [SerializeField] private string functionToCall = "ToggleMenu";
 
     [Header("Interaction Prompt")]
-    [SerializeField] private string interactionPrompt = "Press [E] to open crafting table";
+    [SerializeField] private string interactionPrompt = "[E] Open crafting table";
     public void Interact()
     {
         if (menu != null)

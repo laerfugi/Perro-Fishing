@@ -49433,8 +49433,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315406173}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.2, y: -9.400001, z: 12.200001}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 43.2, y: -11.43, z: 22.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63378,6 +63378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: jotchua_tailwag
       objectReference: {fileID: 0}
+    - target: {fileID: 4114080780806303623, guid: a1cdac2585ac27647b6f9c4bba74662c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 549f1356a1b5f7545bd57a805a281b8f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -84188,6 +84192,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114867354449937907, guid: a457a5c6cf0cbc641b3eb9431e82a613, type: 3}
+      propertyPath: interactionPrompt
+      value: '[E] Open quest board'
+      objectReference: {fileID: 0}
     - target: {fileID: 4289339133186617151, guid: a457a5c6cf0cbc641b3eb9431e82a613, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -91604,7 +91612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.6
+      value: -12.63
       objectReference: {fileID: 0}
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -91612,7 +91620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalRotation.x
@@ -91620,7 +91628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalRotation.z
@@ -91632,7 +91640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 61170617788545011, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -91681,6 +91689,10 @@ PrefabInstance:
     - target: {fileID: 2081293288948513198, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: littleGuyInventoryList.Array.data[0].littleGuy
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991385554342699449, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5582615907098200838, guid: 1f75338e22a6d0342a578134665f80b0, type: 3}
       propertyPath: m_LocalPosition.y

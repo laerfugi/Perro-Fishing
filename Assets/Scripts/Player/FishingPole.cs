@@ -44,7 +44,6 @@ public class FishingPole : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        elapsedCooldownTime = cooldownTime;
         targetLocation.SetActive(false);
 
         //make player hold fishing pole
@@ -62,7 +61,6 @@ public class FishingPole : MonoBehaviour
                 SetAsBait(PlayerInventory.Instance.littleGuyInventoryList[0]);
             }
         }
-
 
         if (!UIManager.Instance.menuIsOpen)     //need to change how to disable inputs 
         {
@@ -245,5 +243,7 @@ public class FishingPole : MonoBehaviour
     {
         baitLittleGuy_ItemDataWrapper = littleGuy_ItemDataWrapper;
         bait = littleGuy_ItemDataWrapper.littleGuy;
+
+        elapsedCooldownTime = cooldownTime;
     }
 }

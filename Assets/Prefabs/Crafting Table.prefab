@@ -2257,7 +2257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 594382419877757360}
   functionToCall: ReloadCraftingUI
-  interactionPrompt: Press [E] to open crafting table
+  interactionPrompt: '[E] Open crafting table'
 --- !u!54 &3196195817737185
 Rigidbody:
   m_ObjectHideFlags: 0
