@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,11 +24,13 @@ public class LittleGuy : MonoBehaviour
     private CameraPivot cameraPivot;
     private SpriteRenderer spriteRenderer;
     public GameObject interactHitbox;
+    public LittleGuyThoughts thoughts;
 
     [field: Header("State")]
     [field: SerializeField]
     public LittleGuyState state { get; private set; }
     private LittleGuyState previousState;  //for MenuEventCheck()
+    public bool isCaught;    //to make sure little guy is added to player inventory only once when caught 
 
     [Header("ItemData")]
     public LittleGuy_ItemData itemData;
@@ -65,22 +68,21 @@ public class LittleGuy : MonoBehaviour
         cameraPivot = GetComponentInChildren<CameraPivot>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.sprite = itemData.icon;
+        thoughts = GetComponentInChildren<LittleGuyThoughts>();
 
         //Change State to AI
         ChangeState(LittleGuyState.AI);
 
         //Add to player inventory
-        PlayerInventory.Instance.AddLittleGuy(this);
+        //PlayerInventory.Instance.AddLittleGuy(this);
     }
 
     void Update()
     {
         if (state == LittleGuyState.AI)                     //Little Guy is AI controlled
         {
-            if (!IsGrounded())
-            {
-                //ForceGrounded();
-            }
+            //add to inventory if caught
+            if (navHandler.isFleeing == false && isCaught ==  false) { Catch(); }
 
             navHandler.HandleAI();
         }
@@ -124,6 +126,9 @@ public class LittleGuy : MonoBehaviour
             //state stuff
             nav.enabled = false;
             controller.enabled = true;
+
+            //thoughts
+            thoughts.StartCoroutine(thoughts.RandomAnimate());
         }
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
@@ -188,5 +193,12 @@ public class LittleGuy : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
         }
+    }
+
+    private void Catch() 
+    {
+        isCaught = true; 
+        PlayerInventory.Instance.AddLittleGuy(this);
+        thoughts.StartCoroutine(thoughts.RandomAnimate());
     }
 }

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private IInteractHandler interactHandler;
 
     public GameObject vCam;     //idk how to make this private
+    public CameraPivot cameraPivot;
     public FishingPole fishingPole;
     public GameObject interactHitbox;
 

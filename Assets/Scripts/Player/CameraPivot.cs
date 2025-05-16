@@ -9,7 +9,7 @@ public class CameraPivot : MonoBehaviour
     private float yRotation = 0f;
     [SerializeField] private float minVerticalAngle;
     [SerializeField] private float maxVerticalAngle;
-    [SerializeField] private bool isActive = true;
+    [SerializeField] public bool isActive = true;
 
     float mouseX;
     float mouseY;
@@ -18,6 +18,12 @@ public class CameraPivot : MonoBehaviour
     {
         EventManager.OpenMenuEvent += toggleInactive;
         EventManager.CloseMenuEvent += toggleActive;
+
+        //TEMP FIX TO ALIGN LITTLE GUY CAMERAPIVOT TO PLAYER CAMERAPIVOT AFTER BEING CRAFTED
+        //doesn't perfectly rotate to player's camerapivot for some reason?
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        isActive = player.cameraPivot.isActive;
+        this.transform.rotation = player.cameraPivot.transform.rotation;
     }
     private void OnDisable()
     {

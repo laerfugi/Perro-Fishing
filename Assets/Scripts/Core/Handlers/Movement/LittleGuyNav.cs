@@ -12,7 +12,7 @@ public class LittleGuyNav : MonoBehaviour
     [SerializeField] private float followDistance = 3f;
     [SerializeField] private float fleeDistance = 8f;
 
-    private bool isFleeing = true;
+    public bool isFleeing = true;
 
     void Start()
     {

@@ -8,7 +8,7 @@ public class VcamCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Camera")) { Debug.Log(other.gameObject.name); model.SetActive(false); }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Camera")) { model.SetActive(false); }
     }
 
     private void OnTriggerExit(Collider other)
