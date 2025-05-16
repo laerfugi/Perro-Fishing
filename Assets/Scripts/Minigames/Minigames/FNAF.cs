@@ -31,6 +31,10 @@ public class FNAF : MonoBehaviour
                 jumpscareAnimator.SetTrigger("lose");
             }
         }
-        
+    }
+
+    public void FnafWin()
+    {
+        Minigame.Instance.InstantWin();
     }
 }

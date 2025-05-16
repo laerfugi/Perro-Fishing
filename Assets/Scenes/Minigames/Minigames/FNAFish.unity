@@ -508,17 +508,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &709472180 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7591801558934387119, guid: df233282e98cd134c90c523b09a14fbd, type: 3}
-  m_PrefabInstance: {fileID: 6568759400923835483}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0649af324821f7e46b8ff8c1ebb428ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1020876541
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,18 +663,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 709472180}
-        m_TargetAssemblyTypeName: Minigame, Assembly-CSharp
-        m_MethodName: InstantWin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 115050206}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
