@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraPivot : MonoBehaviour
 {
+    public bool littleGuyMode;
+
+    [Header("Settings")]
     [SerializeField] private float sensitivity;
     private float xRotation = 0f;
     private float yRotation = 0f;
@@ -21,9 +24,12 @@ public class CameraPivot : MonoBehaviour
 
         //TEMP FIX TO ALIGN LITTLE GUY CAMERAPIVOT TO PLAYER CAMERAPIVOT AFTER BEING CRAFTED
         //doesn't perfectly rotate to player's camerapivot for some reason?
-        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        isActive = player.cameraPivot.isActive;
-        this.transform.rotation = player.cameraPivot.transform.rotation;
+        if (littleGuyMode)
+        {
+            Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            isActive = player.cameraPivot.isActive;
+            this.transform.rotation = player.cameraPivot.transform.rotation;
+        }
     }
     private void OnDisable()
     {
