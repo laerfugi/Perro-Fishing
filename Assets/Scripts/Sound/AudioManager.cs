@@ -214,74 +214,74 @@ public class AudioManager : MonoBehaviour
 
 #region Utility
 // Custom GUI for Modifiers
-//[CustomPropertyDrawer(typeof(AudioManager.Modifier))]
-//public class ModifierPropertyDrawer : PropertyDrawer
-//{
-//    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-//    {
-//        EditorGUI.BeginProperty(position, label, property);
+[CustomPropertyDrawer(typeof(AudioManager.Modifier))]
+public class ModifierPropertyDrawer : PropertyDrawer
+{
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        EditorGUI.BeginProperty(position, label, property);
 
-//        // Get references
-//        var typeProperty = property.FindPropertyRelative("type");
-//        var valueProperty = property.FindPropertyRelative("value");
-//        var minValueProperty = property.FindPropertyRelative("minValue");
-//        var maxValueProperty = property.FindPropertyRelative("maxValue");
+        // Get references
+        var typeProperty = property.FindPropertyRelative("type");
+        var valueProperty = property.FindPropertyRelative("value");
+        var minValueProperty = property.FindPropertyRelative("minValue");
+        var maxValueProperty = property.FindPropertyRelative("maxValue");
 
-//        // Layout for type dropdown
-//        var typeRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
-//        // Layout for value
-//        var valueRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight + 2, position.width, EditorGUIUtility.singleLineHeight);
+        // Layout for type dropdown
+        var typeRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+        // Layout for value
+        var valueRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight + 2, position.width, EditorGUIUtility.singleLineHeight);
 
-//        // Draw the layout for type dropdown
-//        EditorGUI.PropertyField(typeRect, typeProperty);
+        // Draw the layout for type dropdown
+        EditorGUI.PropertyField(typeRect, typeProperty);
 
-//        // If random pitch
-//        if ((AudioManager.ModifierType)typeProperty.enumValueIndex == AudioManager.ModifierType.RandomPitch)
-//        {
-//            // Layout for the min and max fields
-//            var minRect = new Rect(position.x, position.y + (EditorGUIUtility.singleLineHeight + 2), position.width / 2 - 2, EditorGUIUtility.singleLineHeight);
-//            var maxRect = new Rect(position.x + position.width / 2 + 2, position.y + (EditorGUIUtility.singleLineHeight + 2), position.width / 2 - 2, EditorGUIUtility.singleLineHeight);
+        // If random pitch
+        if ((AudioManager.ModifierType)typeProperty.enumValueIndex == AudioManager.ModifierType.RandomPitch)
+        {
+            // Layout for the min and max fields
+            var minRect = new Rect(position.x, position.y + (EditorGUIUtility.singleLineHeight + 2), position.width / 2 - 2, EditorGUIUtility.singleLineHeight);
+            var maxRect = new Rect(position.x + position.width / 2 + 2, position.y + (EditorGUIUtility.singleLineHeight + 2), position.width / 2 - 2, EditorGUIUtility.singleLineHeight);
 
-//            // Draw both the min and max fields
-//            EditorGUI.PropertyField(minRect, minValueProperty, new GUIContent("Min"));
-//            EditorGUI.PropertyField(maxRect, maxValueProperty, new GUIContent("Max"));
-//        }
-//        else
-//        {
-//            // Draw the layout for any other modifier
-//            EditorGUI.PropertyField(valueRect, valueProperty);
-//        }
+            // Draw both the min and max fields
+            EditorGUI.PropertyField(minRect, minValueProperty, new GUIContent("Min"));
+            EditorGUI.PropertyField(maxRect, maxValueProperty, new GUIContent("Max"));
+        }
+        else
+        {
+            // Draw the layout for any other modifier
+            EditorGUI.PropertyField(valueRect, valueProperty);
+        }
 
-//        EditorGUI.EndProperty();
-//    }
+        EditorGUI.EndProperty();
+    }
 
-//    // Add extra padding to the bottom of everything
-//    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-//    {
-//        var typeProperty = property.FindPropertyRelative("type");
-//        if ((AudioManager.ModifierType)typeProperty.enumValueIndex == AudioManager.ModifierType.RandomPitch)
-//        {
-//            return EditorGUIUtility.singleLineHeight * 2;
-//        }
-//        return EditorGUIUtility.singleLineHeight * 2 + 2;
-//    }
-//}
+    // Add extra padding to the bottom of everything
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        var typeProperty = property.FindPropertyRelative("type");
+        if ((AudioManager.ModifierType)typeProperty.enumValueIndex == AudioManager.ModifierType.RandomPitch)
+        {
+            return EditorGUIUtility.singleLineHeight * 2;
+        }
+        return EditorGUIUtility.singleLineHeight * 2 + 2;
+    }
+}
 
-//[CustomEditor(typeof(AudioManager))]
-//public class AudioManagerEditor : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        DrawDefaultInspector();
+[CustomEditor(typeof(AudioManager))]
+public class AudioManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
 
-//        AudioManager audioManager = (AudioManager)target;
+        AudioManager audioManager = (AudioManager)target;
 
-//        // Add a button to force save the settings set in inspector
-//        if (GUILayout.Button("Force Save Volume Settings"))
-//        {
-//            audioManager.SetSoundVolume(audioManager.soundVolume);
-//            audioManager.SetMusicVolume(audioManager.musicVolume);
-//        }
-//    }
-//}
+        // Add a button to force save the settings set in inspector
+        if (GUILayout.Button("Force Save Volume Settings"))
+        {
+            audioManager.SetSoundVolume(audioManager.soundVolume);
+            audioManager.SetMusicVolume(audioManager.musicVolume);
+        }
+    }
+}
 #endregion
