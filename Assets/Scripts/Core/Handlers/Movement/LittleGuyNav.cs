@@ -41,6 +41,7 @@ public class LittleGuyNav : MonoBehaviour
 
     public void HandleAI()
     {
+        fleeNoise.volume = AudioManager.Instance.soundVolume;
         // Bring little guy to flee to random position before allowing it to be captured
         if (initialRunTarget.HasValue)
         {
@@ -85,6 +86,7 @@ public class LittleGuyNav : MonoBehaviour
 
     public void RunToInitialTarget(Vector3 target, Action onReached)
     {
+        StartCoroutine(WaitForEnd());
         initialRunTarget = target;
         onInitialTargetReached = onReached;
     }

@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public List<Sound> sounds;
-    public List<(AudioSource, float)> audioSources;
+    //public List<AudioSource> audioSourceList;
     private Dictionary<string, Sound> soundDictionary;
     private AudioSource audioSource;
     public bool isSoundEnabled;
@@ -88,10 +88,10 @@ public class AudioManager : MonoBehaviour
         fullSoundAudioSource.playOnAwake = false;
     }
 
-    public void AddAudioSource(AudioSource currSource)
+    /*public void AddAudioSource(AudioSource currSource)
     {
-        audioSources.Add((currSource, currSource.volume));
-    }
+        audioSourceList.Add(currSource);
+    }*/
 
     // For sounds that need to be spammed and overlap each other
     public void PlaySound(string soundName)
@@ -174,10 +174,7 @@ public class AudioManager : MonoBehaviour
     public void SetSoundVolume(float volume)
     {
         soundVolume = Mathf.Clamp01(volume);
-        //if (audioSources.Count > 0)
-        //{
-        //    foreach ((AudioSource aud, float vol) in audioSources) { aud.volume = vol * volume; }
-        //}
+        //foreach (AudioSource audSr in audioSourceList) { audSr.volume = volume; }
         SaveSettings();
     }
 
