@@ -22,6 +22,15 @@ public class CameraPivot : MonoBehaviour
         EventManager.OpenMenuEvent += toggleInactive;
         EventManager.CloseMenuEvent += toggleActive;
 
+    }
+    private void OnDisable()
+    {
+        EventManager.OpenMenuEvent -= toggleInactive;
+        EventManager.CloseMenuEvent -= toggleActive;
+    }
+
+    private void Start()
+    {
         //TEMP FIX TO ALIGN LITTLE GUY CAMERAPIVOT TO PLAYER CAMERAPIVOT AFTER BEING CRAFTED
         //doesn't perfectly rotate to player's camerapivot for some reason?
         if (littleGuyMode)
@@ -30,11 +39,6 @@ public class CameraPivot : MonoBehaviour
             isActive = player.cameraPivot.isActive;
             this.transform.rotation = player.cameraPivot.transform.rotation;
         }
-    }
-    private void OnDisable()
-    {
-        EventManager.OpenMenuEvent -= toggleInactive;
-        EventManager.CloseMenuEvent -= toggleActive;
     }
 
 
