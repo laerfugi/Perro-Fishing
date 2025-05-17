@@ -52,4 +52,9 @@ public class TabMenuContainer : MenuClass
             currentTabMenu = menu;
         }
     }
+
+    public void PlaySound()
+    {
+        AudioManager.Instance.PlaySound("ButtonPress");
+    }
 }

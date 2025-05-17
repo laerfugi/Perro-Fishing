@@ -39,6 +39,7 @@ public class EquippedLittleGuyDisplayer : MonoBehaviour
             inventoryButton.countText.gameObject.SetActive(false);
             inventoryButton.border.color = Color.yellow;
             inventoryButton.button.onClick.AddListener(() => itemDataDisplayer.DisplayInfo(fishingPole.baitLittleGuy_ItemDataWrapper));
+            inventoryButton.button.onClick.AddListener(()=> AudioManager.Instance.PlaySound("ButtonPress"));
         }
     }
 }

@@ -31,6 +31,8 @@ public class MenuClass : MonoBehaviour
         {
             StartCoroutine(CloseMenu());
         }
+
+        AudioManager.Instance.PlaySound("ButtonPress");
     }
 
     //delayed event call to prevent mouse click being registered after closing menu

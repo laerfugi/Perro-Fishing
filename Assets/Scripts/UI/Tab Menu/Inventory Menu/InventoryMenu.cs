@@ -139,5 +139,7 @@ public class InventoryMenu : MonoBehaviour
 
         selectedButton = inventoryButton;
         previousSelectedItemDataWrapper = inventoryButton.itemDataWrapper;
+
+        AudioManager.Instance.PlaySound("ButtonPress");
     }
 }

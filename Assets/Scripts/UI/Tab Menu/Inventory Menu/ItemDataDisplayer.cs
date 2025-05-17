@@ -85,6 +85,7 @@ public class ItemDataDisplayer : MonoBehaviour
 
         DisplayInfo(littleGuy_ItemDataWrapper);
         EventManager.OnInventoryAddEvent(null);
+        AudioManager.Instance.PlaySound("ButtonPress");
     }
 }
 
