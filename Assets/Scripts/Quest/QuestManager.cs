@@ -13,6 +13,7 @@ public class QuestManager : MonoBehaviour
 
     private DatabaseWrapper dbWrapper;
 
+    private int totalClaimed = 0;
     private List<Quest> activeQuests = new List<Quest>();
 
     private void Awake()
@@ -81,10 +82,19 @@ public class QuestManager : MonoBehaviour
                 PlayerInventory.Instance.RemoveItem(quest.fishRequest);
             }
             PlayerInventory.Instance.AddMoney(quest.reward);
+
+            totalClaimed += 1;
             quest.claimed = true;
 
             ValidateAllQuests();
             QuestBoardUI.Instance.UpdateQuestBoard(activeQuests);
+        }
+
+        // Regen quests
+        if (totalClaimed >= maxQuests)
+        {
+            totalClaimed = 0;
+            GenerateQuests();
         }
     }
 
