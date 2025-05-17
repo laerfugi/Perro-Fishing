@@ -85,6 +85,7 @@ public class LittleGuyNav : MonoBehaviour
 
     public void RunToInitialTarget(Vector3 target, Action onReached)
     {
+        AudioManager.Instance.AddAudioSource(fleeNoise);
         fleeNoise.volume = AudioManager.Instance.soundVolume;
         fleeNoise.Play();
         initialRunTarget = target;

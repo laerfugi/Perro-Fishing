@@ -35,6 +35,8 @@ public class AudioManager : MonoBehaviour
     }
 
     public List<Sound> sounds;
+    [SerializeReference]
+    public List<(AudioSource, float)> audioSources;
     private Dictionary<string, Sound> soundDictionary;
     private AudioSource audioSource;
     public bool isSoundEnabled;
@@ -84,6 +86,11 @@ public class AudioManager : MonoBehaviour
 
         fullSoundAudioSource.loop = false;
         fullSoundAudioSource.playOnAwake = false;
+    }
+
+    public void AddAudioSource(AudioSource currSource)
+    {
+        audioSources.Add((currSource, currSource.volume));
     }
 
     // For sounds that need to be spammed and overlap each other
@@ -167,6 +174,7 @@ public class AudioManager : MonoBehaviour
     public void SetSoundVolume(float volume)
     {
         soundVolume = Mathf.Clamp01(volume);
+        foreach ((AudioSource aud, float vol) in audioSources) { aud.volume = vol * volume; }
         SaveSettings();
     }
 
