@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 // This script should be placed on an object that is in every scene to handle audio
 // Audio can be added within the inspector and then played by any script referencing the instance
@@ -35,7 +36,6 @@ public class AudioManager : MonoBehaviour
     }
 
     public List<Sound> sounds;
-    [SerializeReference]
     public List<(AudioSource, float)> audioSources;
     private Dictionary<string, Sound> soundDictionary;
     private AudioSource audioSource;
@@ -174,7 +174,10 @@ public class AudioManager : MonoBehaviour
     public void SetSoundVolume(float volume)
     {
         soundVolume = Mathf.Clamp01(volume);
-        foreach ((AudioSource aud, float vol) in audioSources) { aud.volume = vol * volume; }
+        if (audioSources.Count > 0)
+        {
+            foreach ((AudioSource aud, float vol) in audioSources) { aud.volume = vol * volume; }
+        }
         SaveSettings();
     }
 
