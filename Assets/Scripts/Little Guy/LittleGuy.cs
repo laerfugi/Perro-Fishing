@@ -132,7 +132,7 @@ public class LittleGuy : MonoBehaviour
             controller.enabled = true;
 
             //thoughts
-            thoughts.StartCoroutine(thoughts.RandomAnimate());
+            thoughts.RandomAnimateSprite();
         }
         else if (state == LittleGuyState.Inactive)          //Little Guy can't move
         {
@@ -203,6 +203,6 @@ public class LittleGuy : MonoBehaviour
     {
         isCaught = true; 
         PlayerInventory.Instance.AddLittleGuy(this);
-        thoughts.StartCoroutine(thoughts.RandomAnimate());
+        thoughts.RandomAnimateSprite();
     }
 }
