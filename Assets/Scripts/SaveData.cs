@@ -61,7 +61,7 @@ public class SaveData : MonoBehaviour
             Debug.LogWarning($"Save file not found at {path}. Starting with default inventory.");
             return;
         }
-
+        Debug.Log("loading save data");
         string json = File.ReadAllText(path);
         SaveDataModel saveData = JsonUtility.FromJson<SaveDataModel>(json);
 
@@ -78,7 +78,7 @@ public class SaveData : MonoBehaviour
 
         foreach (var littleGuyWrapper in saveData.littleGuyInventoryList)
         {
-            GameObject littleGuy = LittleGuySpawner.Instance.CreateLittleGuy(spawnPoint.position, littleGuyWrapper.itemData as LittleGuy_ItemData);
+            GameObject littleGuy = LittleGuySpawner.Instance.LoadLittleGuy(spawnPoint.position, littleGuyWrapper.itemData as LittleGuy_ItemData);
             //playerInventory.littleGuyInventoryList.Add(new LittleGuy_ItemDataWrapper(littleGuyWrapper.itemData, littleGuy));
         }
 

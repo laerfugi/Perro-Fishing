@@ -68,6 +68,32 @@ MonoBehaviour:
   - name: MinigameStart
     clip: {fileID: 8300000, guid: f4348a2f7bd57a740a81bf1b07b6a20c, type: 3}
     modifiers: []
+  - name: MinigameTransition
+    clip: {fileID: 8300000, guid: d520fe2985e0bc0408d07c63c560a825, type: 3}
+    modifiers: []
+  - name: MinigameWin
+    clip: {fileID: 8300000, guid: 64ea47c89a1971a4ba6d17dedeecb790, type: 3}
+    modifiers:
+    - type: 0
+      value: 0.4
+      minValue: 0
+      maxValue: 0
+  - name: MinigameFail
+    clip: {fileID: 8300000, guid: 5ed748a8aaea6ef48b68b43cda77fa49, type: 3}
+    modifiers: []
+  - name: MoneyGained
+    clip: {fileID: 8300000, guid: 19c7e9a435e86c34196593a628c6772c, type: 3}
+    modifiers: []
+  - name: ItemPickup
+    clip: {fileID: 8300000, guid: a563d798d4deecc488ee13bbb76f5825, type: 3}
+    modifiers:
+    - type: 0
+      value: 0.4
+      minValue: 0
+      maxValue: 0
+  - name: ButtonPress
+    clip: {fileID: 8300000, guid: 5009b79dcdcfb7743a2994729350ea51, type: 3}
+    modifiers: []
   isSoundEnabled: 0
   isMusicEnabled: 0
   soundVolume: 0.5

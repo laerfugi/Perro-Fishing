@@ -77,6 +77,7 @@ public class QuestManager : MonoBehaviour
         Debug.Log($"QUEST {quest.name} IS BEING CLAIMED");
         if (quest.complete && !quest.claimed)
         {
+            AudioManager.Instance.PlaySound("MoneyGained");
             for (int i = 0; i < quest.amount; i++)
             {
                 PlayerInventory.Instance.RemoveItem(quest.fishRequest);
