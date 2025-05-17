@@ -88,7 +88,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a563d798d4deecc488ee13bbb76f5825, type: 3}
     modifiers:
     - type: 0
-      value: 0.4
+      value: 0.2
       minValue: 0
       maxValue: 0
   - name: ButtonPress

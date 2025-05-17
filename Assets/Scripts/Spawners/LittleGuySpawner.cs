@@ -28,6 +28,11 @@ public class LittleGuySpawner : MonoBehaviour
         {
             nav.isFleeing = false;
         }
+        if (littleGuy.TryGetComponent(out LittleGuy lg))
+        {
+            lg.Catch();
+        }
+        
         return littleGuy;
     }
 }

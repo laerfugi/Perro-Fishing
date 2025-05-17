@@ -199,7 +199,7 @@ public class LittleGuy : MonoBehaviour
         }
     }
 
-    private void Catch() 
+    public void Catch() 
     {
         isCaught = true; 
         PlayerInventory.Instance.AddLittleGuy(this);

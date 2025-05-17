@@ -15,7 +15,8 @@ public class RespawnableItem : ItemInteractable
 
     public override void Interact()
     {
-        base.Interact(); 
+        base.Interact();
+        AudioManager.Instance.PlaySound("ItemPickup");
 
         if (spawner != null)
         {

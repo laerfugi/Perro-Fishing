@@ -51,12 +51,14 @@ public class MinigameUI : MonoBehaviour
     {
         loseMessage.SetActive(false);
         winMessage.SetActive(true);
+        AudioManager.Instance.PlaySound("MinigameWin");
     }
 
     public void ShowLoseMessage()
     {
         winMessage.SetActive(false);
         loseMessage.SetActive(true);
+        AudioManager.Instance.PlaySound("MinigameFail");
     }
     #endregion
 }
