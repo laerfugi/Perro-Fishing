@@ -118,7 +118,7 @@ public class AudioManager : MonoBehaviour
         if (soundDictionary.TryGetValue(soundName, out Sound sound) && sound.clip != null)
         {
             backgroundAudioSource.clip = sound.clip;
-            backgroundAudioSource.volume = musicVolume * GetModifierValue(sound, ModifierType.Volume);
+            backgroundAudioSource.volume = 0.4f * musicVolume * GetModifierValue(sound, ModifierType.Volume);
             backgroundAudioSource.Play();
         }
     }

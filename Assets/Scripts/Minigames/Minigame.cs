@@ -132,8 +132,8 @@ public class Minigame : MonoBehaviour
         if (eventSystem != null) eventSystem.enabled = false;
 
         //when timer ends, show win/lose message
-        if (result == Result.Win) { MinigameUI.Instance.ShowWinMessage(); }
-        else if (result == Result.Lose) { MinigameUI.Instance.ShowLoseMessage(); }
+        if (result == Result.Win) { AudioManager.Instance.PlaySound("MinigameWin"); MinigameUI.Instance.ShowWinMessage(); }
+        else if (result == Result.Lose) { AudioManager.Instance.PlaySound("MinigameLose"); MinigameUI.Instance.ShowLoseMessage(); }
 
         yield return new WaitForSeconds(endTime);
 

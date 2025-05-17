@@ -203,6 +203,8 @@ public class LittleGuy : MonoBehaviour
     {
         isCaught = true; 
         PlayerInventory.Instance.AddLittleGuy(this);
+        // replace this line later
+        thoughts = GetComponentInChildren<LittleGuyThoughts>();
         thoughts.RandomAnimateSprite();
     }
 }

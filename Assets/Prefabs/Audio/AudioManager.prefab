@@ -70,17 +70,25 @@ MonoBehaviour:
     modifiers: []
   - name: MinigameTransition
     clip: {fileID: 8300000, guid: d520fe2985e0bc0408d07c63c560a825, type: 3}
-    modifiers: []
+    modifiers:
+    - type: 0
+      value: 0.8
+      minValue: 0
+      maxValue: 0
   - name: MinigameWin
     clip: {fileID: 8300000, guid: 64ea47c89a1971a4ba6d17dedeecb790, type: 3}
     modifiers:
     - type: 0
-      value: 0.4
+      value: 0.3
       minValue: 0
       maxValue: 0
   - name: MinigameFail
     clip: {fileID: 8300000, guid: 5ed748a8aaea6ef48b68b43cda77fa49, type: 3}
-    modifiers: []
+    modifiers:
+    - type: 0
+      value: 0.3
+      minValue: 0
+      maxValue: 0
   - name: MoneyGained
     clip: {fileID: 8300000, guid: 19c7e9a435e86c34196593a628c6772c, type: 3}
     modifiers: []

@@ -45,6 +45,7 @@ public class MinigameTransition : MonoBehaviour
     {
         transition.SetActive(true);
         leftPanel.gameObject.SetActive(true); rightPanel.gameObject.SetActive(true); infoPanel.SetActive(false);
+        AudioManager.Instance.PlaySound("MinigameTransition");
 
         float elapsedTime = 0;
         while (elapsedTime < transitionTime)
@@ -99,6 +100,7 @@ public class MinigameTransition : MonoBehaviour
     public IEnumerator OpenCurtains()
     {
         yield return new WaitForSeconds(.1f);
+        AudioManager.Instance.PlaySound("MinigameTransition");
 
         float elapsedTime = 0;
         while (elapsedTime < transitionTime)

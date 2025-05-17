@@ -85,6 +85,7 @@ public class RecipeDisplayManager : MonoBehaviour
 
             newButton.GetComponent<Button>().onClick.AddListener(() =>
             {
+                AudioManager.Instance.PlaySound("ButtonPress");
                 if (currentCounts[materialData.type] > 0 && currentCraft.Count < 2)
                 {
                     AddMaterialToCraft(materialData);
@@ -120,6 +121,7 @@ public class RecipeDisplayManager : MonoBehaviour
 
         newButton.GetComponent<Button>().onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlaySound("ButtonPress");
             craftingUIManager.ResetCraftingUI();
 
             currentCraft.Clear();

@@ -37,6 +37,7 @@ public class QuestUI : MonoBehaviour
 
     public void OnClaimButtonClicked()
     {
+        AudioManager.Instance.PlaySound("ButtonPress");
         QuestManager.Instance.ClaimReward(quest);
     }
 }

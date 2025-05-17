@@ -24,6 +24,7 @@ public class CraftingSystem : MonoBehaviour
 
     public void Craft()
     {
+        AudioManager.Instance.PlaySound("ButtonPress");
         //(Material_ItemData mat1, Material_ItemData mat2) = (recipeDisplayManager.currentCraft[0], recipeDisplayManager.currentCraft[1]);
         //Debug.Log($"{recipeDisplayManager.currentCraft}");
         if (!HasRequiredMaterials(recipeDisplayManager.currentCraft[0], recipeDisplayManager.currentCraft[1]))
