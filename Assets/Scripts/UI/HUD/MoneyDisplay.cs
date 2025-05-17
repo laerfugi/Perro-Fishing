@@ -38,8 +38,11 @@ public class MoneyDisplay : MonoBehaviour
     {
         countText.text = PlayerInventory.Instance.money.ToString();
 
-        StopAllCoroutines();
-        StartCoroutine(Animate(amount));
+        if (amount > 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Animate(amount));
+        }
 
     }
 
