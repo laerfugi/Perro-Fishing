@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class LittleGuyNav : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;       //i made this public for LittleGuyAnimationHandler to read it
+    private AudioSource fleeNoise;
     [SerializeField] private Transform target;
 
     [SerializeField] private float followDistance = 3f;
@@ -25,6 +26,7 @@ public class LittleGuyNav : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        fleeNoise = GetComponent<AudioSource>();
         Player player = FindObjectOfType<Player>();
 
         if (player != null)
@@ -60,10 +62,15 @@ public class LittleGuyNav : MonoBehaviour
 
         if (isFleeing)
         {
+            /*if (!fleeNoise.isPlaying)
+            {
+                fleeNoise.Play();
+            }*/
             HandleFleeing(distanceToTarget);
         }
         else if (distanceToTarget > followDistance)
         {
+            fleeNoise.Stop();
             FollowTarget();
         }
         //else if (distanceToTarget < fleeDistance)
@@ -78,6 +85,8 @@ public class LittleGuyNav : MonoBehaviour
 
     public void RunToInitialTarget(Vector3 target, Action onReached)
     {
+        fleeNoise.volume = AudioManager.Instance.soundVolume;
+        fleeNoise.Play();
         initialRunTarget = target;
         onInitialTargetReached = onReached;
     }
