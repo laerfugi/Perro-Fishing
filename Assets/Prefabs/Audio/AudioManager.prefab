@@ -102,6 +102,13 @@ MonoBehaviour:
   - name: ButtonPress
     clip: {fileID: 8300000, guid: 5009b79dcdcfb7743a2994729350ea51, type: 3}
     modifiers: []
+  - name: LittleGuyCaught
+    clip: {fileID: 8300000, guid: b02f19eccee53384d9d9d1aaa23d042f, type: 3}
+    modifiers:
+    - type: 0
+      value: 1
+      minValue: 0
+      maxValue: 0
   isSoundEnabled: 0
   isMusicEnabled: 0
   soundVolume: 0.5

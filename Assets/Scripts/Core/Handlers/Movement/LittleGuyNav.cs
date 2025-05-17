@@ -71,7 +71,6 @@ public class LittleGuyNav : MonoBehaviour
         }
         else if (distanceToTarget > followDistance)
         {
-            fleeNoise.Stop();
             FollowTarget();
         }
         //else if (distanceToTarget < fleeDistance)
@@ -134,7 +133,8 @@ public class LittleGuyNav : MonoBehaviour
             return;
         }
         else if (distanceToTarget < followDistance && !isUncatchable) { // if caught
-
+            fleeNoise.Stop();
+            AudioManager.Instance.PlaySound("LittleGuyCaught");
             isFleeing = false;
             navMeshAgent.speed = 8f;
             navMeshAgent.acceleration = 8f;
