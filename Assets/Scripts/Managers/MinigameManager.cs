@@ -90,15 +90,15 @@ public class MinigameManager : MonoBehaviour
 
     private IEnumerator CloseMinigameCoroutine()
     {
+        //reenable audio listener
+        audioListener.enabled = true;
+
         //Transition
         yield return minigameTransition.StartCoroutine(minigameTransition.OpenCurtains());
 
         //reenable event system
         if (eventSystem != null) eventSystem.enabled = true;
         
-        //reenable audio listener
-        audioListener.enabled = true;
-
         //Event call
         EventManager.OnCloseMenuEvent();
     }

@@ -40,7 +40,7 @@ public class InventoryNotification : MonoBehaviour
         canvasGroup.enabled = true;
         Reset();
         name.text = itemData.name;
-        if (itemData.icon != null) { icon.sprite = itemData.icon; }
+        if (itemData.icon != null) { icon.sprite = itemData.icon; icon.preserveAspect = true; }
 
         coroutine = Animate();
         StartCoroutine(coroutine);

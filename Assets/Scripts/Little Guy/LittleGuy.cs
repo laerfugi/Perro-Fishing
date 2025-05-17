@@ -30,6 +30,7 @@ public class LittleGuy : MonoBehaviour
     [field: SerializeField]
     public LittleGuyState state { get; private set; }
     private LittleGuyState previousState;  //for MenuEventCheck()
+    private int areaMask;
     public bool isCaught;    //to make sure little guy is added to player inventory only once when caught 
 
     [Header("ItemData")]
@@ -72,6 +73,9 @@ public class LittleGuy : MonoBehaviour
 
         //Change State to AI
         ChangeState(LittleGuyState.AI);
+        // Set area mask for walkable surfaces
+        areaMask += 1 << NavMesh.GetAreaFromName("Walkable");
+        //areaMask -= 1 << NavMesh.GetAreaFromName("Swimmable");
 
         //Add to player inventory
         //PlayerInventory.Instance.AddLittleGuy(this);
@@ -172,7 +176,7 @@ public class LittleGuy : MonoBehaviour
         if (state == LittleGuyState.Active) yield break;
 
         float maxDistance = 30f;
-        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, maxDistance, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, maxDistance, areaMask))
         {
             transform.position = hit.position + new Vector3(0, 0.5f, 0);
         }
