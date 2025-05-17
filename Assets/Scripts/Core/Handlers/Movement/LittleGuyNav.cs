@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,13 @@ public class LittleGuyNav : MonoBehaviour
     [SerializeField] private float fleeDistance = 8f;
 
     public bool isFleeing = true;
+    [SerializeField]
+    private bool isUncatchable = false;
+
+    [SerializeField]
+    private Action onInitialTargetReached;
+    [SerializeField]
+    private Vector3? initialRunTarget = null;
 
     void Start()
     {
@@ -31,6 +39,21 @@ public class LittleGuyNav : MonoBehaviour
 
     public void HandleAI()
     {
+        // Bring little guy to flee to random position before allowing it to be captured
+        if (initialRunTarget.HasValue)
+        {
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(initialRunTarget.Value);
+
+            if (Vector3.Distance(transform.position, initialRunTarget.Value) < 1f)
+            {
+                initialRunTarget = null;
+                onInitialTargetReached?.Invoke();
+                onInitialTargetReached = null;
+            }
+            return;
+        }
+
         if (target == null || !navMeshAgent.isActiveAndEnabled) return;
 
         float distanceToTarget = Vector3.Distance(transform.position, target.position);
@@ -51,6 +74,23 @@ public class LittleGuyNav : MonoBehaviour
         {
             navMeshAgent.isStopped = true;
         }
+    }
+
+    public void RunToInitialTarget(Vector3 target, Action onReached)
+    {
+        initialRunTarget = target;
+        onInitialTargetReached = onReached;
+    }
+
+    public void SetSpeed(float speed, float acceleration)
+    {
+        navMeshAgent.speed = speed;
+        navMeshAgent.acceleration = acceleration;
+    }
+
+    public void SetUncatchable(bool uncatchable)
+    {
+        isUncatchable = uncatchable;
     }
 
     private void FollowTarget()
@@ -76,7 +116,7 @@ public class LittleGuyNav : MonoBehaviour
         {
             return;
         }
-        else if (distanceToTarget < followDistance) { // if caught
+        else if (distanceToTarget < followDistance && !isUncatchable) { // if caught
 
             isFleeing = false;
             navMeshAgent.speed = 8f;
